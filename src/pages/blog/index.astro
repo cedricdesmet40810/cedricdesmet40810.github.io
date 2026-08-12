@@ -1,0 +1,190 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { SITE } from '../../config.js';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const [featured, ...rest] = posts;
+
+const fmt = (d) =>
+  new Intl.DateTimeFormat('nl-BE', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  }).format(d);
+
+const blogSchema = {
+  '@type': 'Blog',
+  '@id': `${SITE.url}/blog/#blog`,
+  name: 'Auxilia blog',
+  description: 'Praktische artikels over AI en IT voor KMO’s.',
+  publisher: { '@id': `${SITE.url}/#organization` },
+  inLanguage: SITE.lang,
+  blogPost: posts.map((p) => ({
+    '@type': 'BlogPosting',
+    '@id': `${SITE.url}/blog/${p.id}/#article`,
+    headline: p.data.title,
+    description: p.data.description,
+    datePublished: p.data.date.toISOString(),
+    url: `${SITE.url}/blog/${p.id}/`,
+    author: { '@id': `${SITE.url}/#organization` },
+  })),
+};
+---
+
+<BaseLayout
+  title="Blog"
+  metaTitle="Blog over AI voor KMO’s"
+  description="Praktische artikels over AI en IT voor KMO’s: waar beginnen, wat het kost en wat een chatbot op je eigen data wel en niet kan."
+  schema={[blogSchema]}
+  breadcrumbs={[{ name: 'Blog', href: '/blog/' }]}
+>
+  <PageHero
+    crumbs={[{ name: 'Blog', href: '/blog/' }]}
+    badge="Zonder verkooppraat"
+    title="Wat we onderweg leren"
+    lead="Korte stukken over waar KMO’s in de praktijk op vastlopen bij AI. Als je er iets aan hebt zonder ons te bellen, is dat ook goed."
+    size="compact"
+  />
+
+  <section class="section band-paper">
+    <div class="container">
+      {
+        featured && (
+          <a href={`/blog/${featured.id}/`} class="featured reveal">
+            <div class="featured__body">
+              <div class="chip-row">
+                <span class="chip">{featured.data.tag}</span>
+                <span class="chip">Nieuwste</span>
+              </div>
+              <h2>{featured.data.title}</h2>
+              <p class="lead">{featured.data.description}</p>
+              <div class="meta">
+                <time datetime={featured.data.date.toISOString()}>
+                  {fmt(featured.data.date)}
+                </time>
+                <span aria-hidden="true">·</span>
+                <span>{featured.data.readingTime} min lezen</span>
+              </div>
+              <span class="link-arrow">
+                Lees het artikel
+                <span class="arrow" aria-hidden="true">→</span>
+              </span>
+            </div>
+          </a>
+        )
+      }
+
+      {
+        rest.length > 0 && (
+          <div class="grid grid--2 blog-grid reveal">
+            {rest.map((p) => (
+              <a href={`/blog/${p.id}/`} class="card post-card">
+                <span class="chip">{p.data.tag}</span>
+                <h2>{p.data.title}</h2>
+                <p>{p.data.description}</p>
+                <div class="meta">
+                  <time datetime={p.data.date.toISOString()}>{fmt(p.data.date)}</time>
+                  <span aria-hidden="true">·</span>
+                  <span>{p.data.readingTime} min lezen</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  <CtaBand
+    eyebrow="Liever meteen concreet"
+    title="Je eigen situatie doornemen gaat sneller dan lezen"
+    text="Vertel wat je doet en waar het kraakt. Wij zeggen wat we zouden aanpakken, en wat je beter eerst zelf probeert."
+    secondary={{ label: 'Bekijk de oplossingen', href: '/oplossingen/' }}
+  />
+</BaseLayout>
+
+<style>
+  .featured {
+    display: block;
+    padding: clamp(32px, 4.5vw, 52px);
+    border-radius: var(--r-lg);
+    background: var(--teal);
+    color: var(--sand);
+    text-decoration: none;
+    box-shadow: var(--shadow-lg);
+    transition: transform 0.25s var(--ease);
+  }
+
+  .featured:hover {
+    transform: translateY(-2px);
+    color: var(--sand);
+  }
+
+  .featured__body {
+    max-width: 640px;
+  }
+
+  .featured h2 {
+    font-size: clamp(1.8rem, 3.2vw, 2.7rem);
+    color: var(--sand);
+    margin: 20px 0 16px;
+  }
+
+  .featured .lead {
+    color: rgba(250, 247, 242, 0.8);
+    margin-bottom: 22px;
+  }
+
+  .featured .chip {
+    background: rgba(250, 247, 242, 0.12);
+    border-color: rgba(250, 247, 242, 0.24);
+    color: rgba(250, 247, 242, 0.92);
+  }
+
+  .featured .meta {
+    color: rgba(250, 247, 242, 0.75);
+    margin-bottom: 24px;
+  }
+
+  .featured .link-arrow {
+    color: var(--sand);
+  }
+
+  .blog-grid {
+    margin-top: 24px;
+  }
+
+  .post-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .post-card h2 {
+    font-size: clamp(1.3rem, 1.8vw, 1.55rem);
+    margin: 18px 0 12px;
+  }
+
+  .post-card .chip {
+    align-self: flex-start;
+  }
+
+  .post-card p {
+    flex: 1;
+    margin-bottom: 20px;
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.87rem;
+    color: var(--ink-faint);
+  }
+</style>

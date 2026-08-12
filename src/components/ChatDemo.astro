@@ -1,0 +1,176 @@
+---
+/**
+ * Merk-eigen beeld in plaats van een stockfoto: een assistent die antwoordt
+ * uit de documenten van het bedrijf zelf, mét bronvermelding.
+ * Illustratief — geen echte klantdata.
+ */
+import Icon from './Icon.astro';
+---
+
+<div class="demo" role="img" aria-label="Voorbeeld van een AI-assistent die een vraag beantwoordt uit de eigen prijslijst en algemene voorwaarden van het bedrijf, met vermelding van de bronbestanden.">
+  <div class="demo__bar">
+    <span class="demo__dot"></span>
+    <span class="demo__dot"></span>
+    <span class="demo__dot"></span>
+    <span class="demo__title">Assistent · jouw bedrijf</span>
+  </div>
+
+  <div class="demo__body">
+    <div class="msg msg--in">
+      <span class="msg__who">Medewerker · 22:14</span>
+      <p>Wat is onze levertijd voor 24 aluminium ramen, en geldt de klantenkorting daar ook op?</p>
+    </div>
+
+    <div class="msg msg--out">
+      <span class="msg__who">
+        <span class="msg__badge">A</span>
+        Assistent
+      </span>
+      <p>
+        De levertijd is <strong>4 tot 6 weken</strong> vanaf bevestiging. De korting
+        van 5 % voor vaste klanten geldt op het materiaal, niet op de plaatsing.
+      </p>
+      <div class="sources">
+        <span class="sources__label">Uit jouw documenten</span>
+        <div class="chip-row">
+          <span class="src"><Icon name="layers" size={14} /> Prijslijst 2026.xlsx</span>
+          <span class="src"><Icon name="layers" size={14} /> Voorwaarden.pdf</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo__foot">
+      <Icon name="lock" size={15} />
+      <span>Antwoordt alleen uit jouw bestanden. Weet hij het niet? Dan zegt hij dat.</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .demo {
+    background: var(--paper);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+  }
+
+  .demo__bar {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 14px 18px;
+    background: var(--sand-deep);
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .demo__dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: rgba(28, 36, 34, 0.16);
+  }
+
+  .demo__title {
+    margin-left: 8px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--ink-faint);
+    letter-spacing: 0.01em;
+  }
+
+  .demo__body {
+    padding: 22px;
+    display: grid;
+    gap: 16px;
+  }
+
+  .msg {
+    border-radius: 14px;
+    padding: 16px 18px;
+  }
+
+  .msg p {
+    margin: 0;
+    font-size: 0.97rem;
+    line-height: 1.6;
+    max-width: none;
+  }
+
+  .msg__who {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 9px;
+  }
+
+  .msg--in {
+    background: var(--sand-deep);
+    color: var(--ink-soft);
+  }
+
+  .msg--out {
+    background: rgba(15, 92, 90, 0.05);
+    border: 1px solid rgba(15, 92, 90, 0.13);
+    color: var(--ink);
+  }
+
+  .msg__badge {
+    display: grid;
+    place-items: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    background: var(--teal);
+    color: var(--sand);
+    font-size: 0.62rem;
+    letter-spacing: 0;
+  }
+
+  .sources {
+    margin-top: 14px;
+    padding-top: 13px;
+    border-top: 1px dashed rgba(15, 92, 90, 0.2);
+  }
+
+  .sources__label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 9px;
+  }
+
+  .src {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 11px;
+    border-radius: 999px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+  }
+
+  .demo__foot {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding-top: 4px;
+    font-size: 0.84rem;
+    color: var(--ink-faint);
+  }
+
+  .demo__foot :global(svg) {
+    flex: none;
+    color: var(--teal-300);
+  }
+</style>

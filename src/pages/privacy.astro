@@ -1,0 +1,210 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { SITE } from '../config.js';
+
+const bijgewerkt = '5 augustus 2026';
+---
+
+<BaseLayout
+  title="Privacybeleid"
+  description="Hoe Auxilia omgaat met je persoonsgegevens: wat we bijhouden, waarom, hoe lang en welke rechten je hebt."
+  breadcrumbs={[{ name: 'Privacybeleid', href: '/privacy/' }]}
+>
+  <PageHero
+    crumbs={[{ name: 'Privacybeleid', href: '/privacy/' }]}
+    title="Privacybeleid"
+    lead="Wat we van je bijhouden, waarom we dat doen en hoe je het weer kan laten verwijderen."
+    size="compact"
+  />
+
+  <section class="section band-paper">
+    <div class="container">
+      <div class="legal">
+        <p class="legal-date">Laatst bijgewerkt op {bijgewerkt}</p>
+        <h2>Wie verwerkt je gegevens?</h2>
+        <p>
+          {SITE.legalName}, gevestigd in de {SITE.region} (België), met
+          ondernemingsnummer {SITE.companyNumber} en btw-nummer {SITE.vat}, is
+          verantwoordelijk voor de verwerking van je persoonsgegevens. Je bereikt
+          ons via <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+        </p>
+
+        <h2>Welke gegevens houden we bij?</h2>
+        <p>We verzamelen alleen wat we nodig hebben om je te kunnen antwoorden of ons werk te doen.</p>
+        <h3>Als je het contactformulier invult</h3>
+        <ul>
+          <li>je naam en, als je die invult, je bedrijfsnaam;</li>
+          <li>je e-mailadres en eventueel je telefoonnummer;</li>
+          <li>het onderwerp dat je koos en de inhoud van je bericht.</li>
+        </ul>
+        <p>
+          Die gegevens gebruiken we om op je vraag te antwoorden en om het gesprek
+          voor te bereiden. We gebruiken ze niet om je ongevraagd commerciële
+          berichten te sturen.
+        </p>
+
+        <h3>Als je klant bent</h3>
+        <ul>
+          <li>contact- en facturatiegegevens van je onderneming;</li>
+          <li>gegevens die nodig zijn om de opdracht uit te voeren;</li>
+          <li>administratie die we wettelijk moeten bijhouden, zoals facturen.</li>
+        </ul>
+
+        <h3>Als je onze website bezoekt</h3>
+        <p>
+          Deze website plaatst geen trackingcookies en gebruikt geen advertentie-
+          of profileringsdiensten. De lettertypes staan op onze eigen server, dus
+          je browser legt daarvoor geen verbinding met derden. Onze hostingpartij
+          houdt standaard technische logbestanden bij, zoals IP-adressen en
+          foutmeldingen, die nodig zijn om de site veilig en werkend te houden.
+        </p>
+
+        <h2>Waarom mogen we dat?</h2>
+        <ul>
+          <li>
+            <strong>Je toestemming</strong>: voor berichten die je zelf via het
+            formulier verstuurt. Je kan die toestemming altijd intrekken.
+          </li>
+          <li>
+            <strong>Uitvoering van een overeenkomst</strong>: voor alles wat
+            nodig is om een opdracht uit te voeren.
+          </li>
+          <li>
+            <strong>Wettelijke verplichting</strong>: voor onze boekhouding en
+            facturatie.
+          </li>
+          <li>
+            <strong>Gerechtvaardigd belang</strong>: om onze website veilig en
+            beschikbaar te houden.
+          </li>
+        </ul>
+
+        <h2>Hoe lang houden we het bij?</h2>
+        <ul>
+          <li>
+            Berichten via het contactformulier: tot twee jaar na het laatste
+            contact, tenzij je vraagt om ze eerder te wissen.
+          </li>
+          <li>
+            Klantgegevens: zolang de samenwerking loopt en daarna zolang de wet
+            het vraagt.
+          </li>
+          <li>
+            Facturen en boekhouding: zeven jaar, zoals de Belgische wetgeving
+            voorschrijft.
+          </li>
+          <li>Technische logbestanden: doorgaans enkele maanden.</li>
+        </ul>
+
+        <h2>Met wie delen we gegevens?</h2>
+        <p>
+          We verkopen je gegevens niet en geven ze niet door voor commerciële
+          doeleinden. We werken wel met dienstverleners die ons helpen: onze
+          hostingpartij, onze e-mailprovider en onze boekhouder. Met elk van hen
+          hebben we de nodige afspraken over de bescherming van je gegevens.
+        </p>
+        <p>
+          Waar het kan, kiezen we voor verwerking binnen de Europese Economische
+          Ruimte. Is dat uitzonderlijk niet het geval, dan zorgen we voor de
+          waarborgen die de GDPR (AVG) voorschrijft.
+        </p>
+
+        <h2>Gegevens in opdrachten met AI</h2>
+        <p>
+          Bouwen we voor jou een AI-oplossing, dan leggen we vóór de start
+          schriftelijk vast welke gegevens gebruikt worden, waar ze bewaard
+          worden en wie er toegang toe heeft. Bedrijfsgegevens van klanten
+          worden niet gebruikt om modellen te trainen. In die projecten treden
+          wij op als verwerker en blijf jij verwerkingsverantwoordelijke; dat
+          leggen we vast in een verwerkersovereenkomst.
+        </p>
+
+        <h2>Welke rechten heb je?</h2>
+        <p>Volgens de GDPR heb je het recht om:</p>
+        <ul>
+          <li>je gegevens in te kijken;</li>
+          <li>ze te laten verbeteren als er iets niet klopt;</li>
+          <li>ze te laten verwijderen;</li>
+          <li>de verwerking te laten beperken of er bezwaar tegen te maken;</li>
+          <li>je gegevens in een leesbaar formaat mee te krijgen;</li>
+          <li>een gegeven toestemming weer in te trekken.</li>
+        </ul>
+        <p>
+          Stuur daarvoor een mail naar <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+          We antwoorden binnen dertig dagen. Ben je niet tevreden met hoe we
+          ermee omgaan, dan kan je een klacht indienen bij de
+          Gegevensbeschermingsautoriteit, Drukpersstraat 35, 1000 Brussel, via
+          <a href="https://www.gegevensbeschermingsautoriteit.be" rel="noopener">
+            gegevensbeschermingsautoriteit.be</a>.
+        </p>
+
+        <h2>Beveiliging</h2>
+        <p>
+          We nemen redelijke technische en organisatorische maatregelen om je
+          gegevens te beschermen: versleutelde verbindingen, toegang enkel voor
+          wie het nodig heeft, en tweestapsverificatie op onze eigen accounts.
+          Geen enkel systeem is volledig waterdicht, maar we melden het je als er
+          toch iets misloopt dat jou aanbelangt.
+        </p>
+
+        <h2>Wijzigingen</h2>
+        <p>
+          Verandert er iets aan hoe we met gegevens omgaan, dan passen we deze
+          pagina aan en zetten we een nieuwe datum bovenaan.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal-date {
+    margin-bottom: 2.5em;
+    font-size: 0.9rem;
+    color: var(--ink-faint);
+  }
+
+  .legal {
+    max-width: 68ch;
+  }
+
+  .legal h2 {
+    font-size: clamp(1.5rem, 2.2vw, 1.9rem);
+    margin: 2.2em 0 0.6em;
+  }
+
+  .legal h2:first-child {
+    margin-top: 0;
+  }
+
+  .legal h3 {
+    font-size: 1.16rem;
+    margin: 1.8em 0 0.5em;
+  }
+
+  .legal p,
+  .legal ul {
+    color: var(--ink-soft);
+    font-size: 1.03rem;
+    line-height: 1.75;
+  }
+
+  .legal ul {
+    margin: 0 0 1.4em;
+    padding-left: 1.3em;
+  }
+
+  .legal li {
+    margin-bottom: 0.5em;
+    padding-left: 0.3em;
+  }
+
+  .legal li::marker {
+    color: var(--teal-300);
+  }
+
+  .legal strong {
+    color: var(--ink);
+  }
+</style>

@@ -1,0 +1,333 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { SITE } from '../../config.js';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post, posts },
+  }));
+}
+
+const { post, posts } = Astro.props;
+const { Content } = await render(post);
+const { data } = post;
+
+const url = `${SITE.url}/blog/${post.id}/`;
+
+const fmt = (d) =>
+  new Intl.DateTimeFormat('nl-BE', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  }).format(d);
+
+const article = {
+  '@type': 'BlogPosting',
+  '@id': `${url}#article`,
+  headline: data.title,
+  description: data.description,
+  datePublished: data.date.toISOString(),
+  dateModified: (data.updated ?? data.date).toISOString(),
+  inLanguage: SITE.lang,
+  wordCount: post.body.split(/\s+/).length,
+  articleSection: data.tag,
+  author: { '@id': `${SITE.url}/#organization` },
+  publisher: { '@id': `${SITE.url}/#organization` },
+  mainEntityOfPage: { '@id': `${url}#webpage` },
+  isPartOf: { '@id': `${SITE.url}/blog/#blog` },
+};
+
+// Twee andere artikels onderaan.
+const meer = posts
+  .filter((p) => p.id !== post.id)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 2);
+---
+
+<BaseLayout
+  title={data.title}
+  metaTitle={data.metaTitle ?? data.title}
+  description={data.description}
+  schema={[article]}
+  publishedAt={data.date.toISOString()}
+  modifiedAt={(data.updated ?? data.date).toISOString()}
+  breadcrumbs={[
+    { name: 'Blog', href: '/blog/' },
+    { name: data.title, href: `/blog/${post.id}/` },
+  ]}
+>
+  <article class="post">
+    <header class="post__head band-teal">
+      <div class="container">
+        <nav class="crumbs" aria-label="Kruimelpad">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li aria-current="page">{data.tag}</li>
+          </ol>
+        </nav>
+
+        <div class="post__head-inner">
+          <span class="chip">{data.tag}</span>
+          <h1>{data.title}</h1>
+          <p class="lead">{data.description}</p>
+          <div class="meta">
+            <time datetime={data.date.toISOString()}>{fmt(data.date)}</time>
+            <span aria-hidden="true">·</span>
+            <span>{data.readingTime} min lezen</span>
+            <span aria-hidden="true">·</span>
+            <span>{data.author}</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="section band-paper">
+      <div class="container">
+        <div class="prose">
+          <Content />
+        </div>
+
+        <aside class="post__cta">
+          <div class="panel">
+            <h2>Zelf even sparren?</h2>
+            <p>
+              Herken je hier iets van in je eigen bedrijf? Leg het ons voor,
+              dan bekijken we wat er bij jou het eerst zou lonen.
+            </p>
+            <a href={SITE.bookingUrl || '/contact/'} class="btn btn--primary">
+              Plan een kennismaking
+              <span class="arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    {
+      meer.length > 0 && (
+        <div class="section band-sand-deep">
+          <div class="container">
+            <div class="section-head reveal">
+              <p class="eyebrow">Verder lezen</p>
+              <h2>Andere artikels</h2>
+            </div>
+            <div class="grid grid--2 reveal">
+              {meer.map((p) => (
+                <a href={`/blog/${p.id}/`} class="card post-card">
+                  <span class="chip">{p.data.tag}</span>
+                  <h3>{p.data.title}</h3>
+                  <p>{p.data.description}</p>
+                  <span class="link-arrow">
+                    Lees verder
+                    <span class="arrow" aria-hidden="true">→</span>
+                  </span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      )
+    }
+  </article>
+
+  <CtaBand
+    eyebrow="Van lezen naar doen"
+    title="Vertel eens waar het bij jou vastloopt"
+    text="Beschrijf een gewone werkdag in je bedrijf. Wij wijzen aan waar de tijd weglekt."
+    secondary={{ label: 'Bekijk de oplossingen', href: '/oplossingen/' }}
+  />
+</BaseLayout>
+
+<style>
+  .crumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    margin: 0 0 32px;
+    padding: 0;
+    font-size: 0.88rem;
+    color: var(--ink-faint);
+  }
+
+  .crumbs li + li::before {
+    content: '/';
+    margin-right: 8px;
+  }
+
+  .crumbs a {
+    color: var(--ink-soft);
+    text-decoration: none;
+  }
+
+  .crumbs a:hover {
+    color: var(--teal);
+  }
+
+  .post__head {
+    padding-top: clamp(3rem, 5vw, 4.5rem);
+    padding-bottom: clamp(4rem, 6vw, 6rem);
+    background:
+      radial-gradient(70rem 30rem at 50% -14rem, rgba(62, 132, 130, 0.5), transparent 60%),
+      var(--teal);
+  }
+
+  .post__head .crumbs ol,
+  .post__head .crumbs li + li::before {
+    color: rgba(250, 247, 242, 0.75);
+  }
+
+  .post__head .crumbs a {
+    color: rgba(250, 247, 242, 0.78);
+  }
+
+  .post__head .crumbs a:hover {
+    color: var(--sand);
+  }
+
+  .post__head .meta {
+    color: rgba(250, 247, 242, 0.75);
+  }
+
+  .post__head-inner {
+    max-width: 760px;
+  }
+
+  .post__head h1 {
+    font-size: clamp(2.1rem, 4.4vw, 3.5rem);
+    margin: 18px 0 20px;
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: 24px;
+    font-size: 0.9rem;
+    color: var(--ink-faint);
+  }
+
+  /* ------------------------------------------------------------ prose --- */
+
+  .prose {
+    max-width: 68ch;
+  }
+
+  .prose :global(h2) {
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+    margin: 2.2em 0 0.6em;
+  }
+
+  .prose :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .prose :global(h3) {
+    margin: 1.8em 0 0.5em;
+  }
+
+  .prose :global(p) {
+    margin: 0 0 1.35em;
+    color: var(--ink-soft);
+    font-size: 1.06rem;
+    line-height: 1.75;
+  }
+
+  .prose :global(strong) {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin: 0 0 1.5em;
+    padding-left: 1.3em;
+    color: var(--ink-soft);
+    font-size: 1.06rem;
+    line-height: 1.75;
+  }
+
+  .prose :global(li) {
+    margin-bottom: 0.55em;
+    padding-left: 0.3em;
+  }
+
+  .prose :global(li)::marker {
+    color: var(--teal-300);
+  }
+
+  /* Blockquote: het klei-streepje mag hier als grafisch accent. */
+  .prose :global(blockquote) {
+    margin: 2em 0;
+    padding: 4px 0 4px 26px;
+    border-left: 3px solid var(--clay);
+  }
+
+  .prose :global(blockquote p) {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    line-height: 1.45;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  .prose :global(a) {
+    text-decoration: underline;
+  }
+
+  .prose :global(code) {
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 0.9em;
+    padding: 2px 6px;
+    border-radius: 6px;
+    background: var(--sand-deep);
+    color: var(--teal);
+  }
+
+  .prose :global(hr) {
+    margin: 2.5em 0;
+    border: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  /* -------------------------------------------------------- post cta --- */
+
+  .post__cta {
+    max-width: 68ch;
+    margin-top: clamp(3rem, 5vw, 4rem);
+  }
+
+  .post__cta h2 {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+  }
+
+  .post__cta p {
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+  }
+
+  .post-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .post-card .chip {
+    align-self: flex-start;
+  }
+
+  .post-card h3 {
+    margin: 16px 0 12px;
+  }
+
+  .post-card p {
+    flex: 1;
+    margin-bottom: 20px;
+  }
+</style>

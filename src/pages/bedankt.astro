@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+
+/**
+ * Landingspagina na het contactformulier. Staat bewust op noindex en in
+ * robots.txt onder Disallow. Zodra SITE.formEndpoint is ingevuld, stuur je
+ * het formulier hierheen door.
+ */
+---
+
+<BaseLayout
+  title="Bedankt"
+  metaTitle="Bedankt voor je bericht"
+  description="We hebben je bericht goed ontvangen en antwoorden binnen één werkdag."
+  noindex={true}
+>
+  <PageHero
+    size="compact"
+    badge="Goed ontvangen"
+    title="Bedankt, je bericht is binnen"
+    lead="We lezen elk bericht zelf en antwoorden binnen één werkdag. Meestal sneller."
+    secondary={{ label: 'Terug naar de homepagina', href: '/' }}
+  />
+
+  <section class="section band-paper">
+    <div class="container tussentijd">
+      <h2>Intussen al iets om te lezen</h2>
+      <ul>
+        <li><a href="/aanpak/">Hoe zo’n traject bij ons verloopt, stap voor stap</a></li>
+        <li><a href="/ons-werk/">Wat we bij To B-Seen bouwden, en wat het opbracht</a></li>
+        <li><a href="/blog/">De blog, met o.a. wat AI kost voor een KMO</a></li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .tussentijd {
+    max-width: 640px;
+  }
+
+  .tussentijd h2 {
+    font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+    margin-bottom: 20px;
+  }
+
+  .tussentijd ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 14px;
+  }
+
+  .tussentijd a {
+    color: var(--teal);
+    font-weight: 600;
+  }
+</style>

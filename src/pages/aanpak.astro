@@ -1,0 +1,305 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE } from '../config.js';
+
+const faq = [
+  {
+    q: 'Waarom een vaste prijs en geen uurtarief?',
+    a: 'Bij een uurtarief betaal jij voor onze leercurve en draag jij het risico als iets tegenvalt. Bij een vaste prijs dragen wij dat risico. Dat dwingt ons om vooraf goed te kijken, en het geeft jou een bedrag waarmee je kan rekenen.',
+  },
+  {
+    q: 'Wat als we tijdens het traject van gedacht veranderen?',
+    a: 'Dat gebeurt bijna altijd, en meestal is dat een goed teken. Kleine bijsturingen zitten in de prijs. Verandert de scope echt, dan bespreken we dat apart voor we verder gaan. Je komt het nooit pas op de eindfactuur tegen.',
+  },
+  {
+    q: 'Hoeveel van ons team moet erbij betrokken worden?',
+    a: 'Eén iemand die beslissingen mag nemen, en de mensen die het werk vandaag doen. Die laatste groep is de belangrijkste: zij weten waar het echt schuurt, en zij moeten er nadien mee werken.',
+  },
+  {
+    q: 'Werken jullie ook met bedrijven buiten de Kempen?',
+    a: 'Ja. Het meeste werk kan perfect op afstand. Voor de intake en de opleiding komen we graag ter plaatse, en dan is een uur rijden geen bezwaar.',
+  },
+];
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  '@id': `${SITE.url}/aanpak/#faq`,
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+const fases = [
+  {
+    fase: 'Fase 1',
+    t: 'Kennismaken',
+    duur: '30 minuten',
+    d: 'We horen hoe je vandaag werkt en waar het schuurt. Jij hoort of we daar iets aan kunnen doen. Als het antwoord nee is, zeggen we dat hier al.',
+    punten: ['Vrijblijvend', 'Online of bij jou', 'Geen voorbereiding nodig'],
+  },
+  {
+    fase: 'Fase 2',
+    t: 'Doorlichten',
+    duur: '1 tot 2 weken',
+    d: 'We kijken mee in je bedrijf en meten waar de tijd blijft hangen. Je krijgt een rapport met de kansen, de berekening erbij en een volgorde van aanpak.',
+    punten: [
+      'Prijs vooraf afgesproken',
+      'Het rapport is van jou',
+      'Ook wat níet de moeite is',
+    ],
+  },
+  {
+    fase: 'Fase 3',
+    t: 'Bouwen',
+    duur: '4 tot 8 weken',
+    d: 'Eén proces volledig af, aangesloten op je bestaande systemen. De prijs en de opleverdatum liggen vast voor we beginnen.',
+    punten: [
+      'Wekelijks kort overleg',
+      'Je team leert ermee werken',
+      'Geen meerwerk zonder overleg',
+    ],
+  },
+  {
+    fase: 'Fase 4',
+    t: 'Bijblijven',
+    duur: 'Doorlopend',
+    d: 'We onderhouden wat draait en breiden stap voor stap uit. Wil je liever zelf verder, dan draag je het netjes over. Je hebt de code en de documentatie.',
+    punten: ['Maandbedrag op maat', 'Ook los IT-beheer', 'Opzegbaar'],
+  },
+];
+
+const principes = [
+  {
+    icon: 'euro',
+    t: 'De prijs staat vast voor we starten',
+    d: 'Geen uurtje-factuurtje. Loopt het bouwen uit, dan is dat ons probleem, niet het jouwe.',
+  },
+  {
+    icon: 'spark',
+    t: 'Eén proces af is beter dan tien half',
+    d: 'We leveren liever iets kleins op dat maandag draait dan een groot plan dat nog getest moet worden.',
+  },
+  {
+    icon: 'users',
+    t: 'Je praat altijd met dezelfde mensen',
+    d: 'Geen accountmanager die het doorgeeft aan iemand die je nog niet kent. Wij doen het gesprek én het werk.',
+  },
+  {
+    icon: 'lock',
+    t: 'Je blijft eigenaar',
+    d: 'Van je data, van de code en van de omgeving. Stoppen kan zonder dat je opnieuw moet beginnen.',
+  },
+  {
+    icon: 'chat',
+    t: 'We zeggen het als iets niet lukt',
+    d: 'Eerlijk zijn over grenzen wekt meer vertrouwen dan alles beloven. Ook als het ons een opdracht kost.',
+  },
+  {
+    icon: 'check',
+    t: 'We testen voor we opleveren',
+    d: 'Eerst een proefweek op jullie echte dossiers en echte vragen. Wat dan nog hapert, lossen we op vóór de livegang.',
+  },
+];
+---
+
+<BaseLayout
+  title="Aanpak"
+  metaTitle="Onze aanpak: vaste prijs, vaste deadline"
+  description="Van kennismaking tot oplevering: hoe Auxilia AI-projecten bij KMO’s aanpakt. Vaste prijs, vaste deadline, en één proces volledig af in plaats van tien half."
+  schema={[faqSchema]}
+  breadcrumbs={[{ name: 'Aanpak', href: '/aanpak/' }]}
+>
+  <PageHero
+    crumbs={[{ name: 'Aanpak', href: '/aanpak/' }]}
+    badge="Vaste prijs, vaste deadline"
+    title="Je weet bij elke stap waar je staat en wat het kost"
+    lead="Vier fases, van een gesprek van een halfuur tot iets dat elke ochtend draait. Je stapt na elke fase uit als je dat wil."
+    cta={true}
+  />
+
+  <!-- =========================================================== fases -->
+  <section class="section band-paper">
+    <div class="container">
+      <div class="fases">
+        {
+          fases.map((f) => (
+            <article class="fase reveal">
+              <div class="fase__aside">
+                <span class="chip">{f.fase}</span>
+                <span class="fase__duur">
+                  <Icon name="clock" size={16} />
+                  {f.duur}
+                </span>
+              </div>
+              <div class="fase__body">
+                <h2>{f.t}</h2>
+                <p>{f.d}</p>
+                <ul class="chip-row fase__punten">
+                  {f.punten.map((p) => (
+                    <li class="chip">{p}</li>
+                  ))}
+                </ul>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================= principes -->
+  <section class="section band-sand">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Waar we ons aan houden</p>
+        <h2>Dit spreken we hoe dan ook af</h2>
+      </div>
+      <div class="grid grid--3 reveal">
+        {
+          principes.map((p) => (
+            <article class="card">
+              <span class="icon-tile">
+                <Icon name={p.icon} />
+              </span>
+              <h3>{p.t}</h3>
+              <p>{p.d}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== garantie -->
+  <section class="section band-teal">
+    <div class="container">
+      <div class="garantie reveal">
+        <p class="eyebrow eyebrow--center">Onze garantie</p>
+        <blockquote>
+          <p>
+            Werkt het op de afgesproken datum niet zoals we het beschreven
+            hebben, dan blijven we bijsturen tot het wel werkt. Zonder extra
+            factuur.
+          </p>
+        </blockquote>
+        <p class="garantie__foot">
+          We leveren een resultaat, geen uren. Daarom dragen wij het risico van
+          de deadline en niet jij.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= faq -->
+  <section class="section band-sand-deep">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Veelgestelde vragen</p>
+        <h2>Over hoe we werken</h2>
+      </div>
+      <div class="reveal">
+        <Faq items={faq} />
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Begin bij fase één"
+    text="Het eerste gesprek is meteen de eerste fase. Daarna beslis jij of er een tweede komt."
+    secondary={{ label: 'Bekijk de oplossingen', href: '/oplossingen/' }}
+  />
+</BaseLayout>
+
+<style>
+  .fase {
+    display: grid;
+    gap: 20px;
+    padding: clamp(30px, 4vw, 44px) 0;
+    border-top: 1px solid var(--line-soft);
+  }
+
+  .fase:last-child {
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  @media (min-width: 820px) {
+    .fase {
+      grid-template-columns: 220px 1fr;
+      gap: 40px;
+    }
+  }
+
+  .fase__aside {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+  }
+
+  @media (min-width: 820px) {
+    .fase__aside {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+    }
+  }
+
+  .fase__duur {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--teal);
+  }
+
+  .fase h2 {
+    font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+    margin-bottom: 12px;
+  }
+
+  .fase p {
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+  }
+
+  .fase__punten {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* ------------------------------------------------------- garantie --- */
+
+  .garantie {
+    max-width: 760px;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .garantie blockquote {
+    margin: 0;
+  }
+
+  .garantie blockquote p {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2.3rem);
+    line-height: 1.25;
+    letter-spacing: -0.022em;
+    color: var(--sand);
+    margin: 0 auto;
+    max-width: 22ch;
+  }
+
+  .garantie__foot {
+    margin: 28px auto 0;
+    color: rgba(250, 247, 242, 0.72);
+    max-width: 48ch;
+  }
+</style>

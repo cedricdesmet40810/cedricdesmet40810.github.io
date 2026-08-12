@@ -1,0 +1,246 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Icon from '../../components/Icon.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { SITE } from '../../config.js';
+
+/**
+ * Voorlopig één verhaal, volledig verteld. Elk afgerond traject krijgt
+ * hier zijn eigen sectie, in hetzelfde ritme: situatie, oplossing, resultaat.
+ */
+
+const geleverd = [
+  'Een rapportage-app op maat, gebouwd rond hun eigen sjabloon',
+  'Inspecties, foto’s en bevindingen lopen in één keer uit op een afgewerkt verslag',
+  'Gekoppeld aan de software die er al stond',
+  'Administratie stap voor stap geautomatiseerd, van klein naar groot',
+];
+
+const caseSchema = {
+  '@type': 'Article',
+  '@id': `${SITE.url}/ons-werk/#to-b-seen`,
+  headline: 'To B-Seen: een rapportage-app die een volle functie aan administratie overneemt',
+  author: { '@id': `${SITE.url}/#organization` },
+  publisher: { '@id': `${SITE.url}/#organization` },
+  about: {
+    '@type': 'Organization',
+    name: 'To B-Seen',
+    description: 'Begeleidt de veiligheid van evenementen',
+  },
+};
+---
+
+<BaseLayout
+  title="Ons werk"
+  metaTitle="Ons werk: de rapportage-app van To B-Seen"
+  description="Wat Auxilia bouwt en wat het opbrengt. Bij To B-Seen loopt sinds de rapportage-app en de automatisaties een volle functie aan administratief werk vanzelf."
+  schema={[caseSchema]}
+  breadcrumbs={[{ name: 'Ons werk', href: '/ons-werk/' }]}
+>
+  <PageHero
+    crumbs={[{ name: 'Ons werk', href: '/ons-werk/' }]}
+    badge="Eén verhaal, elke week in gebruik"
+    title="Kijk gewoon wat het bij To B-Seen doet"
+    lead="We zijn pas gestart, dus deze pagina telt één traject. We vertellen het liever eerlijk en volledig dan dat we het opblazen. Elk volgend project komt hier bij."
+  />
+
+  <!-- ========================================================== de case -->
+  <section class="section band-paper">
+    <div class="container">
+      <div class="case__kop reveal">
+        <p class="eyebrow">To B-Seen · eventveiligheid</p>
+        <h2>Van een avond verslagen typen naar een document dat klaarstaat</h2>
+      </div>
+
+      <div class="split split--top">
+        <div class="reveal">
+          <h3>De situatie</h3>
+          <p>
+            To B-Seen begeleidt de veiligheid van evenementen. Elk event
+            eindigt in een verslag: inspecties, foto’s, notities en
+            bevindingen die iemand achteraf moest samenbrengen tot een
+            afgewerkt document. Dat opmaken vrat uren, en het kwam bovenop het
+            werk waarvoor klanten hen eigenlijk bellen.
+          </p>
+          <h3>Wat we bouwden</h3>
+          <p>
+            Een rapportage-app op maat. Wat op het event wordt vastgelegd,
+            loopt er in één keer uit op een afgewerkt verslag in hun eigen
+            sjabloon. Geen nieuw pakket ernaast: de app hangt aan de software
+            die er al stond.
+          </p>
+          <p>
+            We begonnen bewust klein, bij de verslagen. Pas toen dat draaide
+            en het team ermee weg was, kwamen de volgende automatisaties
+            erbij. Zo groeit het er vandaag nog steeds, stap voor stap.
+          </p>
+        </div>
+
+        <div class="reveal">
+          <div class="panel">
+            <h3 class="panel__title">Wat er staat</h3>
+            <ul class="checklist">
+              {
+                geleverd.map((g) => (
+                  <li>
+                    <Icon name="check" size={18} />
+                    {g}
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================== het resultaat -->
+  <section class="section case__cijferband">
+    <div class="container case__cijfer reveal">
+      <div>
+        <span class="case__big">1 functie</span>
+        <span class="case__label">
+          aan administratief werk dat sindsdien vanzelf loopt
+        </span>
+      </div>
+      <div>
+        <p>
+          Administratie die vroeger een volledige functie vulde, doet nu
+          zichzelf. De mensen die er werken, doen weer het werk waarvoor
+          klanten hen bellen.
+        </p>
+        <p>
+          Het is ons eerste traject, en meteen de lat die we bij elke
+          volgende klant opnieuw willen halen.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!--
+    Zodra To B-Seen een quote geeft: hier een blockquote met naam en rol,
+    in de stijl van de garantie-band op /aanpak/. Geen quote verzinnen.
+  -->
+
+  <!-- ================================================== zo werken we ook -->
+  <section class="section band-sand">
+    <div class="container split split--top">
+      <div class="reveal">
+        <p class="eyebrow">Wat dit voor jou betekent</p>
+        <h2>Bij jou beginnen we ook bij één proces</h2>
+        <p>
+          Niet met een groot plan, maar met het ene proces dat het meest aan
+          je week vreet. Volledig af, aangesloten op je eigen systemen, met
+          afspraken die vooraf vastliggen. Pas als dat draait, kijken we naar
+          het volgende.
+        </p>
+        <a href="/aanpak/" class="link-arrow">
+          Zo pakken we dat aan
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+      <div class="reveal">
+        <div class="panel">
+          <h3 class="panel__title">Dezelfde afspraken als bij To B-Seen</h3>
+          <ul class="checklist">
+            <li>
+              <Icon name="check" size={18} />
+              Vaste prijs en vaste deadline, vooraf
+            </li>
+            <li>
+              <Icon name="check" size={18} />
+              Gebouwd op de software die je al gebruikt
+            </li>
+            <li>
+              <Icon name="check" size={18} />
+              Je team leert ermee werken voor we vertrekken
+            </li>
+            <li>
+              <Icon name="check" size={18} />
+              Werkt het niet, dan sturen we bij zonder extra factuur
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    eyebrow="Het volgende verhaal"
+    title="Misschien staat jouw bedrijf hier straks"
+    text="Vertel in een half uur wat je doet en waar het kraakt. Dan hoor je wat wij zouden aanpakken, en wat je beter eerst zelf probeert."
+    secondary={{ label: 'Bekijk de oplossingen', href: '/oplossingen/' }}
+  />
+</BaseLayout>
+
+<style>
+  .case__kop {
+    max-width: 760px;
+    margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
+  }
+
+  .case__kop h2 {
+    margin-top: 14px;
+  }
+
+  .split h3 {
+    font-size: clamp(1.25rem, 1.8vw, 1.5rem);
+    margin-bottom: 10px;
+  }
+
+  .split h3:not(:first-child) {
+    margin-top: 32px;
+  }
+
+  .split p {
+    color: var(--ink-soft);
+  }
+
+  .panel__title {
+    margin-bottom: 20px;
+  }
+
+  /* --------------------------------------------------------- resultaat --- */
+
+  .case__cijferband {
+    background: var(--clay-soft);
+  }
+
+  .case__cijfer {
+    display: grid;
+    gap: clamp(40px, 5vw, 72px);
+    align-items: center;
+  }
+
+  @media (min-width: 920px) {
+    .case__cijfer {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .case__big {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+    font-size: clamp(4rem, 9.5vw, 8rem);
+    color: var(--clay-700);
+  }
+
+  .case__label {
+    display: block;
+    margin-top: 20px;
+    font-size: 1.08rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 40ch;
+  }
+
+  .case__cijfer p {
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+  }
+</style>

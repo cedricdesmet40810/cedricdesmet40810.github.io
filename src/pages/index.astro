@@ -1,0 +1,1080 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import StepScene from '../components/StepScene.astro';
+import Faq from '../components/Faq.astro';
+import { SERVICES, SITE } from '../config.js';
+
+// De vragen die mensen ons echt stellen zodra ze horen wat we doen.
+const faq = [
+  {
+    q: 'Wat kan zo’n AI nu concreet voor ons doen?',
+    a: 'Het meeste kantoorwerk is lezen, schrijven en overtypen: offertes opmaken, mails sorteren en beantwoorden, verslagen schrijven, gegevens van het ene systeem naar het andere brengen, vragen beantwoorden uit je eigen documenten. Daar is AI sterk in. Beslissingen nemen, klanten bellen en rommel opruimen blijven mensenwerk.',
+  },
+  {
+    q: 'Hoe bouwen jullie zoiets?',
+    a: 'We hangen AI aan de software die je al gebruikt: Microsoft 365, Google Workspace, SharePoint, Odoo, Billit. Eerst één proces, van begin tot eind. Pas als dat draait en je team ermee weg is, kijken we naar het volgende.',
+  },
+  {
+    q: 'Wat kunnen we zelf al doen, zonder jullie?',
+    a: 'Meer dan je denkt. Voor losse taken, een mail herschrijven of een tekst samenvatten, volstaat ChatGPT of Copilot. Daar heb je ons niet voor nodig, en dat zeggen we er ook bij. Wij komen in beeld zodra het aan je systemen moet hangen en er elke dag betrouwbaar hetzelfde uit moet komen.',
+  },
+  {
+    q: 'Wat kost dat?',
+    a: 'We starten met een korte scan van je processen. Daarna krijg je één vast bedrag voor het hele traject, vooraf. Geen uurtje-factuurtje. Wat het precies wordt, hangt af van hoeveel systemen we moeten aansluiten.',
+  },
+  {
+    q: 'Moet ons team technisch zijn?',
+    a: 'Nee. Niemand hoeft te kunnen programmeren en je hebt geen IT-afdeling nodig. Wij doen het technische werk en leggen in gewone taal uit wat er gebeurt. Je team leert werken met het resultaat.',
+  },
+  {
+    q: 'Wat gebeurt er met onze gegevens?',
+    a: 'Je data blijft van jou. We spreken vooraf af welke bestanden gebruikt worden, waar ze staan en wie erbij kan. We werken volgens de GDPR en houden rekening met de Europese AI Act. Waar het kan, draait de verwerking op Europese servers.',
+  },
+];
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  '@id': `${SITE.url}/#faq`,
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+const servicesSchema = SERVICES.map((s) => ({
+  '@type': 'Service',
+  '@id': `${SITE.url}/oplossingen/${s.slug}/#service`,
+  name: s.title,
+  description: s.excerpt,
+  serviceType: s.short,
+  provider: { '@id': `${SITE.url}/#organization` },
+  areaServed: { '@type': 'Country', name: 'België' },
+  url: `${SITE.url}/oplossingen/${s.slug}/`,
+}));
+
+// De regels die oplichten terwijl je scrolt.
+const poem = [
+  'ChatGPT staat intussen op ieders telefoon.',
+  'En toch wordt elke offerte nog met de hand gemaakt.',
+  'Elke mail zelf getypt. Elk verslag op vrijdagavond.',
+  'Niet omdat het moet.',
+  'Omdat niemand de tijd had om het anders te bouwen.',
+];
+
+const stappen = [
+  {
+    scene: 'werkvloer',
+    t: 'We beginnen bij jouw werkvloer',
+    d: 'Geen presentatie over AI, maar een halve dag tussen je mensen. We volgen het werk dat zich herhaalt en zetten op papier waar de tijd blijft hangen, met de rekensom erbij.',
+  },
+  {
+    scene: 'systemen',
+    t: 'We bouwen op wat er al staat',
+    d: 'Je boekhoudpakket, je mailbox en je mappen blijven gewoon staan. We hangen AI aan Microsoft 365, Google Workspace, SharePoint, Odoo of Billit en maken één proces volledig af.',
+  },
+  {
+    scene: 'team',
+    t: 'We geven het in handen van je team',
+    d: 'Opleiding op jullie eigen dossiers, een handleiding in gewone taal, en een week proefdraaien met echte vragen. Pas als je team er zelf mee weg is, is het af.',
+  },
+  {
+    scene: 'buurt',
+    t: 'We blijven in de buurt',
+    d: 'Documenten veranderen, systemen krijgen updates. Wij houden het draaiend, breiden uit wat goed werkt, en nemen desgewenst ook de rest van je IT erbij.',
+  },
+];
+
+const producten = [
+  {
+    vraag: 'Weet je dat er iets moet, maar niet wat?',
+    naam: 'Scan',
+    d: 'We lichten je processen door. Je krijgt een rapport met de kansen, de berekening erbij en een volgorde van aanpak. Het rapport is van jou, ook zonder vervolg.',
+    href: '/oplossingen/kostenbesparing/',
+    label: 'Hoe de scan werkt',
+  },
+  {
+    vraag: 'Eén proces dat blijft vreten aan je week?',
+    naam: 'Bouw',
+    d: 'Een automatisering of een app op maat, werkend opgeleverd op de afgesproken datum, voor het afgesproken bedrag. Zoals de rapportage-app van To B-Seen.',
+    href: '/oplossingen/apps-op-maat/',
+    label: 'Bekijk wat we bouwen',
+  },
+  {
+    vraag: 'Zit jullie kennis verspreid over mappen en hoofden?',
+    naam: 'Chat',
+    d: 'Een assistent die antwoordt uit je eigen documenten, met bronvermelding. Zegt het als hij iets niet weet, in plaats van te gokken.',
+    href: '/oplossingen/ai-chatbots/',
+    label: 'Zo werkt de chatbot',
+  },
+];
+
+// Illustratieve werkstromen, in de stijl van hoe we ze echt bouwen.
+const stromen = [
+  {
+    icon: 'euro',
+    label: 'Offertes',
+    in_: '“Kunnen jullie een prijs maken voor 24 ramen, levering eind mei?”',
+    uit: 'Een offerte in jullie huisstijl, met prijzen uit je eigen lijst. Jij kijkt na en verstuurt.',
+  },
+  {
+    icon: 'mail',
+    label: 'Mailbox',
+    in_: 'Veertien nieuwe mails, alles door elkaar: prijsvragen, facturen, een klacht.',
+    uit: 'Gesorteerd op wat dringend is, met per mail een voorstel van antwoord klaar.',
+  },
+  {
+    icon: 'app',
+    label: 'Verslagen',
+    in_: 'Foto’s, notities en bevindingen van op de werf of het event.',
+    uit: 'Een afgewerkt verslag in jullie sjabloon. Zo draait het vandaag bij To B-Seen.',
+  },
+  {
+    icon: 'chart',
+    label: 'Maandcijfers',
+    in_: 'Omzet in het boekhoudpakket, orders in de webshop, uren in Excel.',
+    uit: 'Eén rapport, elke eerste van de maand, zonder dat iemand het moet samenstellen.',
+  },
+];
+---
+
+<BaseLayout
+  title="Auxilia · AI en IT voor KMO’s in de Kempen"
+  exactTitle={true}
+  description="AI-chatbots op je eigen data, apps op maat en automatisering voor KMO’s. Eén aanspreekpunt voor AI én IT. Vaste prijs, vaste deadline. Plan een kennismaking."
+  schema={[faqSchema, ...servicesSchema]}
+>
+  <!-- ====================================================== hero (teal) -->
+  <section class="hero band-teal">
+    <div class="container hero__inner">
+      <p class="hero-badge">In gebruik bij To B-Seen</p>
+      <h1>Meer tijd voor het echte werk</h1>
+      <p class="hero__lead">
+        Papierwerk slorpt je dagen op. Auxilia bouwt AI die het overneemt, in
+        de software die je al gebruikt, met je team aan het stuur.
+      </p>
+      <div class="btn-row hero__actions">
+        <a href={SITE.bookingUrl || '/contact/'} class="btn btn--primary btn--xl">
+          Plan 30 minuten
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+      <p class="hero__sub">Vaste prijs · vaste deadline · je data blijft van jou</p>
+    </div>
+
+    <!-- De Kempen bij valavond: heuvels, dennen en een lage klei-zon. -->
+    <svg
+      class="hero__horizon"
+      viewBox="0 0 1440 300"
+      preserveAspectRatio="xMidYMax slice"
+      aria-hidden="true"
+    >
+      <circle cx="1080" cy="170" r="72" fill="#D2691E" opacity="0.9" />
+      <circle cx="1080" cy="170" r="110" fill="#D2691E" opacity="0.12" />
+      <!-- verre heuvelrug -->
+      <path
+        d="M-10 232 Q 220 200 480 222 T 940 214 T 1450 226 L1450 300 L-10 300 Z"
+        fill="rgba(11,69,67,0.4)"
+      />
+      <!-- dennen op de rug -->
+      <g
+        fill="none"
+        stroke="rgba(250,247,242,0.35)"
+        stroke-width="2.2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M150 224 l17 -38 l17 38 m-25 -20 l8 -20 l8 20 m-8 20 v14" />
+        <path d="M205 228 l13 -28 l13 28 m-19 -15 l6 -15 l6 15 m-6 15 v11" />
+        <path d="M248 226 l10 -22 l10 22 m-15 -11 l5 -13 l5 13 m-5 11 v9" />
+        <path d="M620 220 l15 -33 l15 33 m-22 -17 l7 -18 l7 18 m-7 17 v12" />
+        <path d="M668 224 l11 -24 l11 24 m-16 -12 l5 -14 l5 14 m-5 12 v10" />
+        <path d="M860 218 l19 -42 l19 42 m-28 -22 l9 -22 l9 22 m-9 22 v15" />
+        <path d="M920 222 l14 -30 l14 30 m-21 -16 l7 -16 l7 16 m-7 16 v12" />
+        <path d="M1280 224 l16 -35 l16 35 m-24 -18 l8 -19 l8 19 m-8 18 v13" />
+        <path d="M1330 228 l11 -24 l11 24 m-16 -12 l5 -13 l5 13 m-5 12 v10" />
+      </g>
+      <!-- veldlijnen -->
+      <g fill="none" stroke="rgba(250,247,242,0.14)" stroke-width="1.6" stroke-linecap="round">
+        <path d="M-10 258 Q 400 244 900 254 T 1450 250" />
+        <path d="M-10 276 Q 500 264 1000 272 T 1450 268" />
+      </g>
+      <!-- voorgrond -->
+      <path
+        d="M-10 300 L-10 250 Q 340 232 760 246 T 1450 248 L1450 300 Z"
+        fill="rgba(11,69,67,0.75)"
+      />
+    </svg>
+  </section>
+
+  <!-- ==================================================== integraties -->
+  <section class="section--tight band-sand strip">
+    <div class="container strip__row">
+      <p class="strip__label">Sluit aan op wat je al gebruikt</p>
+      <ul class="strip__list">
+        <li>
+          <svg class="strip__logo" viewBox="0 0 21 21" aria-hidden="true">
+            <rect width="10" height="10" fill="#F25022"></rect>
+            <rect x="11" width="10" height="10" fill="#7FBA00"></rect>
+            <rect y="11" width="10" height="10" fill="#00A4EF"></rect>
+            <rect x="11" y="11" width="10" height="10" fill="#FFB900"></rect>
+          </svg>
+          Microsoft 365
+        </li>
+        <li>
+          <svg class="strip__logo" viewBox="0 0 48 48" aria-hidden="true">
+            <path
+              fill="#EA4335"
+              d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"
+            ></path>
+            <path
+              fill="#4285F4"
+              d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"
+            ></path>
+            <path
+              fill="#FBBC05"
+              d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"
+            ></path>
+            <path
+              fill="#34A853"
+              d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"
+            ></path>
+          </svg>
+          Google Workspace
+        </li>
+        <li>
+          <!-- Vereenvoudigd merkteken; vervang bij lancering door het officiële logo. -->
+          <svg class="strip__logo" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="10" cy="9" r="8" fill="#036C70"></circle>
+            <circle cx="17.5" cy="13.5" r="6" fill="#1A9BA1"></circle>
+            <circle cx="12" cy="19" r="4.5" fill="#37C6D0"></circle>
+          </svg>
+          SharePoint
+        </li>
+        <li>
+          <svg class="strip__logo" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="8.5" fill="none" stroke="#714B67" stroke-width="5"></circle>
+          </svg>
+          Odoo
+        </li>
+        <li>
+          <!-- Officieel Billit-icoon (origami-vogel), verkleind ingebed. -->
+          <img class="strip__logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAMAAABiM0N1AAADAFBMVEVMaXH//v3NRQr//v7ORwr///3///7////xigDcagLyjAD+/f3OSAr//vvwiQDbaALxiwLcawLecxLdbAHbaQLzjgDLPADxggDbZgDxiQDdaQHXXQTgfSL//PrcaADPSg3xhQDNQwrVVgfZYgPMQQPLPgP8/f3++vX//PvNRAfWWgjbZADrgAHuhADORgndbgjyz7/MPwHcawTQThXfbgLNRQfPSg/gcALfdhPKOADaZQP3wHbbbBvechDYWQCyydT+/v7RTQcARm3+/PjSUQjORAPSVRn++PD67eb0ozfWWhPIMwH5zZTXYhz77N/bcCXnegHjdAHvhwDPSgcCTXHceU31rU7UUwn97tnznzD99ez97NTVVwD98+ncbAn9+PX60qL99vDaXgLecAr1uGrtu6Lyxp3whAD43cP9/v/ykREAQmjbeErz0sPeglXce1D737vxhwDxiwjzigHxkRj98N/poV760JrzmyfhfzT018vigSffeBvvfwD4yY362KrcbxX438npr5T2slfwfAL0pjv00rPlkUj1kwnYXxXjiTfqegHhZwPxybfgdAH3vnHaZRXQTg34wnr98uXsbAD73bTwxbPilHLVXRf78ez1q0jplknUUgP96czbdT3aagT2tV7ofgvddS/zpVDxjgzdchfaYg3ecB333tD62bDgiWHrqWzxwpX66dj848DmpIn6yYPMRA/srnjjk2TvdgDssYXvuo7zlx3XbRW30NvhjmrZcUf35NryzLoATHrTWiLlnXzYbz7jcAT118f0q1bieSffhFnuwKvueADdfVT85sbXazzghE3ucADvtoTsihnjmHfYbDb3uGDlm3D0zqv2t2LihUXiilXoghvEJADldQbllWDldgCjv82XtsXp9PzmfBZtmK2EqLpVh6CNlo+QbEDWgVq/bCJtZ1I0V2EcV3DZbTDUXyzQVSbloH/mmFHzzKnnmlPYai/jizvpomXVZj3pqYHikWDFJwDDJgDleQfdg1/3yZP0wIXwgwLeejOHCltdAAAAAXRSTlMAQObYZgAAAAlwSFlzAAALEwAACxMBAJqcGAAABopJREFUeNrtlndUE1kUxjMz2bkZkpBgICQGCSFEEnoXQlkwiHR2ld47rohiA0RUFBTB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" alt="" width="18" height="18" />
+          Billit
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================================================== probleem-gedicht -->
+  <section class="poemband band-paper">
+    <div class="container">
+      <div class="poem" data-poem>
+        <h2 class="poem__opener">Iedereen zegt dat je iets met AI moet.</h2>
+        {poem.map((line) => <p class="poem__line">{line}</p>)}
+        <p class="poem__kicker">
+          <span aria-hidden="true"></span>
+          Wij hebben daar wél de tijd voor. Het is letterlijk ons vak.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================== stappen -->
+  <section class="section band-sand">
+    <div class="container">
+      <div class="section-head section-head--center reveal">
+        <p class="eyebrow eyebrow--center">Hoe we werken</p>
+        <h2>AI die blijft draaien als wij naar huis zijn</h2>
+      </div>
+
+      <ol class="bigsteps">
+        {
+          stappen.map((s, i) => (
+            <li class="bigstep reveal">
+              <div class="bigstep__visual" aria-hidden="true">
+                <StepScene name={s.scene} />
+                <span class="bigstep__n">{String(i + 1).padStart(2, '0')}</span>
+              </div>
+              <div class="bigstep__body">
+                <h3>{s.t}</h3>
+                <p>{s.d}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+
+      <p class="steps__note reveal">
+        Loopt iets niet zoals afgesproken, dan lossen wij dat op. Zonder
+        discussie en zonder kleine lettertjes.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================================================== succesverhalen -->
+  <section class="section succesband">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Succesverhalen</p>
+        <h2>Waar het vandaag al draait</h2>
+      </div>
+
+      <!-- Elk afgerond traject krijgt hier zo'n kaart. -->
+      <article class="card succes reveal">
+        <div class="succes__body">
+          <p class="succes__klant">To B-Seen · eventveiligheid</p>
+          <h3>Elk event een verslag, zonder dat iemand ervoor moet blijven zitten</h3>
+          <p>
+            To B-Seen begeleidt de veiligheid van evenementen. Elk event
+            eindigt in een verslag, en dat opmaken vrat uren. Vandaag rolt
+            het er vanzelf uit.
+          </p>
+          <a href="/ons-werk/" class="link-arrow">
+            Lees het hele verhaal
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+        <div class="succes__stat">
+          <span class="succes__big">1 functie</span>
+          <span class="succes__label">
+            voltijds administratief werk dat er nu vanzelf loopt
+          </span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ======================================================== producten -->
+  <section class="section band-paper">
+    <div class="container">
+      <div class="section-head section-head--center reveal">
+        <p class="eyebrow eyebrow--center">Kies je vertrekpunt</p>
+        <h2>Drie manieren om te starten</h2>
+      </div>
+
+      <div class="grid grid--3 reveal">
+        {
+          producten.map((p) => (
+            <article class="card product">
+              <p class="product__vraag">{p.vraag}</p>
+              <h3 class="product__naam">
+                <span class="product__mark" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="20" height="20">
+                    <path
+                      d="M5 14 L12 7.5 L19 14"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.4"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+                {p.naam}
+              </h3>
+              <p class="product__d">{p.d}</p>
+              <a href={p.href} class="link-arrow">
+                {p.label}
+                <span class="arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          ))
+        }
+      </div>
+
+      <!-- De vaste partner: breed, want dit is het einddoel. -->
+      <article class="wacht reveal">
+        <div>
+          <p class="product__vraag">Liever iemand die er blijvend op let?</p>
+          <h3 class="product__naam product__naam--light">
+            <span class="product__mark product__mark--light" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20">
+                <path
+                  d="M5 14 L12 7.5 L19 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+            Partner
+          </h3>
+          <p class="wacht__d">
+            Ons vaste partnerschap: wij houden de wacht over je AI én de rest
+            van je IT. Werkplekken, licenties, back-ups, beveiliging en alles
+            wat hapert. Eén nummer, vast maandbedrag.
+          </p>
+        </div>
+        <a href="/oplossingen/it-beheer/" class="btn btn--secondary">
+          Zo werkt het partnerschap
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </article>
+    </div>
+  </section>
+
+  <!-- ======================================================= werkstromen -->
+  <section class="section band-sand-deep">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">In de praktijk</p>
+        <h2>Wat er binnenkomt, en wat eruit komt</h2>
+        <p class="lead">
+          Vier werkstromen zoals we ze bouwen. Bij jou draait het op je eigen
+          prijzen, sjablonen en systemen.
+        </p>
+      </div>
+
+      <div class="grid grid--2 reveal">
+        {
+          stromen.map((w) => (
+            <article class="stroom card">
+              <p class="stroom__label">
+                <Icon name={w.icon} size={18} />
+                {w.label}
+              </p>
+              <div class="stroom__flow">
+                <p class="stroom__in">{w.in_}</p>
+                <span class="stroom__pijl" aria-hidden="true">
+                  <Icon name="arrow" size={18} />
+                </span>
+                <p class="stroom__uit">{w.uit}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <p class="stromen__noot reveal">
+        Illustratieve voorbeelden, geen echte klantdata.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================= faq -->
+  <section class="section band-sand" id="faq">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Veelgestelde vragen</p>
+        <h2>Wat mensen ons als eerste vragen</h2>
+        <p class="lead">
+          Staat je vraag er niet bij? De rest beantwoorden we bij een koffie.
+        </p>
+      </div>
+      <div class="reveal">
+        <Faq items={faq} />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================== slot (teal) -->
+  <section class="section band-teal slot">
+    <div class="container">
+      <div class="slot__head reveal">
+        <h2 class="statement">Na dertig minuten weet je het</h2>
+        <p class="lead">
+          Eén gesprek, online of bij jou op kantoor. Dit neem je sowieso mee
+          naar huis:
+        </p>
+      </div>
+
+      <div class="slot__grid reveal">
+        <ul class="checklist slot__list">
+          <li>
+            <Icon name="check" size={18} />
+            Een beeld van waar AI bij jullie het snelst rendeert
+          </li>
+          <li>
+            <Icon name="check" size={18} />
+            Wat je beter eerst zelf probeert, zonder ons
+          </li>
+          <li>
+            <Icon name="check" size={18} />
+            Of het de moeite is om verder te praten
+          </li>
+        </ul>
+
+        <div class="slot__cta">
+          <a href={SITE.bookingUrl || '/contact/'} class="btn btn--primary btn--xl">
+            Plan 30 minuten
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+          <a href="/aanpak/" class="btn btn--secondary">Lees eerst de aanpak</a>
+        </div>
+      </div>
+
+      <p class="slot__data reveal">
+        <Icon name="lock" size={16} />
+        Je data blijft van jou. GDPR en de Europese AI Act, vanaf dag één.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ------------------------------------------------------------- hero --- */
+
+  .hero {
+    position: relative;
+    overflow: hidden;
+    /* de donkere header loopt visueel door in het hero */
+    margin-top: -78px;
+    padding-top: calc(78px + clamp(6.5rem, 11vw, 11rem));
+    padding-bottom: clamp(13rem, 20vw, 19rem);
+    /* Kantoorfoto achter een teal-sluier: licht en rustig, het merk draagt. */
+    background:
+      linear-gradient(
+        180deg,
+        rgba(11, 69, 67, 0.94) 0%,
+        rgba(11, 69, 67, 0.86) 40%,
+        rgba(15, 92, 90, 0.74) 68%,
+        rgba(11, 69, 67, 0.92) 100%
+      ),
+      url('/hero-kantoor.jpg') center 70% / cover no-repeat,
+      var(--teal);
+  }
+
+  .hero__inner {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 940px;
+  }
+
+  .hero-badge {
+    margin: 0 0 34px;
+  }
+
+  .hero h1 {
+    font-size: clamp(3rem, 7.6vw, 6.4rem);
+    max-width: 16ch;
+    margin-inline: auto;
+  }
+
+  .hero__lead {
+    font-size: clamp(1.2rem, 1.9vw, 1.5rem);
+    line-height: 1.55;
+    color: rgba(250, 247, 242, 0.8);
+    max-width: 46ch;
+    margin: 28px auto 0;
+  }
+
+  .hero__actions {
+    justify-content: center;
+    margin-top: 44px;
+  }
+
+  .btn--xl {
+    padding: 18px 38px;
+    font-size: 1.08rem;
+  }
+
+  .hero__sub {
+    margin: 22px auto 0;
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+    color: rgba(250, 247, 242, 0.75);
+    max-width: none;
+  }
+
+  .hero__horizon {
+    position: absolute;
+    inset: auto 0 0;
+    width: 100%;
+    height: clamp(160px, 22vw, 300px);
+    display: block;
+  }
+
+  /* ------------------------------------------------------------ strip --- */
+
+  .strip {
+    border-bottom: 1px solid var(--line-soft);
+    padding-block: 28px;
+  }
+
+  .strip__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 14px 40px;
+  }
+
+  .strip__label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0;
+    max-width: none;
+  }
+
+  .strip__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 32px;
+  }
+
+  .strip__list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-size: 1.12rem;
+    color: var(--ink-soft);
+  }
+
+  .strip__logo {
+    width: 18px;
+    height: 18px;
+    flex: none;
+  }
+
+  /* ------------------------------------------------------------- poem --- */
+
+  /* Het gedicht krijgt het volledige scherm: één beeldvullende adempauze. */
+  .poemband {
+    display: grid;
+    align-items: center;
+    min-height: 100svh;
+    padding-block: clamp(6rem, 9vw, 9rem);
+  }
+
+  .poem {
+    max-width: none;
+    text-align: center;
+  }
+
+  .poem__opener {
+    font-size: clamp(2.5rem, 5.6vw, 4.6rem);
+    max-width: 18ch;
+    margin-inline: auto;
+    margin-bottom: clamp(2.2rem, 4vw, 3.4rem);
+  }
+
+  .poem__line {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.022em;
+    font-size: clamp(1.8rem, 4vw, 3.3rem);
+    line-height: 1.22;
+    max-width: 26ch;
+    margin: 0 auto clamp(1.1rem, 2vw, 1.9rem);
+    color: var(--ink);
+    transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+  }
+
+  /* dimmen gebeurt pas als JS meedoet; zonder JS is alles gewoon leesbaar */
+  [data-poem].is-enhanced .poem__line {
+    opacity: 0.12;
+    transform: translateY(12px);
+  }
+
+  [data-poem].is-enhanced .poem__line.is-lit {
+    opacity: 1;
+    transform: none;
+  }
+
+  .poem__kicker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: clamp(2.6rem, 4.4vw, 4rem);
+    margin-inline: auto;
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+    color: var(--teal);
+    max-width: 30ch;
+  }
+
+  .poem__kicker span {
+    width: 38px;
+    height: 3px;
+    border-radius: 3px;
+    background: var(--clay);
+    flex: none;
+  }
+
+  /* ---------------------------------------------------------- bigsteps --- */
+
+  .bigsteps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 28px;
+    max-width: 960px;
+    margin-inline: auto;
+  }
+
+  .bigstep {
+    display: grid;
+    gap: 24px;
+    background: var(--paper);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--r-xl);
+    box-shadow: var(--shadow);
+    padding: clamp(28px, 4vw, 52px);
+  }
+
+  @media (min-width: 720px) {
+    .bigstep {
+      grid-template-columns: 190px 1fr;
+      align-items: center;
+      gap: clamp(32px, 4.5vw, 56px);
+    }
+
+    /* om en om, zoals een strip */
+    .bigstep:nth-child(even) {
+      grid-template-columns: 1fr 190px;
+    }
+
+    .bigstep:nth-child(even) .bigstep__visual {
+      order: 2;
+    }
+  }
+
+  .bigstep__visual {
+    position: relative;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1;
+    max-width: 190px;
+    border-radius: 24px;
+    background: linear-gradient(150deg, rgba(15, 92, 90, 0.1), rgba(15, 92, 90, 0.04));
+  }
+
+  .bigstep__visual :global(svg) {
+    width: 100%;
+    height: 100%;
+    display: block;
+    padding: 14px;
+  }
+
+  .bigstep__n {
+    position: absolute;
+    top: 14px;
+    left: 18px;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    color: var(--ink-faint);
+  }
+
+  .bigstep__body h3 {
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
+    margin-bottom: 12px;
+  }
+
+  .bigstep__body p {
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    margin: 0;
+  }
+
+  .steps__note {
+    margin: 48px auto 0;
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 1.8vw, 1.45rem);
+    color: var(--ink-soft);
+    max-width: 42ch;
+  }
+
+  /* --------------------------------------------------- succesverhalen --- */
+
+  /* De warme popband: klei-zacht, het verhaal voorop, het cijfer als bijrol. */
+  .succesband {
+    background: var(--clay-soft);
+  }
+
+  .succes {
+    display: grid;
+    gap: clamp(28px, 4vw, 56px);
+    align-items: center;
+    padding: clamp(30px, 4vw, 52px);
+  }
+
+  @media (min-width: 880px) {
+    .succes {
+      grid-template-columns: 1.5fr 1fr;
+    }
+
+    .succes__stat {
+      border-left: 1px solid var(--line-soft);
+      padding-left: clamp(28px, 4vw, 56px);
+    }
+  }
+
+  .succes__klant {
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--clay-700);
+    margin-bottom: 14px;
+  }
+
+  .succes h3 {
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
+    margin-bottom: 12px;
+    max-width: 24ch;
+  }
+
+  .succes__body > p:not(.succes__klant) {
+    color: var(--ink-soft);
+    margin-bottom: 22px;
+    max-width: 52ch;
+  }
+
+  .succes__big {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    font-size: clamp(2.6rem, 5vw, 4rem);
+    color: var(--clay-700);
+  }
+
+  .succes__label {
+    display: block;
+    margin-top: 12px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 24ch;
+  }
+
+  /* -------------------------------------------------------- producten --- */
+
+  .product {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product__vraag {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--clay-700);
+    margin-bottom: 16px;
+  }
+
+  .product__naam {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: clamp(1.6rem, 2.4vw, 2rem);
+    margin-bottom: 12px;
+  }
+
+  .product__mark {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: var(--teal);
+    color: var(--sand);
+    flex: none;
+  }
+
+  .product__d {
+    flex: 1;
+    margin-bottom: 22px;
+  }
+
+  .wacht {
+    display: grid;
+    gap: 28px;
+    align-items: center;
+    margin-top: 28px;
+    padding: clamp(30px, 4vw, 52px);
+    border-radius: var(--r-xl);
+    background: var(--teal);
+    color: var(--sand);
+    box-shadow: var(--shadow-lg);
+  }
+
+  @media (min-width: 860px) {
+    .wacht {
+      grid-template-columns: 1fr auto;
+      gap: clamp(32px, 5vw, 64px);
+    }
+  }
+
+  .wacht .product__vraag {
+    color: var(--clay-soft);
+  }
+
+  .product__naam--light {
+    color: var(--sand);
+  }
+
+  .product__mark--light {
+    background: rgba(250, 247, 242, 0.14);
+    color: var(--sand);
+  }
+
+  .wacht__d {
+    color: rgba(250, 247, 242, 0.8);
+    margin: 0;
+    max-width: 58ch;
+  }
+
+  .wacht .btn--secondary {
+    color: var(--sand);
+    border-color: rgba(250, 247, 242, 0.32);
+  }
+
+  .wacht .btn--secondary:hover {
+    border-color: var(--sand);
+    background: rgba(250, 247, 242, 0.1);
+  }
+
+  /* ------------------------------------------------------- werkstromen --- */
+
+  .stroom__label {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 20px;
+  }
+
+  .stroom__label :global(svg) {
+    flex: none;
+  }
+
+  .stroom__flow {
+    display: grid;
+    gap: 14px;
+  }
+
+  .stroom__in {
+    margin: 0;
+    padding: 16px 18px;
+    border-radius: 14px;
+    background: var(--sand-deep);
+    color: var(--ink-soft);
+    font-size: 0.98rem;
+  }
+
+  .stroom__pijl {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--clay);
+    color: #fff;
+    transform: rotate(90deg);
+    margin-inline: auto;
+  }
+
+  .stroom__uit {
+    margin: 0;
+    padding: 16px 18px;
+    border-radius: 14px;
+    background: rgba(15, 92, 90, 0.06);
+    border: 1px solid rgba(15, 92, 90, 0.16);
+    color: var(--ink);
+    font-size: 0.98rem;
+    font-weight: 500;
+  }
+
+  .stromen__noot {
+    margin-top: 28px;
+    font-size: 0.88rem;
+    color: var(--ink-faint);
+  }
+
+  /* ------------------------------------------------------------- slot --- */
+
+  .slot__head {
+    text-align: center;
+    max-width: 720px;
+    margin-inline: auto;
+  }
+
+  .slot__head .statement {
+    max-width: 20ch;
+    margin-inline: auto;
+  }
+
+  .slot__head .lead {
+    margin: 22px auto 0;
+  }
+
+  .slot__grid {
+    display: grid;
+    gap: clamp(32px, 4vw, 48px);
+    align-items: center;
+    max-width: 900px;
+    margin: clamp(2.8rem, 4.5vw, 4rem) auto 0;
+  }
+
+  @media (min-width: 820px) {
+    .slot__grid {
+      grid-template-columns: 1.1fr 0.9fr;
+    }
+  }
+
+  .slot__cta {
+    display: grid;
+    gap: 12px;
+  }
+
+  .slot__data {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: clamp(3rem, 5vw, 4rem) auto 0;
+    padding-top: 28px;
+    border-top: 1px solid rgba(250, 247, 242, 0.16);
+    font-size: 0.92rem;
+    color: rgba(250, 247, 242, 0.75);
+    max-width: none;
+  }
+
+  .slot__data :global(svg) {
+    color: rgba(250, 247, 242, 0.75);
+    flex: none;
+  }
+</style>
+
+<script>
+  // Het probleem-gedicht licht regel per regel op tijdens het scrollen.
+  // Zonder JS of met reduced-motion blijft alles gewoon zichtbaar.
+  const poemEl = document.querySelector('[data-poem]');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (poemEl && !reduced && 'IntersectionObserver' in window) {
+    poemEl.classList.add('is-enhanced');
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-lit');
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -30% 0px', threshold: 0.5 }
+    );
+    poemEl.querySelectorAll('.poem__line').forEach((el) => io.observe(el));
+  }
+</script>

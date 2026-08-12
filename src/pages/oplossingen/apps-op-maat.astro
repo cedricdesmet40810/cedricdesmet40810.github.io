@@ -1,0 +1,191 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import Icon from '../../components/Icon.astro';
+
+const faq = [
+  {
+    q: 'Waarom een eigen app en geen bestaand pakket?',
+    a: 'Meestal is een bestaand pakket de betere keuze, en dat zeggen we dan ook. Een app op maat loont pas als je proces echt afwijkt van de standaard, of als je vandaag drie pakketten aan elkaar knoopt met Excel ertussen. Dat verschil bekijken we voor we iets bouwen.',
+  },
+  {
+    q: 'Van wie is de software achteraf?',
+    a: 'Van jou. Je krijgt de broncode en de omgeving staat op jouw naam. Je bent niet verplicht om bij ons te blijven om ermee verder te kunnen. Dat vinden we een gezondere basis om samen te werken.',
+  },
+  {
+    q: 'Hoe lang duurt het?',
+    a: 'Een eerste werkende versie halen we meestal in vier tot acht weken, afhankelijk van hoeveel systemen we moeten aansluiten. We leveren liever snel iets kleins dat werkt dan na een half jaar iets groots dat nog getest moet worden.',
+  },
+  {
+    q: 'Werkt het ook op een telefoon?',
+    a: 'Ja. We bouwen standaard zo dat het even goed werkt op een gsm in de wagen als op een scherm op kantoor. Voor mensen op de baan is dat meestal net het punt.',
+  },
+  {
+    q: 'Wat als we later iets willen bijbouwen?',
+    a: 'Dat is ingecalculeerd. We bouwen in kleine stukken die los van elkaar aangepast kunnen worden, zodat een uitbreiding geen verbouwing wordt. Wat je later toevoegt, spreken we per stuk af.',
+  },
+];
+
+const wanneer = [
+  {
+    icon: 'layers',
+    t: 'Je proces past in geen enkel pakket',
+    d: 'Je werkt op een manier die klanten net bij jou brengt. Een standaardpakket dwingt je die manier op te geven.',
+  },
+  {
+    icon: 'refresh',
+    t: 'Dezelfde gegevens gaan drie keer over',
+    d: 'Van de mail naar Excel, van Excel naar het pakket, van het pakket naar een verslag. Elke stap kost tijd en levert fouten op.',
+  },
+  {
+    icon: 'plug',
+    t: 'Je tools praten niet met elkaar',
+    d: 'Je betaalt voor vijf abonnementen die elk een stukje doen, en jij bent de koppeling ertussen.',
+  },
+  {
+    icon: 'users',
+    t: 'Je team werkt op papier',
+    d: 'Opmetingen, controles en werkbonnen op papier, die iemand ’s avonds overtypt. Dat kan meteen digitaal, ook zonder bereik.',
+  },
+];
+
+const stappen = [
+  {
+    t: 'We schetsen het samen',
+    d: 'Voor er één regel code geschreven wordt, tekenen we de schermen uit. Zo zie je waar het naartoe gaat en is bijsturen nog gratis.',
+  },
+  {
+    t: 'Je krijgt snel iets in handen',
+    d: 'Een eerste versie met het belangrijkste stuk erin, zodat je team er echt mee kan werken in plaats van erover te vergaderen.',
+  },
+  {
+    t: 'We bouwen af op wat je leert',
+    d: 'De opmerkingen uit dat eerste gebruik bepalen wat er daarna bij komt. Dat is bijna nooit exact wat we vooraf hadden bedacht.',
+  },
+  {
+    t: 'We zetten het live en blijven erop',
+    d: 'Inclusief opleiding, een handleiding in gewone taal en onderhoud daarna. Software die niemand bijhoudt, is over een jaar een probleem.',
+  },
+];
+---
+
+<ServiceLayout
+  slug="apps-op-maat"
+  title="Apps en tools op maat"
+  h1="Software gebouwd rond hoe jij werkt"
+  metaTitle="App op maat laten maken voor je KMO"
+  description="Web- en mobiele apps op maat voor KMO’s: gebouwd rond jouw proces, gekoppeld aan je bestaande software. Vaste prijs, je bent eigenaar van de code."
+  lead="Een pakket dwingt je in een manier van werken die niet de jouwe is. Wij draaien het om en bouwen de tool rond het proces dat bij jou al werkt."
+  highlights={[
+    'Werkende versie in vier tot acht weken',
+    'Werkt op gsm, tablet en desktop',
+    'Gekoppeld aan je bestaande software',
+    'Jij bent eigenaar van de code',
+    'Opleiding en onderhoud inbegrepen',
+  ]}
+  faq={faq}
+>
+  <!-- ======================================================== wanneer -->
+  <section class="section band-paper">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Wanneer het loont</p>
+        <h2>Wanneer een eigen tool de moeite wordt</h2>
+        <p class="lead">
+          Herken je hier iets in, dan is het gesprek waarschijnlijk de moeite.
+        </p>
+      </div>
+      <div class="grid grid--4 reveal">
+        {
+          wanneer.map((w) => (
+            <article class="card">
+              <span class="icon-tile">
+                <Icon name={w.icon} />
+              </span>
+              <h3>{w.t}</h3>
+              <p>{w.d}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================== wat we bouwen -->
+  <section class="section band-sand">
+    <div class="container split split--top">
+      <div class="reveal">
+        <p class="eyebrow">Wat we zoal bouwen</p>
+        <h2>Van werkbon tot klantenportaal</h2>
+        <p>
+          Voor To B-Seen, een bedrijf in eventveiligheid, bouwden we een
+          rapportage-app die van losse inspecties en foto’s ter plekke een
+          kant-en-klaar verslag maakt. Wat dat opleverde, lees je bij
+          <a href="/ons-werk/">ons werk</a>.
+        </p>
+        <p>
+          Zo spectaculair hoeft het trouwens niet altijd te zijn. Vaak is het
+          één scherm dat een half uur handwerk per dag wegneemt, en dat exact
+          spreekt zoals jouw bedrijf spreekt.
+        </p>
+        <p>
+          Waar het kan, bouwen we er AI in. Een verslag dat zichzelf al voor
+          driekwart opmaakt uit wat er ingevuld is, bijvoorbeeld. Maar alleen als
+          het iets oplost. Anders laten we het weg.
+        </p>
+      </div>
+      <div class="reveal">
+        <div class="panel">
+          <ul class="checklist">
+            <li>
+              <Icon name="check" size={18} />
+              Werkbonnen en opmetingen die je ploeg op de baan invult
+            </li>
+            <li>
+              <Icon name="check" size={18} />
+              Inspecties en verslagen met foto’s, meteen tot een pdf
+            </li>
+            <li>
+              <Icon name="check" size={18} />
+              Een portaal waar klanten hun dossier en documenten zien
+            </li>
+            <li>
+              <Icon name="check" size={18} />
+              Planning en toewijzing van ploegen of voertuigen
+            </li>
+            <li>
+              <Icon name="check" size={18} />
+              Offertes uit je eigen prijslijst, met je eigen kortingsregels
+            </li>
+            <li>
+              <Icon name="check" size={18} />
+              Een intern dashboard dat cijfers uit al je systemen samenbrengt
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= aanpak -->
+  <section class="section band-teal">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Hoe we het aanpakken</p>
+        <h2>Klein beginnen, snel tonen, daarna pas uitbreiden</h2>
+      </div>
+      <ol class="numbered reveal">
+        {
+          stappen.map((s, i) => (
+            <li>
+              <span class="numbered__n">{String(i + 1).padStart(2, '0')}</span>
+              <div>
+                <h3>{s.t}</h3>
+                <p>{s.d}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+</ServiceLayout>

@@ -1,0 +1,169 @@
+---
+/**
+ * Alle head-markup op één plek: canonical, social cards en de JSON-LD graph.
+ * Elke pagina levert alleen titel, omschrijving en eventueel extra schema aan.
+ */
+import { SITE } from '../config.js';
+
+const {
+  title,
+  /** Kortere, zoekgerichte variant voor het <title>. Valt terug op `title`. */
+  metaTitle,
+  description = SITE.description,
+  /** Titel exact zo gebruiken, zonder " · Auxilia" erachter (alleen de homepage). */
+  exactTitle = false,
+  image = '/og-image.png',
+  imageAlt = 'Auxilia, AI en IT voor KMO’s',
+  noindex = false,
+  /** Extra schema-objecten die in de @graph komen. */
+  schema = [],
+  /** [{ name, href }] — href relatief. De homepage wordt automatisch vooraan gezet. */
+  breadcrumbs = [],
+  /** Overschrijft de datum in de Article-markup. */
+  publishedAt,
+  modifiedAt,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, SITE.url).href;
+const ogImage = new URL(image, SITE.url).href;
+const headline = metaTitle ?? title;
+const fullTitle = exactTitle ? headline : `${headline} · ${SITE.name}`;
+
+/* ---------------------------------------------------------------- schema --- */
+
+const organization = {
+  '@type': ['Organization', 'ProfessionalService'],
+  '@id': `${SITE.url}/#organization`,
+  name: SITE.name,
+  legalName: SITE.legalName,
+  url: `${SITE.url}/`,
+  description: SITE.description,
+  email: SITE.email,
+  vatID: SITE.vat,
+  taxID: SITE.companyNumber,
+  foundingDate: SITE.founded,
+  logo: {
+    '@type': 'ImageObject',
+    '@id': `${SITE.url}/#logo`,
+    url: new URL('/logo.png', SITE.url).href,
+    contentUrl: new URL('/logo.png', SITE.url).href,
+    caption: SITE.name,
+  },
+  image: { '@id': `${SITE.url}/#logo` },
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: SITE.addressLocality,
+    addressRegion: 'Antwerpen',
+    addressCountry: SITE.addressCountry,
+  },
+  areaServed: [
+    { '@type': 'AdministrativeArea', name: 'Kempen' },
+    { '@type': 'AdministrativeArea', name: 'Provincie Antwerpen' },
+    { '@type': 'Country', name: 'België' },
+  ],
+  knowsLanguage: ['nl-BE', 'en'],
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'sales',
+    email: SITE.email,
+    areaServed: 'BE',
+    availableLanguage: ['Dutch', 'English'],
+  },
+  ...(SITE.social.linkedin ? { sameAs: [SITE.social.linkedin] } : {}),
+};
+
+const website = {
+  '@type': 'WebSite',
+  '@id': `${SITE.url}/#website`,
+  url: `${SITE.url}/`,
+  name: SITE.name,
+  description: SITE.description,
+  publisher: { '@id': `${SITE.url}/#organization` },
+  inLanguage: SITE.lang,
+};
+
+const webpage = {
+  '@type': 'WebPage',
+  '@id': `${canonical}#webpage`,
+  url: canonical,
+  name: fullTitle,
+  description,
+  isPartOf: { '@id': `${SITE.url}/#website` },
+  about: { '@id': `${SITE.url}/#organization` },
+  inLanguage: SITE.lang,
+  ...(publishedAt ? { datePublished: publishedAt } : {}),
+  ...(modifiedAt ? { dateModified: modifiedAt } : {}),
+};
+
+const crumbs = [{ name: 'Home', href: '/' }, ...breadcrumbs];
+const breadcrumbList =
+  breadcrumbs.length > 0
+    ? [
+        {
+          '@type': 'BreadcrumbList',
+          '@id': `${canonical}#breadcrumb`,
+          itemListElement: crumbs.map((c, i) => ({
+            '@type': 'ListItem',
+            position: i + 1,
+            name: c.name,
+            item: new URL(c.href, SITE.url).href,
+          })),
+        },
+      ]
+    : [];
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [organization, website, webpage, ...breadcrumbList, ...schema],
+};
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+
+{
+  noindex ? (
+    <meta name="robots" content="noindex, nofollow" />
+  ) : (
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+  )
+}
+
+<meta name="author" content={SITE.name} />
+<meta name="theme-color" content="#0F5C5A" />
+<link rel="alternate" hreflang="nl-be" href={canonical} />
+<link rel="alternate" hreflang="x-default" href={canonical} />
+
+<!-- Open Graph: blogposts zijn artikels, al de rest is 'website'. -->
+<meta property="og:type" content={publishedAt ? 'article' : 'website'} />
+{publishedAt && <meta property="article:published_time" content={publishedAt} />}
+{modifiedAt && <meta property="article:modified_time" content={modifiedAt} />}
+<meta property="og:site_name" content={SITE.name} />
+<meta property="og:locale" content={SITE.locale} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={imageAlt} />
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+<meta name="twitter:image:alt" content={imageAlt} />
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+<script type="application/ld+json" set:html={JSON.stringify(graph)} />

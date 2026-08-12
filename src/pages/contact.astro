@@ -1,0 +1,222 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { SITE } from '../config.js';
+
+const contactSchema = {
+  '@type': 'ContactPage',
+  '@id': `${SITE.url}/contact/#contactpage`,
+  name: 'Contact opnemen met Auxilia',
+  description:
+    'Plan een vrijblijvende kennismaking of stel je vraag over AI en IT voor je KMO.',
+  mainEntity: { '@id': `${SITE.url}/#organization` },
+};
+
+const verloop = [
+  {
+    t: 'Je vertelt waar het vastloopt',
+    d: 'Geen presentatie van onze kant. We willen vooral horen hoe je vandaag werkt en waar de tijd blijft hangen.',
+  },
+  {
+    t: 'We zeggen wat we ervan denken',
+    d: 'Soms is dat een concreet voorstel. Soms is het “daar hebben wij niet de juiste mensen voor”. Dat hoor je dan meteen.',
+  },
+  {
+    t: 'Je beslist zelf wat je ermee doet',
+    d: 'Je krijgt geen offerte in je mailbox die je niet gevraagd hebt, en we bellen je niet drie keer na.',
+  },
+];
+---
+
+<BaseLayout
+  title="Contact"
+  metaTitle="Contact & afspraak"
+  description="Plan een vrijblijvende kennismaking van 30 minuten of stel je vraag over AI en IT voor je KMO. We antwoorden meestal binnen één werkdag."
+  schema={[contactSchema]}
+  breadcrumbs={[{ name: 'Contact', href: '/contact/' }]}
+>
+  <PageHero
+    crumbs={[{ name: 'Contact', href: '/contact/' }]}
+    badge="We antwoorden meestal binnen één werkdag"
+    title="Vertel ons waar het kraakt"
+    lead="We luisteren, denken mee en je zit nergens aan vast. Online of bij je op kantoor."
+    size="compact"
+  />
+
+  <!-- ==================================================== formulier + info -->
+  <section class="section--tight band-sand contact-main">
+    <div class="container contact-grid">
+      <div class="contact-form-col">
+        <h2 class="contact-h2">Stuur je vraag door</h2>
+        <p class="contact-intro">
+          Vul in wat je kwijt wil. Hoe concreter je het omschrijft, hoe beter we
+          ons kunnen voorbereiden op het gesprek.
+        </p>
+        <ContactForm />
+      </div>
+
+      <aside class="contact-side">
+        <div class="panel side-card">
+          <h2 class="side-card__title">Liever meteen inplannen</h2>
+          <p>
+            Kies zelf een moment dat past. Je hoeft niets voor te bereiden.
+          </p>
+          <a href={SITE.bookingUrl || '#contactformulier'} class="btn btn--primary side-card__btn">
+            Plan een afspraak
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+          <ul class="side-card__meta">
+            <li><Icon name="clock" size={17} /> 30 minuten</li>
+            <li><Icon name="users" size={17} /> Online of ter plaatse</li>
+            <li><Icon name="check" size={17} /> Vrijblijvend</li>
+          </ul>
+        </div>
+
+        <div class="direct">
+          <h2 class="side-card__title">Rechtstreeks</h2>
+          <ul class="direct__list">
+            <li>
+              <Icon name="mail" size={18} />
+              <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+            </li>
+            <li>
+              <Icon name="pin" size={18} />
+              <span>{SITE.region}, België</span>
+            </li>
+            {
+              SITE.social.linkedin && (
+                <li>
+                  <Icon name="users" size={18} />
+                  <a href={SITE.social.linkedin} rel="noopener">
+                    Auxilia op LinkedIn
+                  </a>
+                </li>
+              )
+            }
+          </ul>
+          <p class="direct__vat">
+            Ondernemingsnummer {SITE.companyNumber} · btw {SITE.vat}
+          </p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ======================================================== verloop -->
+  <section class="section band-teal">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Wat je mag verwachten</p>
+        <h2>Hoe zo’n eerste gesprek verloopt</h2>
+      </div>
+      <ol class="numbered reveal">
+        {
+          verloop.map((v, i) => (
+            <li>
+              <span class="numbered__n">{String(i + 1).padStart(2, '0')}</span>
+              <div>
+                <h3>{v.t}</h3>
+                <p>{v.d}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-grid {
+    display: grid;
+    gap: clamp(40px, 5vw, 64px);
+    align-items: start;
+  }
+
+  @media (min-width: 960px) {
+    .contact-grid {
+      grid-template-columns: 1.35fr 0.65fr;
+    }
+  }
+
+  .contact-h2 {
+    font-size: clamp(1.5rem, 2.2vw, 1.9rem);
+    margin-bottom: 12px;
+  }
+
+  .contact-intro {
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+  }
+
+  .contact-side {
+    display: grid;
+    gap: 24px;
+  }
+
+  .side-card__title {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 14px;
+  }
+
+  .side-card p {
+    color: var(--ink-soft);
+    font-size: 0.97rem;
+  }
+
+  .side-card__btn {
+    width: 100%;
+    margin: 22px 0 0;
+  }
+
+  .side-card__meta {
+    list-style: none;
+    margin: 22px 0 0;
+    padding: 20px 0 0;
+    border-top: 1px solid var(--line-soft);
+    display: grid;
+    gap: 11px;
+  }
+
+  .side-card__meta li,
+  .direct__list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.94rem;
+    color: var(--ink-soft);
+  }
+
+  .side-card__meta :global(svg),
+  .direct__list :global(svg) {
+    color: var(--teal);
+    flex: none;
+  }
+
+  .direct {
+    padding: 0 4px;
+  }
+
+  .direct__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+  }
+
+  .direct__vat {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line-soft);
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+  }
+</style>

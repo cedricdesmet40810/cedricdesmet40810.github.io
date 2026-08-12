@@ -1,0 +1,209 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import Icon from '../../components/Icon.astro';
+import ChatDemo from '../../components/ChatDemo.astro';
+
+const faq = [
+  {
+    q: 'Verzint de chatbot antwoorden?',
+    a: 'Daar zit precies het verschil met een gewone chatbot. De onze zoekt eerst het juiste stuk in jouw documenten en antwoordt daaruit, met vermelding van het bestand. Vindt hij niets, dan zegt hij dat hij het niet weet in plaats van iets te verzinnen. Dat laatste is een instelling die wij bewust zo zetten.',
+  },
+  {
+    q: 'Welke bestanden kan hij lezen?',
+    a: 'PDF’s, Word-documenten, Excel-bestanden, PowerPoints, pagina’s van je website en tekst uit je CRM of ticketsysteem. Gescande documenten kunnen ook, al hangt de kwaliteit dan af van hoe goed de scan is.',
+  },
+  {
+    q: 'Blijven onze documenten privé?',
+    a: 'Ja. Je bestanden komen in een afgeschermde omgeving die alleen voor jouw bedrijf werkt, en ze worden niet gebruikt om modellen te trainen. We leggen vooraf vast waar de data staat en wie erbij kan. Waar het kan, houden we de verwerking binnen Europa.',
+  },
+  {
+    q: 'Kan niet iedereen dan alles zien?',
+    a: 'Nee, we koppelen de rechten aan je bestaande gebruikersgroepen. Wie geen toegang heeft tot de loonfiches, krijgt er ook via de assistent niets over te horen. Dat testen we samen voor we live gaan.',
+  },
+  {
+    q: 'Wat als onze documenten verouderd zijn?',
+    a: 'Dan valt dat meteen op, en dat is vaak de eerste winst. De assistent wordt zo goed als de bronnen die je hem geeft. We helpen bij het opschonen en zetten daarna een vaste verversing in, zodat een nieuwe prijslijst automatisch meegaat.',
+  },
+  {
+    q: 'Kunnen klanten er ook mee chatten?',
+    a: 'Dat kan, met een aparte set documenten en strengere grenzen dan de interne versie. Vaak begint een KMO intern, omdat je daar sneller ziet wat er goed en fout gaat zonder dat een klant het merkt.',
+  },
+];
+
+const gebruik = [
+  {
+    icon: 'search',
+    t: 'Je eigen kennisbank doorzoeken',
+    d: 'Handleidingen, procedures, oude offertes en productfiches. Eén vraag in plaats van tien minuten zoeken in mappen.',
+  },
+  {
+    icon: 'mail',
+    t: 'Vragen van klanten beantwoorden',
+    d: 'Levertijden, garantievoorwaarden, openingsuren. Op je website of in je mailbox, ook om tien uur ’s avonds.',
+  },
+  {
+    icon: 'users',
+    t: 'Nieuwe collega’s inwerken',
+    d: 'Iemand die net begint durft het niet vijf keer te vragen. Aan een assistent wel.',
+  },
+  {
+    icon: 'euro',
+    t: 'Prijzen en marges opzoeken',
+    d: 'Uit je eigen prijslijst, met de kortingsregels die bij die klant horen.',
+  },
+];
+
+const stappen = [
+  {
+    t: 'We verzamelen je bronnen',
+    d: 'Samen kiezen we welke documenten mee mogen: mappen op de server, SharePoint, je website, je CRM. We gaan niet zomaar alles inlezen. Wat verouderd is, blijft eruit.',
+  },
+  {
+    t: 'We maken ze doorzoekbaar',
+    d: 'De documenten worden opgeknipt en geïndexeerd zodat de assistent gericht het juiste stuk terugvindt in plaats van te gokken op basis van algemene kennis.',
+  },
+  {
+    t: 'We testen met echte vragen',
+    d: 'Je team gooit er een week lang de vragen tegenaan die echt binnenkomen. Elk fout antwoord is een aanwijzing over welke bron ontbreekt of niet klopt.',
+  },
+  {
+    t: 'Hij gaat live waar je werkt',
+    d: 'In Teams, op je website, in je mailbox of in een eigen scherm. Daarna houden we hem bij naarmate je documenten veranderen.',
+  },
+];
+---
+
+<ServiceLayout
+  slug="ai-chatbots"
+  title="AI-chatbots op je eigen data"
+  h1="Een AI-chatbot die antwoordt uit jouw documenten"
+  metaTitle="AI-chatbot op je eigen data laten bouwen"
+  description="Laat een AI-chatbot bouwen die antwoordt uit je eigen documenten, prijslijsten en procedures, met bronvermelding. Voor KMO’s in de Kempen en heel België."
+  lead="Een assistent die jouw prijslijst, handleidingen en voorwaarden kent en bij elk antwoord vermeldt uit welk document het komt. Een algemene chatbot kan dat niet, want die kent jouw bestanden niet."
+  highlights={[
+    'Antwoordt uit jouw bestanden in plaats van uit het internet',
+    'Toont bij elk antwoord de bron',
+    'Zegt het als hij iets niet weet',
+    'Respecteert de rechten die je al hebt ingesteld',
+    'Draait in Teams, op je site of in je mailbox',
+  ]}
+  faq={faq}
+>
+  <!-- ==================================================== het verschil -->
+  <section class="section band-paper">
+    <div class="container split">
+      <div class="reveal">
+        <p class="eyebrow">Het verschil</p>
+        <h2>Een gewone chatbot raadt. Deze zoekt het op.</h2>
+        <p>
+          Zet je een standaard AI-assistent op je website, dan antwoordt hij op
+          basis van wat hij ooit ergens gelezen heeft. Over jouw levertijden,
+          jouw garantie of jouw kortingen weet hij niets. Dus verzint hij iets
+          dat plausibel klinkt, en dat is precies het antwoord dat je niet wil
+          dat een klant krijgt.
+        </p>
+        <p>
+          Wij draaien het om. Bij elke vraag zoekt de assistent eerst in jouw
+          documenten naar het stuk dat erover gaat, en pas daarna formuleert hij
+          een antwoord uit wat hij daar vond. Staat het er niet in, dan zegt hij
+          dat. Saai, maar betrouwbaar, en dat is wat je nodig hebt als er een
+          prijs in staat.
+        </p>
+      </div>
+      <div class="reveal">
+        <ChatDemo />
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== gebruik -->
+  <section class="section band-sand">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Waarvoor KMO’s het inzetten</p>
+        <h2>Waar hij meestal terechtkomt</h2>
+      </div>
+      <div class="grid grid--4 reveal">
+        {
+          gebruik.map((g) => (
+            <article class="card">
+              <span class="icon-tile">
+                <Icon name={g.icon} />
+              </span>
+              <h3>{g.t}</h3>
+              <p>{g.d}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= aanpak -->
+  <section class="section band-teal">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Hoe we het bouwen</p>
+        <h2>Van een map vol documenten naar een assistent die klopt</h2>
+      </div>
+      <ol class="numbered reveal">
+        {
+          stappen.map((s, i) => (
+            <li>
+              <span class="numbered__n">{String(i + 1).padStart(2, '0')}</span>
+              <div>
+                <h3>{s.t}</h3>
+                <p>{s.d}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- ======================================================== grenzen -->
+  <section class="section band-sand">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">De grenzen</p>
+        <h2>Wat een chatbot op je data níet oplost</h2>
+        <p class="lead">
+          Liever vooraf duidelijk dan achteraf teleurgesteld.
+        </p>
+      </div>
+      <div class="grid grid--3 reveal">
+        <article class="card limit">
+          <h3>Rommelige documenten</h3>
+          <p>
+            Staan er drie versies van dezelfde prijslijst op je server, dan lost
+            de assistent dat niet op. Hij maakt het alleen zichtbaar. Opruimen
+            blijft mensenwerk. We helpen erbij, maar het kost tijd.
+          </p>
+        </article>
+        <article class="card limit">
+          <h3>Beslissingen nemen</h3>
+          <p>
+            Hij zoekt op en vat samen. Of je die korting geeft, beslis jij. We
+            bouwen bewust geen assistent die zelfstandig toezeggingen doet aan
+            klanten.
+          </p>
+        </article>
+        <article class="card limit">
+          <h3>Kennis die nergens staat</h3>
+          <p>
+            Wat alleen in het hoofd van je meest ervaren collega zit, kan hij
+            niet weten. Dat is meteen een goede reden om het eindelijk eens op
+            te schrijven.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+</ServiceLayout>
+
+<style>
+  .limit h3 {
+    margin-bottom: 12px;
+  }
+</style>

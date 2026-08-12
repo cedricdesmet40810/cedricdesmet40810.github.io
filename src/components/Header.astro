@@ -1,0 +1,400 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { NAV, SERVICES, SITE } from '../config.js';
+
+const path = Astro.url.pathname;
+const isActive = (href) => (href === '/' ? path === '/' : path.startsWith(href));
+const bookHref = SITE.bookingUrl || '/contact/';
+---
+
+<header class="site-header" data-header>
+  <div class="container header__inner">
+    <a href="/" class="header__logo" aria-label="Auxilia, naar de homepagina">
+      <Logo variant="dark" />
+    </a>
+
+    <nav class="header__nav" aria-label="Hoofdnavigatie">
+      <ul class="nav-list">
+        {
+          NAV.map((item) =>
+            item.href === '/oplossingen/' ? (
+              <li class="nav-item nav-item--has-menu">
+                <a
+                  href={item.href}
+                  class:list={['nav-link', isActive(item.href) && 'is-active']}
+                  aria-current={isActive(item.href) ? 'page' : undefined}
+                >
+                  {item.label}
+                  <svg
+                    class="nav-caret"
+                    width="10"
+                    height="10"
+                    viewBox="0 0 10 10"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M2 4l3 3 3-3"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </a>
+                <div class="submenu">
+                  <ul>
+                    {SERVICES.map((s) => (
+                      <li>
+                        <a href={`/oplossingen/${s.slug}/`}>
+                          <span class="submenu__icon">
+                            <Icon name={s.icon} size={20} />
+                          </span>
+                          <span>
+                            <strong>{s.nav}</strong>
+                            <em>{s.excerpt}</em>
+                          </span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </li>
+            ) : (
+              <li class="nav-item">
+                <a
+                  href={item.href}
+                  class:list={['nav-link', isActive(item.href) && 'is-active']}
+                  aria-current={isActive(item.href) ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+              </li>
+            )
+          )
+        }
+      </ul>
+    </nav>
+
+    <div class="header__actions">
+      <a href={bookHref} class="btn btn--primary btn--sm">
+        Plan 30 minuten
+      </a>
+    </div>
+
+    <button
+      class="header__toggle"
+      data-menu-toggle
+      aria-expanded="false"
+      aria-controls="mobiel-menu"
+      aria-label="Menu openen"
+    >
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobiel menu -->
+<div class="mobile-menu" id="mobiel-menu" data-menu hidden>
+  <nav class="container" aria-label="Mobiele navigatie">
+    <ul>
+      <li><a href="/">Home</a></li>
+      {SERVICES.map((s) => (
+        <li><a href={`/oplossingen/${s.slug}/`}>{s.nav}</a></li>
+      ))}
+      <li><a href="/aanpak/">Aanpak</a></li>
+      <li><a href="/over-ons/">Over ons</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="/contact/">Contact</a></li>
+    </ul>
+    <a href={bookHref} class="btn btn--primary">Plan 30 minuten</a>
+  </nav>
+</div>
+
+<style>
+  /* Donker chroom over de hele site: het merk draagt de pagina. */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    background: rgba(11, 69, 67, 0.85);
+    backdrop-filter: saturate(160%) blur(16px);
+    -webkit-backdrop-filter: saturate(160%) blur(16px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.25s var(--ease), background-color 0.25s var(--ease);
+  }
+
+  .site-header.is-stuck {
+    background: rgba(11, 69, 67, 0.96);
+    border-bottom-color: rgba(250, 247, 242, 0.12);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    height: 78px;
+  }
+
+  .header__logo {
+    text-decoration: none;
+    flex: none;
+  }
+
+  .header__nav {
+    margin-left: auto;
+  }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-item {
+    position: relative;
+  }
+
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 16px;
+    border-radius: 999px;
+    font-size: 0.97rem;
+    font-weight: 500;
+    color: rgba(250, 247, 242, 0.78);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.25s var(--ease), background-color 0.25s var(--ease);
+  }
+
+  .nav-link:hover,
+  .nav-link.is-active {
+    color: var(--sand);
+    background: rgba(250, 247, 242, 0.1);
+  }
+
+  .nav-caret {
+    transition: transform 0.25s var(--ease);
+    opacity: 0.7;
+  }
+
+  /* --- uitklapmenu ------------------------------------------------------- */
+
+  .submenu {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 50%;
+    translate: -50% 0;
+    width: 384px;
+    background: var(--paper);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-lg);
+    padding: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.25s var(--ease), transform 0.25s var(--ease),
+      visibility 0.25s var(--ease);
+  }
+
+  .nav-item--has-menu:hover .submenu,
+  .nav-item--has-menu:focus-within .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .nav-item--has-menu:hover .nav-caret,
+  .nav-item--has-menu:focus-within .nav-caret {
+    transform: rotate(180deg);
+  }
+
+  .submenu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .submenu a {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 12px;
+    align-items: start;
+    padding: 12px;
+    border-radius: 14px;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.25s var(--ease);
+  }
+
+  .submenu a:hover {
+    background: rgba(15, 92, 90, 0.06);
+  }
+
+  .submenu__icon {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    background: rgba(15, 92, 90, 0.08);
+    color: var(--teal);
+  }
+
+  .submenu strong {
+    display: block;
+    font-size: 0.97rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+
+  .submenu em {
+    display: block;
+    font-style: normal;
+    font-size: 0.86rem;
+    line-height: 1.45;
+    color: var(--ink-faint);
+  }
+
+  /* --- acties ------------------------------------------------------------ */
+
+  .header__actions {
+    flex: none;
+  }
+
+  .btn--sm {
+    padding: 11px 22px;
+    font-size: 0.94rem;
+  }
+
+  .header__toggle {
+    display: none;
+    flex: none;
+    width: 44px;
+    height: 44px;
+    margin-left: auto;
+    padding: 0;
+    background: none;
+    border: 1px solid rgba(250, 247, 242, 0.28);
+    border-radius: 999px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .header__toggle span {
+    display: block;
+    width: 16px;
+    height: 1.8px;
+    border-radius: 2px;
+    background: var(--sand);
+    transition: transform 0.25s var(--ease), opacity 0.25s var(--ease);
+  }
+
+  .header__toggle[aria-expanded='true'] span:nth-child(1) {
+    transform: translateY(5.8px) rotate(45deg);
+  }
+
+  .header__toggle[aria-expanded='true'] span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .header__toggle[aria-expanded='true'] span:nth-child(3) {
+    transform: translateY(-5.8px) rotate(-45deg);
+  }
+
+  /* --- mobiel menu ------------------------------------------------------- */
+
+  .mobile-menu {
+    position: fixed;
+    inset: 78px 0 0;
+    z-index: 55;
+    background: var(--teal-700);
+    overflow-y: auto;
+    padding: 32px 0 48px;
+  }
+
+  .mobile-menu ul {
+    list-style: none;
+    margin: 0 0 28px;
+    padding: 0;
+  }
+
+  .mobile-menu li + li {
+    border-top: 1px solid rgba(250, 247, 242, 0.12);
+  }
+
+  .mobile-menu a:not(.btn) {
+    display: block;
+    padding: 16px 0;
+    font-size: 1.14rem;
+    font-weight: 500;
+    color: var(--sand);
+    text-decoration: none;
+  }
+
+  @media (max-width: 1080px) {
+    .header__nav,
+    .header__actions {
+      display: none;
+    }
+
+    .header__toggle {
+      display: flex;
+    }
+  }
+
+  @media (min-width: 1081px) {
+    .mobile-menu {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector('[data-menu-toggle]');
+  const menu = document.querySelector('[data-menu]');
+  const header = document.querySelector('[data-header]');
+
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => {
+      const open = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!open));
+      toggle.setAttribute('aria-label', open ? 'Menu openen' : 'Menu sluiten');
+      menu.hidden = open;
+      document.body.style.overflow = open ? '' : 'hidden';
+    });
+
+    const wide = window.matchMedia('(min-width: 1081px)');
+    wide.addEventListener('change', (e) => {
+      if (e.matches) {
+        toggle.setAttribute('aria-expanded', 'false');
+        menu.hidden = true;
+        document.body.style.overflow = '';
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        toggle.click();
+        toggle.focus();
+      }
+    });
+  }
+
+  if (header) {
+    const onScroll = () => header.classList.toggle('is-stuck', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+</script>

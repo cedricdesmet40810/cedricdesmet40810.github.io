@@ -1,0 +1,177 @@
+---
+/**
+ * De donkere paginakop die elke pagina hetzelfde filmische ritme geeft:
+ * badge, één grote zin, een korte lead en de Kempen-horizon onderaan.
+ */
+import { SITE } from '../config.js';
+
+const {
+  badge,
+  title,
+  lead,
+  /** [{ name, href }] — subtiel kruimelpad boven de badge. */
+  crumbs = [],
+  /** Toon de primaire knop. */
+  cta = false,
+  ctaLabel = 'Plan 30 minuten',
+  secondary = null,
+  /** 'compact' voor tekstpagina's zoals privacy. */
+  size = 'default',
+} = Astro.props;
+---
+
+<section class:list={['phero band-teal', size === 'compact' && 'phero--compact']}>
+  <div class="container phero__inner">
+    {
+      crumbs.length > 0 && (
+        <nav class="phero__crumbs" aria-label="Kruimelpad">
+          <ol>
+            <li>
+              <a href="/">Home</a>
+            </li>
+            {crumbs.map((c, i) => (
+              <li aria-current={i === crumbs.length - 1 ? 'page' : undefined}>
+                {i === crumbs.length - 1 ? c.name : <a href={c.href}>{c.name}</a>}
+              </li>
+            ))}
+          </ol>
+        </nav>
+      )
+    }
+
+    {badge && <p class="hero-badge">{badge}</p>}
+
+    <h1>{title}</h1>
+    {lead && <p class="phero__lead">{lead}</p>}
+
+    {
+      (cta || secondary) && (
+        <div class="btn-row phero__actions">
+          {cta && (
+            <a href={SITE.bookingUrl || '/contact/'} class="btn btn--primary">
+              {ctaLabel}
+              <span class="arrow" aria-hidden="true">
+                →
+              </span>
+            </a>
+          )}
+          {secondary && (
+            <a href={secondary.href} class="btn btn--secondary">
+              {secondary.label}
+            </a>
+          )}
+        </div>
+      )
+    }
+  </div>
+
+  <svg
+    class="phero__horizon"
+    viewBox="0 0 1440 150"
+    preserveAspectRatio="xMidYMax slice"
+    aria-hidden="true"
+  >
+    <circle cx="1150" cy="96" r="36" fill="#D2691E" opacity="0.8" />
+    <g
+      fill="none"
+      stroke="rgba(250,247,242,0.3)"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M-10 128 Q 260 112 560 124 T 1100 120 T 1450 128" />
+      <path d="M200 122 l14 -30 l14 30 m-21 -16 l7 -16 l7 16" />
+      <path d="M244 124 l10 -22 l10 22 m-15 -12 l5 -12 l5 12" />
+      <path d="M890 122 l15 -33 l15 33 m-22 -17 l7 -17 l7 17" />
+      <path d="M934 124 l11 -23 l11 23 m-16 -12 l5 -12 l5 12" />
+    </g>
+    <path
+      d="M-10 150 L-10 132 Q 320 116 740 128 T 1450 132 L1450 150 Z"
+      fill="rgba(11,69,67,0.55)"
+    />
+  </svg>
+</section>
+
+<style>
+  .phero {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(4.5rem, 8vw, 7.5rem) clamp(7rem, 11vw, 10rem);
+    background:
+      radial-gradient(80rem 36rem at 50% -16rem, rgba(62, 132, 130, 0.5), transparent 60%),
+      var(--teal);
+  }
+
+  .phero--compact {
+    padding-block: clamp(3.5rem, 6vw, 5.5rem) clamp(5.5rem, 8vw, 7.5rem);
+  }
+
+  .phero__inner {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 900px;
+  }
+
+  .phero__crumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    list-style: none;
+    margin: 0 0 28px;
+    padding: 0;
+    font-size: 0.85rem;
+    color: rgba(250, 247, 242, 0.75);
+  }
+
+  .phero__crumbs li + li::before {
+    content: '/';
+    margin-right: 8px;
+    opacity: 0.6;
+  }
+
+  .phero__crumbs a {
+    color: rgba(250, 247, 242, 0.75);
+    text-decoration: none;
+  }
+
+  .phero__crumbs a:hover {
+    color: var(--sand);
+  }
+
+  .hero-badge {
+    margin: 0 0 28px;
+  }
+
+  .phero h1 {
+    font-size: clamp(2.6rem, 5.8vw, 4.8rem);
+    max-width: 18ch;
+    margin-inline: auto;
+  }
+
+  .phero--compact h1 {
+    font-size: clamp(2.3rem, 4.6vw, 3.8rem);
+  }
+
+  .phero__lead {
+    font-size: clamp(1.16rem, 1.7vw, 1.4rem);
+    line-height: 1.6;
+    color: rgba(250, 247, 242, 0.78);
+    max-width: 54ch;
+    margin: 24px auto 0;
+  }
+
+  .phero__actions {
+    justify-content: center;
+    margin-top: 38px;
+  }
+
+  .phero__horizon {
+    position: absolute;
+    inset: auto 0 0;
+    width: 100%;
+    height: clamp(80px, 10vw, 150px);
+    display: block;
+  }
+</style>

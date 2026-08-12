@@ -1,0 +1,329 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE } from '../config.js';
+
+/**
+ * De portretten zijn bewust nog initialen. Zodra er documentaire foto's zijn
+ * (natuurlijk licht, aan het werk, niet poserend), vervang je `initialen`
+ * door een <Image>. De rest van de kaart blijft gelijk.
+ */
+const team = [
+  {
+    initialen: 'CD',
+    naam: 'Cedric De Smet',
+    rol: 'Bouw & implementatie',
+    d: 'Bouwt de apps en automatisaties, en zorgt dat ze blijven draaien nadat iedereen ze vanzelfsprekend is gaan vinden.',
+  },
+  {
+    initialen: 'KV',
+    naam: 'Kevin Vaal',
+    rol: 'Proces & opleiding',
+    d: 'Vertaalt hoe je bedrijf werkt naar iets dat je team zelf kan dragen, ook als wij er niet bij zijn.',
+  },
+];
+---
+
+<BaseLayout
+  title="Over ons"
+  metaTitle="Over Auxilia: AI en IT uit de Kempen"
+  description="Auxilia is een jong AI- en IT-bedrijf uit de Kempen: Cedric en Kevin, allebei geschoold in software, met To B-Seen als eerste bewijs dat het werkt."
+  breadcrumbs={[{ name: 'Over ons', href: '/over-ons/' }]}
+>
+  <PageHero
+    crumbs={[{ name: 'Over ons', href: '/over-ons/' }]}
+    badge="Cedric & Kevin · Kempen"
+    title="We gaan je niet wijsmaken dat we een groot bureau zijn"
+    lead="Auxilia, dat zijn Cedric en Kevin. Gestart in 2026, allebei geschoold in software, en met één klant die vandaag al toont wat het oplevert."
+  />
+
+  <section class="band-sand naam-band">
+    <div class="container">
+      <div class="panel intro-card">
+        <p>
+          De naam komt van de hulptroepen die het Romeinse leger kwamen
+          versterken. Ze namen het niet over, ze maakten het sterker.
+        </p>
+        <p>
+          Dat leek ons een juiste naam voor wat we doen: naast je team gaan
+          staan, het saaie werk automatiseren en pas vertrekken als het zonder
+          ons verder kan.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================== waarom jong -->
+  <section class="section band-paper">
+    <div class="container split split--top">
+      <div class="reveal">
+        <p class="eyebrow">Waarom dat geen nadeel is</p>
+        <h2>Jong bedrijf, en dat merk je aan de goede kant</h2>
+        <p>
+          Wie ons belt, krijgt geen accountmanager en geen junior die het
+          dossier erbij neemt. Je krijgt de twee mensen die het ook echt
+          bouwen, met de aandacht die een eerste generatie klanten nu eenmaal
+          krijgt: veel.
+        </p>
+        <p>
+          En omdat we nergens aan vastzitten, geen oude contracten, geen
+          software van tien jaar geleden die we moeten blijven verkopen, bouwen
+          we met wat vandaag het beste werkt. Dit is waar we allebei voor
+          gestudeerd hebben en waar we onze dagen mee vullen. Dat enthousiasme
+          krijg je er gratis bij.
+        </p>
+      </div>
+      <div class="reveal">
+        <div class="panel">
+          <h3 class="panel__title">Wat dat concreet betekent</h3>
+          <ul class="checklist">
+            <li>
+              <Icon name="check" size={18} />
+              Je praat rechtstreeks met wie het bouwt
+            </li>
+            <li>
+              <Icon name="check" size={18} />
+              Weinig trajecten tegelijk, dus veel aandacht per klant
+            </li>
+            <li>
+              <Icon name="check" size={18} />
+              Gebouwd met de huidige generatie AI-tools, niet met wat we
+              toevallig in de kast hadden liggen
+            </li>
+            <li>
+              <Icon name="check" size={18} />
+              Je nummer staat in onze telefoon, niet in een ticketsysteem
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ team -->
+  <section class="section band-sand">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Wie je krijgt</p>
+        <h2>Er zit niemand tussen jou en wie het bouwt</h2>
+        <p class="lead">
+          Van het eerste gesprek tot lang na de oplevering praat je met dezelfde
+          twee mensen.
+        </p>
+      </div>
+
+      <div class="grid grid--2 reveal">
+        {
+          team.map((p) => (
+            <article class="card person">
+              <span class="person__avatar" aria-hidden="true">
+                {p.initialen}
+              </span>
+              <div>
+                <h3>{p.naam}</h3>
+                <p class="person__rol">{p.rol}</p>
+                <p>{p.d}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================== het bewijs -->
+  <section class="section band-teal">
+    <div class="container">
+      <div class="bewijs reveal">
+        <p class="eyebrow">Het eerste bewijs</p>
+        <h2>Praatjes vullen geen gaatjes, dus kijk naar To B-Seen</h2>
+        <p class="lead">
+          Ons eerste traject draait er elke week mee: een rapportage-app op
+          maat en een administratie die stap voor stap zichzelf doet.
+        </p>
+        <p class="bewijs__body">
+          Voor ons is het meer dan een referentie. Het is de manier van werken
+          die we bij elke volgende klant opnieuw willen waarmaken.
+        </p>
+        <a href="/ons-werk/" class="link-arrow link-arrow--licht">
+          Lees het hele verhaal
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== praktisch -->
+  <section class="section band-sand-deep">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Praktisch</p>
+        <h2>De gegevens die je op een factuur verwacht</h2>
+      </div>
+      <dl class="feiten reveal">
+        <div>
+          <dt>Vestiging</dt>
+          <dd>{SITE.region}, België</dd>
+        </div>
+        <div>
+          <dt>Werkgebied</dt>
+          <dd>Kempen, provincie Antwerpen en heel Vlaanderen</dd>
+        </div>
+        <div>
+          <dt>Gestart</dt>
+          <dd>2026</dd>
+        </div>
+        <div>
+          <dt>Ondernemingsnummer</dt>
+          <dd>{SITE.companyNumber}</dd>
+        </div>
+        <div>
+          <dt>Btw-nummer</dt>
+          <dd>{SITE.vat}</dd>
+        </div>
+        <div>
+          <dt>E-mail</dt>
+          <dd><a href={`mailto:${SITE.email}`}>{SITE.email}</a></dd>
+        </div>
+        <div>
+          <dt>Talen</dt>
+          <dd>Nederlands en Engels</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <CtaBand
+    eyebrow="Kennismaken"
+    title="Kom eens langs met je vraag"
+    text="Of wij komen naar jou, dat rijdt snel genoeg in de Kempen. Vertel wat je doet en waar het kraakt, dan zeggen we wat wij zouden aanpakken."
+    secondary={{ label: 'Bekijk onze aanpak', href: '/aanpak/' }}
+  />
+</BaseLayout>
+
+<style>
+  .naam-band {
+    padding-bottom: clamp(3rem, 5vw, 4.5rem);
+  }
+
+  .intro-card {
+    margin-top: clamp(-4.5rem, -6vw, -3rem);
+    position: relative;
+    z-index: 2;
+    box-shadow: var(--shadow-lg);
+    display: grid;
+    gap: 0 40px;
+  }
+
+  @media (min-width: 820px) {
+    .intro-card {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .intro-card p {
+    color: var(--ink-soft);
+  }
+
+  .panel__title {
+    margin-bottom: 20px;
+  }
+
+  .bewijs {
+    max-width: 720px;
+  }
+
+  .bewijs__body {
+    color: rgba(250, 247, 242, 0.82);
+  }
+
+  /* De pijltjeslink op de donkere band: zandkleur in plaats van teal. */
+  .link-arrow--licht {
+    color: var(--sand);
+    margin-top: 8px;
+  }
+
+  /* ----------------------------------------------------------- team --- */
+
+  .person {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 22px;
+    align-items: start;
+  }
+
+  .person__avatar {
+    width: 72px;
+    height: 72px;
+    display: grid;
+    place-items: center;
+    border-radius: 20px;
+    background: var(--teal);
+    color: var(--sand);
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .person h3 {
+    margin-bottom: 4px;
+  }
+
+  .person__rol {
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 12px;
+  }
+
+  @media (max-width: 480px) {
+    .person {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+  }
+
+  /* -------------------------------------------------------- praktisch --- */
+
+  .feiten {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    max-width: 760px;
+  }
+
+  .feiten > div {
+    display: grid;
+    gap: 4px 32px;
+    padding: 18px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  @media (min-width: 620px) {
+    .feiten > div {
+      grid-template-columns: 240px 1fr;
+      align-items: baseline;
+    }
+  }
+
+  .feiten > div:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .feiten dt {
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .feiten dd {
+    margin: 0;
+    color: var(--ink);
+  }
+</style>

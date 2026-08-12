@@ -1,0 +1,88 @@
+---
+/**
+ * Getekende scènes voor de stappen op de homepage. Zelfde beeldtaal als de
+ * Kempen-horizon in de hero: teal lijnwerk, wit papier, één klei-accent per
+ * scène. Puur decoratief; de ouder zet aria-hidden.
+ */
+const { name } = Astro.props;
+
+const teal = '#0f5c5a';
+const faint = 'rgba(15, 92, 90, 0.35)';
+const clay = '#d2691e';
+---
+
+{
+  name === 'werkvloer' && (
+    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="142" cy="58" r="28" stroke={teal} stroke-width="3.5" />
+      <path d="M142 58 V40 M142 58 L156 64" stroke={clay} stroke-width="3.5" stroke-linecap="round" />
+      <rect x="44" y="70" width="68" height="90" rx="8" stroke={faint} stroke-width="3" />
+      <rect x="32" y="82" width="68" height="90" rx="8" fill="#ffffff" stroke={teal} stroke-width="3.5" />
+      <path d="M44 102 h36 M44 116 h44 M44 130 h28" stroke={faint} stroke-width="3" stroke-linecap="round" />
+      <path d="M44 148 h40" stroke={clay} stroke-width="3.5" stroke-linecap="round" />
+      <circle cx="112" cy="150" r="16" stroke={teal} stroke-width="3.5" />
+      <path d="M123 161 l15 15" stroke={teal} stroke-width="3.5" stroke-linecap="round" />
+    </svg>
+  )
+}
+
+{
+  name === 'systemen' && (
+    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="18" y="34" width="76" height="58" rx="9" fill="#ffffff" stroke={teal} stroke-width="3.5" />
+      <path d="M20 52 h72" stroke={faint} stroke-width="3" />
+      <circle cx="31" cy="43" r="2.4" fill={faint} />
+      <circle cx="41" cy="43" r="2.4" fill={faint} />
+      <rect x="106" y="108" width="76" height="58" rx="9" fill="#ffffff" stroke={teal} stroke-width="3.5" />
+      <path d="M108 126 h72" stroke={faint} stroke-width="3" />
+      <circle cx="119" cy="117" r="2.4" fill={faint} />
+      <circle cx="129" cy="117" r="2.4" fill={faint} />
+      <path d="M56 92 C 56 128, 74 138, 94 138" stroke={teal} stroke-width="3.5" stroke-linecap="round" />
+      <rect x="94" y="130" width="11" height="16" rx="3.5" stroke={teal} stroke-width="3.5" />
+      <path d="M105 134 h7 M105 142 h7" stroke={teal} stroke-width="3.5" stroke-linecap="round" />
+      <path d="M114 120 l5 -8 M123 123 l8 -4" stroke={clay} stroke-width="3" stroke-linecap="round" />
+    </svg>
+  )
+}
+
+{
+  name === 'team' && (
+    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="64" y="40" width="72" height="48" rx="14" fill="#ffffff" stroke={teal} stroke-width="3.5" />
+      <path d="M90 88 q-2 12 -12 18" stroke={teal} stroke-width="3.5" stroke-linecap="round" />
+      <path d="M84 64 l10 10 l20 -18" stroke={clay} stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+      <circle cx="72" cy="126" r="14" stroke={teal} stroke-width="3.5" />
+      <path d="M48 168 c0 -18 12 -26 24 -26 s24 8 24 26" stroke={teal} stroke-width="3.5" stroke-linecap="round" />
+      <circle cx="132" cy="132" r="12" stroke={teal} stroke-width="3.5" />
+      <path d="M112 168 c0 -15 9 -22 20 -22 s20 7 20 22" stroke={teal} stroke-width="3.5" stroke-linecap="round" />
+    </svg>
+  )
+}
+
+{
+  name === 'buurt' && (
+    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="148" cy="56" r="27" fill={clay} opacity="0.15" />
+      <circle cx="148" cy="56" r="17" fill={clay} opacity="0.9" />
+      <path d="M8 138 Q 60 122 110 132 T 194 128" stroke={faint} stroke-width="3" stroke-linecap="round" />
+      <path
+        d="M46 130 l13 -28 l13 28 m-19 -15 l6 -14 l6 14 m-6 15 v11"
+        stroke={teal}
+        stroke-width="3"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M84 134 l10 -22 l10 22 m-15 -11 l5 -11 l5 11 m-5 11 v9"
+        stroke={teal}
+        stroke-width="3"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path d="M118 118 l26 -20 l26 20" stroke={teal} stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+      <rect x="124" y="118" width="40" height="30" fill="#ffffff" stroke={teal} stroke-width="3.5" />
+      <rect x="139" y="132" width="10" height="16" stroke={faint} stroke-width="3" />
+      <path d="M6 172 Q 70 160 130 168 T 196 164" stroke="rgba(15, 92, 90, 0.2)" stroke-width="3" stroke-linecap="round" />
+    </svg>
+  )
+}

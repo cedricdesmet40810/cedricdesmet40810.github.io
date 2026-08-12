@@ -1,0 +1,71 @@
+---
+/**
+ * Het merk is altijd woordmerk + teken. Het teken alleen mag enkel
+ * waar de naam al bekend is (favicon, app-icoon, avatar).
+ *
+ * Twee chevrons: de bovenste is de klant, de onderste in klei-oranje
+ * is Auxilia die meeduwt.
+ */
+const { variant = 'light', markOnly = false, size = 38 } = Astro.props;
+
+const dark = variant === 'dark';
+const tile = dark ? 'rgba(250,247,242,0.12)' : '#0F5C5A';
+const topChevron = dark ? '#FAF7F2' : '#FAF7F2';
+const wordmark = dark ? '#FAF7F2' : '#1C2422';
+// Radius = 28% van de tegel.
+const radius = size * 0.28;
+---
+
+<span class="logo" aria-hidden={markOnly ? undefined : 'false'}>
+  <svg
+    class="logo__mark"
+    width={size}
+    height={size}
+    viewBox="0 0 40 40"
+    role="img"
+    aria-label={markOnly ? 'Auxilia' : undefined}
+    aria-hidden={markOnly ? undefined : 'true'}
+  >
+    <rect width="40" height="40" rx={(radius / size) * 40} fill={tile} />
+    <path
+      d="M12 19.5 L20 12.5 L28 19.5"
+      fill="none"
+      stroke={topChevron}
+      stroke-width="2.6"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M12 28 L20 21 L28 28"
+      fill="none"
+      stroke="#D2691E"
+      stroke-width="2.6"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+  {!markOnly && <span class="logo__word" style={`color:${wordmark}`}>Auxilia</span>}
+</span>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    text-decoration: none;
+  }
+
+  .logo__mark {
+    flex: none;
+    border-radius: 28%;
+  }
+
+  /* Het woordmerk staat altijd in Spectral. */
+  .logo__word {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.42rem;
+    letter-spacing: -0.022em;
+    line-height: 1;
+  }
+</style>

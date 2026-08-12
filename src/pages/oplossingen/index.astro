@@ -1,0 +1,179 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Icon from '../../components/Icon.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { SERVICES, SITE } from '../../config.js';
+
+const detail = {
+  'ai-chatbots': [
+    'Antwoordt uit je eigen documenten, met bronvermelding',
+    'Werkt in Teams, op je website of in je mailbox',
+    'Zegt het als hij iets niet weet',
+  ],
+  'apps-op-maat': [
+    'Gebouwd rond jouw proces in plaats van rond een pakket',
+    'Werkt op gsm, tablet en desktop',
+    'Jij bent eigenaar van de code',
+  ],
+  'ai-integratie': [
+    'Je bestaande software blijft gewoon staan',
+    'We maken één proces volledig af',
+    'Opleiding voor je team inbegrepen',
+  ],
+  kostenbesparing: [
+    'Rapport met de berekening erbij',
+    'Geordend op wat het snelst oplevert',
+    'Ook waar AI de moeite niet loont',
+  ],
+  'it-beheer': [
+    'Werkplekken, back-ups, licenties en beveiliging',
+    'Vast maandbedrag zonder verrassingen',
+    'Dezelfde mensen die je AI bouwden',
+  ],
+};
+
+const itemList = {
+  '@type': 'ItemList',
+  '@id': `${SITE.url}/oplossingen/#lijst`,
+  name: 'Oplossingen van Auxilia',
+  itemListElement: SERVICES.map((s, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: s.title,
+    url: `${SITE.url}/oplossingen/${s.slug}/`,
+  })),
+};
+---
+
+<BaseLayout
+  title="Oplossingen"
+  metaTitle="AI- en IT-oplossingen voor KMO’s"
+  description="AI-chatbots op je eigen data, apps op maat, AI-integratie, kostenbesparing en IT-beheer. Alle oplossingen van Auxilia voor KMO’s op een rij."
+  schema={[itemList]}
+  breadcrumbs={[{ name: 'Oplossingen', href: '/oplossingen/' }]}
+>
+  <PageHero
+    crumbs={[{ name: 'Oplossingen', href: '/oplossingen/' }]}
+    badge="Vijf oplossingen, één partner"
+    title="Alles om met AI te starten en te blijven draaien"
+    lead="Je kiest wat je vandaag nodig hebt. Wij zorgen dat het samenwerkt met wat er al staat, en dat er één iemand verantwoordelijk blijft."
+    cta={true}
+  />
+
+  <section class="section band-paper">
+    <div class="container">
+      <div class="hub-list">
+        {
+          SERVICES.map((s) => (
+            <article class="hub-item reveal">
+              <div class="hub-item__head">
+                <span class="icon-tile">
+                  <Icon name={s.icon} />
+                </span>
+              </div>
+              <div class="hub-item__body">
+                <h2>
+                  <a href={`/oplossingen/${s.slug}/`}>{s.title}</a>
+                </h2>
+                <p class="lead">{s.excerpt}</p>
+                <ul class="checklist">
+                  {detail[s.slug].map((d) => (
+                    <li>
+                      <Icon name="check" size={18} />
+                      {d}
+                    </li>
+                  ))}
+                </ul>
+                <a href={`/oplossingen/${s.slug}/`} class="link-arrow">
+                  Bekijk {s.short.toLowerCase()}
+                  <span class="arrow" aria-hidden="true">→</span>
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section band-sand-deep">
+    <div class="container">
+      <div class="section-head section-head--center reveal">
+        <p class="eyebrow eyebrow--center">Niet zeker wat je nodig hebt?</p>
+        <h2>Dat hoeft ook niet</h2>
+        <p class="lead">
+          Negen op de tien gesprekken beginnen hier met “we weten dat er
+          iets moet, maar niet wat”. Prima startpunt. Kom met de vraag, wij
+          zorgen voor de opties.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    eyebrow="Zet de eerste stap"
+    title="Vertel eens waar het bij jou vastloopt"
+    text="Beschrijf een gewone werkdag in je bedrijf. Wij wijzen aan waar de tijd weglekt en wat je daaraan kan doen, ook als dat zonder ons is."
+    secondary={{ label: 'Lees over onze aanpak', href: '/aanpak/' }}
+  />
+</BaseLayout>
+
+<style>
+  .hub-list {
+    padding-top: clamp(1rem, 2vw, 2rem);
+    display: grid;
+    gap: 0;
+  }
+
+  .hub-item {
+    display: grid;
+    gap: 24px;
+    padding: clamp(32px, 4vw, 48px) 0;
+    border-top: 1px solid var(--line-soft);
+  }
+
+  .hub-item:last-child {
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  @media (min-width: 860px) {
+    .hub-item {
+      grid-template-columns: 200px 1fr;
+      gap: 40px;
+    }
+  }
+
+  .hub-item__head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .hub-item__head :global(.icon-tile) {
+    margin-bottom: 0;
+  }
+
+  .hub-item h2 {
+    font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+    margin-bottom: 12px;
+  }
+
+  .hub-item h2 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .hub-item h2 a:hover {
+    color: var(--teal);
+  }
+
+  .hub-item .lead {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+  }
+
+  .hub-item .checklist {
+    margin-bottom: 24px;
+  }
+</style>

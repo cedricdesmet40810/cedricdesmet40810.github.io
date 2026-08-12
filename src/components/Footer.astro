@@ -1,0 +1,204 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { SERVICES, SITE } from '../config.js';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <!-- Eén grote gedachte, zoals een aftiteling. -->
+    <div class="footer__statement">
+      <p class="statement">
+        Het papierwerk doet zichzelf.<br />Jij doet weer je vak.
+      </p>
+      <a href={SITE.bookingUrl || '/contact/'} class="btn btn--primary">
+        Plan 30 minuten
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <div class="footer__top">
+      <div class="footer__brand">
+        <Logo variant="dark" />
+        <p>
+          AI en IT voor KMO’s, vanuit de Kempen. Gekoppeld aan de software die
+          je al hebt, en we blijven tot je team er zelf mee weg is.
+        </p>
+        <ul class="footer__contact">
+          <li>
+            <Icon name="mail" size={18} />
+            <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+          </li>
+          <li>
+            <Icon name="pin" size={18} />
+            <span>{SITE.region}, België</span>
+          </li>
+        </ul>
+      </div>
+
+      <nav class="footer__col" aria-label="Oplossingen">
+        <h2>Oplossingen</h2>
+        <ul>
+          {SERVICES.map((s) => (
+            <li><a href={`/oplossingen/${s.slug}/`}>{s.nav}</a></li>
+          ))}
+        </ul>
+      </nav>
+
+      <nav class="footer__col" aria-label="Auxilia">
+        <h2>Auxilia</h2>
+        <ul>
+          <li><a href="/aanpak/">Aanpak</a></li>
+          <li><a href="/ons-werk/">Ons werk</a></li>
+          <li><a href="/over-ons/">Over ons</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/privacy/">Privacybeleid</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer__col">
+        <h2>In gebruik bij</h2>
+        <p class="footer__proof">
+          To B-Seen, eventveiligheid. Verslagen die vroeger uren kostten,
+          staan sinds de automatisering vanzelf klaar.
+          <a href="/ons-werk/">Lees het verhaal</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>
+        © {year} {SITE.name} · Ondernemingsnummer {SITE.companyNumber} · btw {SITE.vat}
+      </p>
+      <p class="footer__keywords">
+        AI-chatbots · apps op maat · AI-integratie · IT-beheer voor KMO’s in de Kempen
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--teal-700);
+    color: rgba(250, 247, 242, 0.72);
+    padding-block: clamp(4.5rem, 8vw, 7.5rem) 2.5rem;
+  }
+
+  .footer__statement {
+    display: grid;
+    gap: 32px;
+    justify-items: start;
+    padding-bottom: clamp(3.5rem, 6vw, 5.5rem);
+    margin-bottom: clamp(3rem, 5vw, 4.5rem);
+    border-bottom: 1px solid rgba(250, 247, 242, 0.14);
+  }
+
+  .footer__statement .statement {
+    color: var(--sand);
+    margin: 0;
+    max-width: 18ch;
+  }
+
+  .footer__top {
+    display: grid;
+    gap: 44px;
+  }
+
+  @media (min-width: 760px) {
+    .footer__top {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 1000px) {
+    .footer__top {
+      grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+      gap: 32px;
+    }
+  }
+
+  .footer__brand p {
+    margin: 20px 0 24px;
+    max-width: 34ch;
+    font-size: 0.97rem;
+    line-height: 1.7;
+  }
+
+  .footer__contact {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+
+  .footer__contact li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+  }
+
+  .footer__contact :global(svg) {
+    color: var(--teal-300);
+    flex: none;
+  }
+
+  .footer__col h2 {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(250, 247, 242, 0.66);
+    margin: 0 0 18px;
+  }
+
+  .footer__col ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 11px;
+  }
+
+  .site-footer a:not(.btn) {
+    color: rgba(250, 247, 242, 0.82);
+    font-size: 0.97rem;
+    text-decoration: none;
+    transition: color 0.25s var(--ease);
+  }
+
+  .site-footer a:not(.btn):hover {
+    color: #fff;
+  }
+
+  .footer__proof {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    max-width: 30ch;
+  }
+
+  .footer__bottom {
+    margin-top: clamp(3rem, 5vw, 4.5rem);
+    padding-top: 26px;
+    border-top: 1px solid rgba(250, 247, 242, 0.14);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 28px;
+    justify-content: space-between;
+  }
+
+  .footer__bottom p {
+    margin: 0;
+    font-size: 0.87rem;
+    max-width: none;
+  }
+
+  .footer__keywords {
+    color: rgba(250, 247, 242, 0.6);
+  }
+</style>

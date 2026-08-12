@@ -1,0 +1,196 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import Icon from '../../components/Icon.astro';
+
+const faq = [
+  {
+    q: 'Moeten we onze software vervangen?',
+    a: 'Bijna nooit. We bouwen bovenop wat er draait en koppelen eraan vast. Je boekhoudpakket, je CRM en je mailbox blijven gewoon staan. Kan iets echt niet koppelen, dan zeggen we dat vooraf in plaats van er een fragiele omweg omheen te bouwen.',
+  },
+  {
+    q: 'Wat als ons team niet mee wil?',
+    a: 'Dat is een reëel risico en meestal terecht. Mensen zijn niet bang van AI, ze zijn bang dat er iets over hen beslist wordt. Daarom betrekken we de mensen die het werk doen vanaf de eerste dag, en beginnen we bij het werk dat zij zelf het vervelendst vinden.',
+  },
+  {
+    q: 'Hoe zit het met de AI Act?',
+    a: 'Voor de meeste KMO-toepassingen valt het mee: administratieve hulp en zoekfuncties zitten in de laagste risicocategorie. We leggen vast wat het systeem doet, welke data het gebruikt en wie erop toeziet. Gaat het richting personeel of klanten beoordelen, dan gelden strengere regels en zeggen we dat op voorhand.',
+  },
+  {
+    q: 'Wie houdt het draaiend als jullie weg zijn?',
+    a: 'Je team, met ons als achtervang. We leveren nooit iets op zonder dat minstens één iemand bij jou weet hoe het werkt en waar hij moet kijken als het hapert. De documentatie schrijven we in gewone taal, niet in technische termen.',
+  },
+  {
+    q: 'Kunnen we klein beginnen?',
+    a: 'Dat is net de bedoeling. Eén proces, van begin tot eind, met een vaste prijs. Werkt het, dan is de volgende stap een makkelijke beslissing. Werkt het niet, dan heb je weinig verloren.',
+  },
+];
+
+const gebieden = [
+  {
+    icon: 'mail',
+    t: 'Je mailbox',
+    d: 'Binnenkomende vragen gesorteerd op wat dringend is, met een voorstel van antwoord klaar. Jij kijkt na en verstuurt.',
+  },
+  {
+    icon: 'euro',
+    t: 'Je administratie',
+    d: 'Facturen en bestelbonnen die zichzelf uitlezen en op de juiste plek belanden, zonder overtypen.',
+  },
+  {
+    icon: 'chart',
+    t: 'Je rapportering',
+    d: 'Cijfers uit je verschillende systemen automatisch samengebracht, op een vaste dag in je mailbox.',
+  },
+  {
+    icon: 'users',
+    t: 'Je team',
+    d: 'Opleiding op jullie eigen dossiers, zodat mensen weten wanneer AI helpt en wanneer ze het beter zelf doen.',
+  },
+];
+---
+
+<ServiceLayout
+  slug="ai-integratie"
+  title="AI integreren in je bedrijf"
+  h1="AI die meedraait in de systemen die je al hebt"
+  metaTitle="AI implementeren in je KMO"
+  description="AI invoeren in je KMO zonder je software te vervangen: gekoppeld aan je bestaande systemen, met opleiding voor je team. Begeleiding van scan tot oplevering."
+  lead="Niet nog een tool erbij, maar AI die inhaakt op je mailbox, je administratie en je rapportering. Inclusief de opleiding om er zelf mee verder te kunnen."
+  highlights={[
+    'Je bestaande software blijft staan',
+    'Eén proces dat van begin tot eind werkt',
+    'Opleiding op jullie eigen dossiers',
+    'Documentatie in gewone taal',
+    'Rekening houdend met GDPR en de AI Act',
+  ]}
+  faq={faq}
+>
+  <!-- ====================================================== waar het kan -->
+  <section class="section band-paper">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Het vertrekpunt</p>
+        <h2>Waar we meestal beginnen</h2>
+        <p class="lead">
+          Bijna altijd is het werk dat zich herhaalt en dat niemand graag doet.
+        </p>
+      </div>
+      <div class="grid grid--4 reveal">
+        {
+          gebieden.map((g) => (
+            <article class="card">
+              <span class="icon-tile">
+                <Icon name={g.icon} />
+              </span>
+              <h3>{g.t}</h3>
+              <p>{g.d}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== opleiding -->
+  <section class="section band-sand">
+    <div class="container split">
+      <div class="reveal">
+        <p class="eyebrow">Het stuk dat men overslaat</p>
+        <h2>Techniek is het makkelijke deel</h2>
+        <p>
+          AI-projecten in een KMO stranden zelden op de techniek. Ze stranden
+          omdat er na de oplevering niemand eigenaar van is: de collega die het
+          snapte is met verlof, en de rest doet het weer handmatig, want dat is
+          zeker. Bij To B-Seen begonnen we daarom klein, bij de verslagen, en
+          groeide het pas daarna door naar de rest van de administratie.
+        </p>
+        <p>
+          Daarom eindigt een traject bij ons niet bij de oplevering. We leiden je
+          mensen op met hun eigen dossiers op het scherm, spreken af wie het
+          opvolgt, en blijven bereikbaar voor de vragen die pas na een maand
+          opduiken.
+        </p>
+      </div>
+      <div class="reveal">
+        <div class="panel">
+          <h3 class="panel__title">Wat de opleiding inhoudt</h3>
+          <ul class="checklist">
+            <li>
+              <Icon name="check" size={18} />
+              Werken met de oplossing die we voor jullie bouwden
+            </li>
+            <li>
+              <Icon name="check" size={18} />
+              Herkennen wanneer een antwoord van AI niet klopt
+            </li>
+            <li>
+              <Icon name="check" size={18} />
+              Welke informatie er wél en niet in mag
+            </li>
+            <li>
+              <Icon name="check" size={18} />
+              Waar te kijken als er iets hapert, en wanneer ons te bellen
+            </li>
+          </ul>
+          <p class="panel__foot">
+            Afhankelijk van je bedrijfsgrootte bestaan er in Vlaanderen
+            subsidiekanalen voor opleiding. We bekijken samen of je in aanmerking
+            komt. Beloven doen we het niet.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================== veiligheid -->
+  <section class="section band-teal">
+    <div class="container split">
+      <div class="reveal">
+        <p class="eyebrow">Data en regelgeving</p>
+        <h2>Je data blijft van jou</h2>
+        <p class="lead">
+          Voor we iets aansluiten, leggen we vast welke gegevens gebruikt worden,
+          waar ze staan en wie erbij kan.
+        </p>
+      </div>
+      <div class="reveal">
+        <ul class="checklist">
+          <li>
+            <Icon name="check" size={18} />
+            Je bedrijfsdata wordt niet gebruikt om modellen te trainen
+          </li>
+          <li>
+            <Icon name="check" size={18} />
+            Waar het kan, blijft de verwerking binnen Europa
+          </li>
+          <li>
+            <Icon name="check" size={18} />
+            Toegangsrechten volgen de groepen die je al hebt ingesteld
+          </li>
+          <li>
+            <Icon name="check" size={18} />
+            Je krijgt op papier wat het systeem doet en op welke data
+          </li>
+          <li>
+            <Icon name="check" size={18} />
+            Stoppen kan: je data en configuratie gaan mee naar buiten
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</ServiceLayout>
+
+<style>
+  .panel__title {
+    margin-bottom: 20px;
+  }
+
+  .panel__foot {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line-soft);
+    font-size: 0.92rem;
+    color: var(--ink-faint);
+  }
+</style>

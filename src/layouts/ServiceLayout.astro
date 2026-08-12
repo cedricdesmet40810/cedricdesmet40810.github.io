@@ -1,0 +1,195 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SERVICES, SITE } from '../config.js';
+
+const {
+  slug,
+  title,
+  h1,
+  metaTitle,
+  description,
+  lead,
+  /** Korte opsomming in de kaart onder de hero. */
+  highlights = [],
+  faq = [],
+} = Astro.props;
+
+const service = SERVICES.find((s) => s.slug === slug);
+const others = SERVICES.filter((s) => s.slug !== slug);
+const url = `${SITE.url}/oplossingen/${slug}/`;
+
+const serviceSchema = {
+  '@type': 'Service',
+  '@id': `${url}#service`,
+  name: title,
+  description,
+  serviceType: service?.short ?? title,
+  provider: { '@id': `${SITE.url}/#organization` },
+  areaServed: [
+    { '@type': 'AdministrativeArea', name: 'Kempen' },
+    { '@type': 'Country', name: 'België' },
+  ],
+  audience: { '@type': 'BusinessAudience', audienceType: 'KMO' },
+  url,
+};
+
+const faqSchema =
+  faq.length > 0
+    ? [
+        {
+          '@type': 'FAQPage',
+          '@id': `${url}#faq`,
+          mainEntity: faq.map((f) => ({
+            '@type': 'Question',
+            name: f.q,
+            acceptedAnswer: { '@type': 'Answer', text: f.a },
+          })),
+        },
+      ]
+    : [];
+---
+
+<BaseLayout
+  title={title}
+  metaTitle={metaTitle}
+  description={description}
+  schema={[serviceSchema, ...faqSchema]}
+  breadcrumbs={[
+    { name: 'Oplossingen', href: '/oplossingen/' },
+    { name: service?.short ?? title, href: `/oplossingen/${slug}/` },
+  ]}
+>
+  <PageHero
+    crumbs={[
+      { name: 'Oplossingen', href: '/oplossingen/' },
+      { name: service?.short ?? title, href: `/oplossingen/${slug}/` },
+    ]}
+    title={h1 ?? title}
+    lead={lead}
+    cta={true}
+    secondary={{ label: 'Zo pakken we het aan', href: '/aanpak/' }}
+  />
+
+  {
+    highlights.length > 0 && (
+      <section class="band-sand svc-kort-band">
+        <div class="container">
+          <aside class="svc-kort">
+            <h2 class="svc-kort__title">In het kort</h2>
+            <ul class="checklist svc-kort__list">
+              {highlights.map((h) => (
+                <li>
+                  <Icon name="check" size={18} />
+                  {h}
+                </li>
+              ))}
+            </ul>
+          </aside>
+        </div>
+      </section>
+    )
+  }
+
+  <slot />
+
+  <!-- ============================================================= faq -->
+  {
+    faq.length > 0 && (
+      <section class="section band-sand-deep">
+        <div class="container">
+          <div class="section-head reveal">
+            <p class="eyebrow">Veelgestelde vragen</p>
+            <h2>Wat je hierover meestal wil weten</h2>
+          </div>
+          <div class="reveal">
+            <Faq items={faq} />
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- ================================================ andere diensten -->
+  <section class="section band-paper">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Verder kijken</p>
+        <h2>Onze andere oplossingen</h2>
+      </div>
+      <div class="grid grid--4 reveal">
+        {
+          others.map((s) => (
+            <a href={`/oplossingen/${s.slug}/`} class="card other-card">
+              <span class="icon-tile">
+                <Icon name={s.icon} />
+              </span>
+              <h3>{s.short}</h3>
+              <p>{s.excerpt}</p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>
+
+<style>
+  /* De samenvatting hangt half over de hero, als een uitgestoken hand. */
+  .svc-kort-band {
+    padding-bottom: clamp(3rem, 5vw, 4.5rem);
+  }
+
+  .svc-kort {
+    margin-top: clamp(-4.5rem, -6vw, -3rem);
+    position: relative;
+    z-index: 2;
+    background: var(--paper);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-lg);
+    padding: clamp(28px, 3.5vw, 44px);
+  }
+
+  .svc-kort__title {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 20px;
+  }
+
+  .svc-kort__list {
+    display: grid;
+    gap: 14px;
+  }
+
+  @media (min-width: 780px) {
+    .svc-kort__list {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px 40px;
+    }
+  }
+
+  .other-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .other-card :global(.icon-tile) {
+    width: 42px;
+    height: 42px;
+    margin-bottom: 16px;
+  }
+
+  .other-card h3 {
+    font-size: 1.16rem;
+  }
+</style>

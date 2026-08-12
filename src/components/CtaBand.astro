@@ -1,0 +1,61 @@
+---
+import { SITE } from '../config.js';
+
+const {
+  eyebrow = 'Klaar om te beginnen',
+  title = 'Na dertig minuten weet je het',
+  text = 'Eén gesprek, online of bij jou op kantoor. Je hoort waar AI bij jullie het snelst rendeert, en wat je beter eerst zelf probeert.',
+  primary = 'Plan 30 minuten',
+  secondary = { label: 'Bekijk de aanpak', href: '/aanpak/' },
+} = Astro.props;
+---
+
+<section class="section band-teal cta-band">
+  <div class="container">
+    <div class="cta-band__inner reveal">
+      <p class="eyebrow eyebrow--center">{eyebrow}</p>
+      <h2 class="statement">{title}</h2>
+      <p class="lead">{text}</p>
+      <div class="btn-row cta-band__actions">
+        <a href={SITE.bookingUrl || '/contact/'} class="btn btn--primary">
+          {primary}
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        {secondary && (
+          <a href={secondary.href} class="btn btn--secondary">{secondary.label}</a>
+        )}
+      </div>
+      <p class="cta-band__note">
+        Vrijblijvend · online of bij je op kantoor · je data blijft van jou
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-band__inner {
+    text-align: center;
+    max-width: 780px;
+    margin-inline: auto;
+  }
+
+  .cta-band .statement {
+    max-width: 16ch;
+    margin-inline: auto;
+  }
+
+  .cta-band .lead {
+    margin: 24px auto 36px;
+  }
+
+  .cta-band__actions {
+    justify-content: center;
+  }
+
+  .cta-band__note {
+    margin-top: 26px;
+    font-size: 0.9rem;
+    color: rgba(250, 247, 242, 0.75);
+    max-width: none;
+  }
+</style>

@@ -1,0 +1,249 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import Icon from '../../components/Icon.astro';
+
+const faq = [
+  {
+    q: 'Wat kost de scan zelf?',
+    a: 'Een vast bedrag dat we vooraf afspreken, afhankelijk van de grootte van je bedrijf en het aantal processen dat we doorlichten. Je krijgt de prijs voor we beginnen, en het rapport is van jou, ook als je daarna niets met ons doet.',
+  },
+  {
+    q: 'Hoe weten jullie wat ons werk kost?',
+    a: 'Dat rekenen we samen uit. Wij meten hoe vaak iets gebeurt en hoe lang het duurt, jij vult het uurtarief of de loonkost in. Zo blijft de berekening van jou en hoeven wij geen aannames te doen over jouw cijfers.',
+  },
+  {
+    q: 'En als AI bij ons niets oplevert?',
+    a: 'Dan staat dat in het rapport. Dat gebeurt: soms is het antwoord een betere instelling in software die je al betaalt, of gewoon een andere afspraak intern. We hebben er niets aan om je iets te laten bouwen dat zichzelf niet terugverdient.',
+  },
+  {
+    q: 'Kijken jullie ook naar onze IT-kosten?',
+    a: 'Ja, dat nemen we mee. Ongebruikte licenties, dubbele abonnementen die hetzelfde doen, opslag waar niemand nog naar kijkt. Dat zijn zelden de grootste posten, maar het is wel de makkelijkste besparing.',
+  },
+  {
+    q: 'Hoe lang duurt zo’n scan?',
+    a: 'Meestal één tot twee weken. Het meeste werk is meekijken en meten; het rapport zelf schrijven gaat snel. Je team is er samen een paar uur mee bezig.',
+  },
+];
+
+const posten = [
+  {
+    icon: 'clock',
+    t: 'Werk dat zich herhaalt',
+    d: 'Dezelfde gegevens overtypen, dezelfde mail opnieuw opstellen, dezelfde lijst elke maand samenstellen.',
+  },
+  {
+    icon: 'refresh',
+    t: 'Wachttijd tussen stappen',
+    d: 'Een offerte die drie dagen blijft liggen kost geen uren, maar wel opdrachten.',
+  },
+  {
+    icon: 'euro',
+    t: 'Abonnementen en licenties',
+    d: 'Tools die niemand nog gebruikt, of drie pakketten die grotendeels hetzelfde doen.',
+  },
+  {
+    icon: 'search',
+    t: 'Zoeken naar informatie',
+    d: 'De tijd die weggaat aan het terugvinden van het juiste document of de juiste afspraak.',
+  },
+  {
+    icon: 'refresh',
+    t: 'Fouten rechtzetten',
+    d: 'Een verkeerd nummer in een bestelling kost het tienvoudige van de tijd die het invoeren kostte.',
+  },
+  {
+    icon: 'users',
+    t: 'Werk dat bij één persoon zit',
+    d: 'Als er maar één iemand weet hoe iets moet, staat alles stil zodra die met verlof is.',
+  },
+];
+---
+
+<ServiceLayout
+  slug="kostenbesparing"
+  title="Kosten besparen met AI"
+  h1="Eerst uitrekenen waar AI je geld oplevert"
+  metaTitle="Kosten besparen met AI in je KMO"
+  description="Ontdek met een AI-scan waar je KMO tijd en geld kan besparen, en waar AI de moeite niet loont. Concreet rapport met berekening en volgorde van aanpak."
+  lead="AI is niet overal de goedkoopste oplossing. We beginnen met de saaie oefening: waar kruipt de tijd in, wat kost dat op een jaar, en verdient een oplossing zichzelf terug?"
+  highlights={[
+    'Concreet rapport met de berekening erbij',
+    'Geordend op wat het snelst oplevert',
+    'Ook waar AI níet de oplossing is',
+    'Het rapport is van jou, ook zonder vervolg',
+    'Meestal klaar in één tot twee weken',
+  ]}
+  faq={faq}
+>
+  <!-- ==================================================== waar we kijken -->
+  <section class="section band-paper">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Waar we naar kijken</p>
+        <h2>Waar het geld weglekt</h2>
+        <p class="lead">
+          Zelden op één grote plek. Meestal een half uur hier en twintig minuten
+          daar, elke dag opnieuw.
+        </p>
+      </div>
+      <div class="grid grid--3 reveal">
+        {
+          posten.map((p) => (
+            <article class="card">
+              <span class="icon-tile">
+                <Icon name={p.icon} />
+              </span>
+              <h3>{p.t}</h3>
+              <p>{p.d}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================== de rekensom -->
+  <section class="section band-sand">
+    <div class="container split split--top">
+      <div class="reveal">
+        <p class="eyebrow">De rekensom</p>
+        <h2>Elk getal krijgt een zin die uitlegt waar het vandaan komt</h2>
+        <p>
+          Je hebt niets aan “tot 40 % efficiënter”. Je hebt iets aan: deze
+          handeling gebeurt zestig keer per maand, duurt gemiddeld twaalf
+          minuten, en daarvan blijven er na automatisering twee over.
+        </p>
+        <p>
+          Dat is de vorm waarin je het rapport krijgt. Per kans staat er wat het
+          vandaag kost, wat het na de ingreep zou kosten, wat het bouwen kost en
+          hoelang het duurt voor het break-even draait. Je kan er zelf mee
+          rekenen, en je kan er zelf mee tegenspreken.
+        </p>
+      </div>
+      <div class="reveal">
+        <div class="panel example">
+          <span class="badge badge--soft">Illustratief voorbeeld</span>
+          <h3 class="example__title">Offertes opmaken</h3>
+          <dl class="example__rows">
+            <div>
+              <dt>Hoe vaak</dt>
+              <dd>60 × per maand</dd>
+            </div>
+            <div>
+              <dt>Nu</dt>
+              <dd>± 12 min per offerte</dd>
+            </div>
+            <div>
+              <dt>Na</dt>
+              <dd>± 2 min nakijken</dd>
+            </div>
+            <div>
+              <dt>Verschil</dt>
+              <dd>10 uur per maand</dd>
+            </div>
+          </dl>
+          <p class="example__foot">
+            De uurkost vul jij in, want die kennen wij niet. Pas als het bedrag
+            dat eruit komt de bouwkost ruim overstijgt, raden we het aan.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= eerlijk -->
+  <section class="section band-teal">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Uit het rapport</p>
+        <h2>Soms is het antwoord: hier niet aan beginnen</h2>
+        <p class="lead">
+          Deze drie conclusies komen vaker voor dan je zou denken, en ze staan
+          gewoon in het rapport.
+        </p>
+      </div>
+      <div class="grid grid--3 reveal">
+        <article class="card afraden">
+          <h3>Je betaalt er al voor</h3>
+          <p>
+            In veel pakketten zit een functie die al doet wat je zoekt, maar die
+            nooit is aangezet. Dat kost je een instelling, geen project.
+          </p>
+        </article>
+        <article class="card afraden">
+          <h3>Het gebeurt te weinig om te lonen</h3>
+          <p>
+            Iets dat vier keer per jaar terugkomt, is zelden de moeite om te
+            automatiseren. Hoe vervelend het ook is als het aan de beurt is.
+          </p>
+        </article>
+        <article class="card afraden">
+          <h3>Het echte probleem zit elders</h3>
+          <p>
+            Soms is de trage offerte niet het probleem, maar de onduidelijke
+            prijsafspraak erachter. Die los je niet op met software.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+</ServiceLayout>
+
+<style>
+  /* Op de donkere band moeten de kaarten meedraaien met de achtergrond. */
+  .afraden {
+    background: rgba(250, 247, 242, 0.07);
+    border-color: rgba(250, 247, 242, 0.16);
+    box-shadow: none;
+  }
+
+  .afraden h3 {
+    color: var(--sand);
+    margin-bottom: 12px;
+  }
+
+  .afraden p {
+    color: rgba(250, 247, 242, 0.78);
+  }
+
+  .example__title {
+    margin: 14px 0 20px;
+  }
+
+  .example__rows {
+    margin: 0;
+    display: grid;
+    gap: 0;
+  }
+
+  .example__rows > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 13px 0;
+    border-top: 1px solid var(--line-soft);
+  }
+
+  .example__rows dt {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+  }
+
+  .example__rows dd {
+    margin: 0;
+    font-weight: 600;
+    text-align: right;
+  }
+
+  .example__rows > div:last-child dd {
+    color: var(--teal);
+  }
+
+  .example__foot {
+    margin-top: 22px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line-soft);
+    font-size: 0.92rem;
+    color: var(--ink-faint);
+  }
+</style>

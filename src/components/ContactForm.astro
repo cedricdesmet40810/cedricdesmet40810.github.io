@@ -1,0 +1,387 @@
+---
+/**
+ * Werkt in drie standen, afhankelijk van SITE.formEndpoint:
+ *  · endpoint ingevuld → verstuurt via fetch, blijft op de pagina
+ *  · endpoint leeg     → valt netjes terug op een voorbereide mailto
+ * Zonder JavaScript blijft het een gewoon formulier dat naar het endpoint post.
+ */
+import Icon from './Icon.astro';
+import { SITE, SERVICES } from '../config.js';
+
+const endpoint = SITE.formEndpoint;
+---
+
+<form
+  class="form"
+  id="contactformulier"
+  method="post"
+  action={endpoint || undefined}
+  data-endpoint={endpoint}
+  data-mailto={SITE.email}
+  novalidate
+>
+  <div class="form__row">
+    <label class="field">
+      <span>Je naam <span aria-hidden="true">*</span></span>
+      <input
+        class="input"
+        type="text"
+        name="naam"
+        required
+        autocomplete="name"
+        placeholder="Jan Peeters"
+      />
+      <span class="error" data-error-for="naam" hidden></span>
+    </label>
+
+    <label class="field">
+      <span>Bedrijf</span>
+      <input
+        class="input"
+        type="text"
+        name="bedrijf"
+        autocomplete="organization"
+        placeholder="Peeters bv"
+      />
+    </label>
+  </div>
+
+  <div class="form__row">
+    <label class="field">
+      <span>E-mailadres <span aria-hidden="true">*</span></span>
+      <input
+        class="input"
+        type="email"
+        name="email"
+        required
+        autocomplete="email"
+        placeholder="jan@bedrijf.be"
+      />
+      <span class="error" data-error-for="email" hidden></span>
+    </label>
+
+    <label class="field">
+      <span>Telefoon <span class="hint">(optioneel)</span></span>
+      <input
+        class="input"
+        type="tel"
+        name="telefoon"
+        autocomplete="tel"
+        placeholder="0470 12 34 56"
+      />
+    </label>
+  </div>
+
+  <label class="field">
+    <span>Waarover gaat het?</span>
+    <select class="select" name="onderwerp">
+      <option value="">Kies een onderwerp</option>
+      {SERVICES.map((s) => <option value={s.short}>{s.title}</option>)}
+      <option value="Iets anders">Iets anders / ik weet het nog niet</option>
+    </select>
+  </label>
+
+  <label class="field">
+    <span>Waar loopt het vast? <span aria-hidden="true">*</span></span>
+    <textarea
+      class="textarea"
+      name="bericht"
+      required
+      minlength="10"
+      placeholder="Beschrijf kort wat er vandaag te veel tijd kost. Hoe concreter, hoe beter we ons kunnen voorbereiden."
+    ></textarea>
+    <span class="error" data-error-for="bericht" hidden></span>
+  </label>
+
+  <label class="consent">
+    <input type="checkbox" name="akkoord" required />
+    <span>
+      Ik ga ermee akkoord dat Auxilia mijn gegevens gebruikt om op deze vraag te
+      antwoorden. Meer daarover in het <a href="/privacy/">privacybeleid</a>.
+    </span>
+  </label>
+  <span class="error" data-error-for="akkoord" hidden></span>
+
+  <!-- Spamval: mensen zien dit veld niet, bots vullen het in. -->
+  <div class="honey" aria-hidden="true">
+    <label>
+      Laat dit veld leeg
+      <input type="text" name="website" tabindex="-1" autocomplete="off" />
+    </label>
+  </div>
+
+  <div class="form__foot">
+    <button type="submit" class="btn btn--primary" data-submit>
+      <span data-submit-label>Verstuur je vraag</span>
+      <span class="arrow" aria-hidden="true">→</span>
+    </button>
+    <p class="form__note">
+      <Icon name="clock" size={16} />
+      We antwoorden meestal binnen één werkdag.
+    </p>
+  </div>
+
+  <!-- Statusmelding, ook voorgelezen door schermlezers. -->
+  <p class="status" role="status" aria-live="polite" data-status hidden></p>
+</form>
+
+<style>
+  .form {
+    max-width: 680px;
+  }
+
+  .form__row {
+    display: grid;
+    gap: 0 20px;
+  }
+
+  @media (min-width: 620px) {
+    .form__row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .field > span:first-child {
+    display: block;
+    font-size: 0.92rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+
+  .field > span [aria-hidden] {
+    color: var(--clay);
+  }
+
+  .error {
+    display: block;
+    margin-top: 7px;
+    font-size: 0.87rem;
+    font-weight: 500;
+    color: var(--clay-700);
+  }
+
+  .input[aria-invalid='true'],
+  .textarea[aria-invalid='true'] {
+    border-color: var(--clay);
+  }
+
+  .consent {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 12px;
+    align-items: start;
+    margin-bottom: 8px;
+    font-size: 0.94rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    cursor: pointer;
+  }
+
+  .consent input {
+    width: 20px;
+    height: 20px;
+    margin: 3px 0 0;
+    accent-color: var(--teal);
+    cursor: pointer;
+  }
+
+  .honey {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .form__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 24px;
+    margin-top: 28px;
+  }
+
+  .form__note {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--ink-faint);
+  }
+
+  .form__note :global(svg) {
+    color: var(--teal-300);
+    flex: none;
+  }
+
+  .status {
+    margin-top: 24px;
+    padding: 16px 18px;
+    border-radius: var(--r-btn);
+    font-size: 0.95rem;
+    max-width: none;
+  }
+
+  .status[data-tone='ok'] {
+    background: rgba(15, 92, 90, 0.08);
+    border: 1px solid rgba(15, 92, 90, 0.24);
+    color: var(--teal);
+  }
+
+  .status[data-tone='fout'] {
+    background: var(--clay-soft);
+    border: 1px solid rgba(210, 105, 30, 0.35);
+    color: var(--clay-700);
+  }
+
+  button[disabled] {
+    opacity: 0.6;
+    cursor: progress;
+    transform: none;
+  }
+</style>
+
+<script>
+  const form = document.getElementById('contactformulier');
+  if (form instanceof HTMLFormElement) {
+    const status = form.querySelector('[data-status]');
+    const button = form.querySelector('[data-submit]');
+    const label = form.querySelector('[data-submit-label]');
+    const endpoint = form.dataset.endpoint;
+    const mailto = form.dataset.mailto;
+
+    const berichten = {
+      naam: 'Vul je naam in, dan weten we wie we antwoorden.',
+      email: 'Vul een geldig e-mailadres in, anders raakt ons antwoord je niet.',
+      bericht: 'Schrijf kort waar het over gaat. Een zin of twee volstaat.',
+      akkoord: 'We hebben je akkoord nodig om je bericht te mogen verwerken.',
+    };
+
+    const toonFout = (naam, tekst) => {
+      const veld = form.elements.namedItem(naam);
+      const doel = form.querySelector(`[data-error-for="${naam}"]`);
+      if (veld instanceof HTMLElement) veld.setAttribute('aria-invalid', 'true');
+      if (doel) {
+        doel.textContent = tekst;
+        doel.hidden = false;
+      }
+    };
+
+    const wisFouten = () => {
+      form.querySelectorAll('[data-error-for]').forEach((el) => {
+        el.hidden = true;
+        el.textContent = '';
+      });
+      form.querySelectorAll('[aria-invalid]').forEach((el) =>
+        el.removeAttribute('aria-invalid')
+      );
+    };
+
+    const meldStatus = (tekst, tone) => {
+      if (!status) return;
+      status.textContent = tekst;
+      status.dataset.tone = tone;
+      status.hidden = false;
+    };
+
+    const valideer = () => {
+      wisFouten();
+      const data = new FormData(form);
+      let eersteFout = null;
+
+      const check = (naam, geldig) => {
+        if (!geldig) {
+          toonFout(naam, berichten[naam]);
+          eersteFout = eersteFout || naam;
+        }
+      };
+
+      check('naam', String(data.get('naam') || '').trim().length > 1);
+      check('email', /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(data.get('email') || '').trim()));
+      check('bericht', String(data.get('bericht') || '').trim().length >= 10);
+      check('akkoord', data.get('akkoord') !== null);
+
+      if (eersteFout) {
+        const veld = form.elements.namedItem(eersteFout);
+        if (veld instanceof HTMLElement) veld.focus();
+        return null;
+      }
+      return data;
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = valideer();
+      if (!data) return;
+
+      // Ingevulde spamval: doe alsof het gelukt is en verstuur niets.
+      if (String(data.get('website') || '').length > 0) {
+        form.reset();
+        meldStatus('Bedankt, je bericht is verstuurd.', 'ok');
+        return;
+      }
+      data.delete('website');
+
+      // Geen endpoint ingesteld: val terug op de mailclient van de bezoeker.
+      if (!endpoint) {
+        const onderwerp = `Aanvraag via de website: ${data.get('onderwerp') || 'algemeen'}`;
+        const body = [
+          `Naam: ${data.get('naam')}`,
+          `Bedrijf: ${data.get('bedrijf') || 'niet ingevuld'}`,
+          `E-mail: ${data.get('email')}`,
+          `Telefoon: ${data.get('telefoon') || 'niet ingevuld'}`,
+          `Onderwerp: ${data.get('onderwerp') || 'niet ingevuld'}`,
+          '',
+          String(data.get('bericht')),
+        ].join('\n');
+
+        window.location.href = `mailto:${mailto}?subject=${encodeURIComponent(
+          onderwerp
+        )}&body=${encodeURIComponent(body)}`;
+        meldStatus(
+          'We openen je mailprogramma met het bericht klaar. Verstuur het daar om het af te ronden.',
+          'ok'
+        );
+        return;
+      }
+
+      if (button instanceof HTMLButtonElement) button.disabled = true;
+      if (label) label.textContent = 'Bezig met versturen…';
+
+      try {
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          body: data,
+          headers: { Accept: 'application/json' },
+        });
+        if (!res.ok) throw new Error(String(res.status));
+
+        form.reset();
+        meldStatus(
+          'Bedankt, je bericht is binnen. We nemen meestal binnen één werkdag contact op.',
+          'ok'
+        );
+      } catch {
+        meldStatus(
+          `Er liep iets mis bij het versturen. Mail ons gerust rechtstreeks op ${mailto}.`,
+          'fout'
+        );
+      } finally {
+        if (button instanceof HTMLButtonElement) button.disabled = false;
+        if (label) label.textContent = 'Verstuur je vraag';
+      }
+    });
+
+    // Fout weghalen zodra iemand het veld corrigeert.
+    form.addEventListener('input', (e) => {
+      const target = e.target;
+      if (!(target instanceof HTMLElement) || !target.hasAttribute('aria-invalid')) return;
+      target.removeAttribute('aria-invalid');
+      const naam = target.getAttribute('name');
+      const doel = form.querySelector(`[data-error-for="${naam}"]`);
+      if (doel) doel.hidden = true;
+    });
+  }
+</script>

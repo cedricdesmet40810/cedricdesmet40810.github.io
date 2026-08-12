@@ -1,0 +1,199 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import Icon from '../../components/Icon.astro';
+
+const faq = [
+  {
+    q: 'We hebben al een IT-leverancier. Moeten we wisselen?',
+    a: 'Niet noodzakelijk. Als je huidige partij goed werk levert, sluiten we daarop aan voor het AI-gedeelte. Wisselen heeft alleen zin als je vandaag telkens tussen twee partijen moet bemiddelen om iets opgelost te krijgen.',
+  },
+  {
+    q: 'Hoe snel reageren jullie als er iets stukgaat?',
+    a: 'We spreken vooraf af binnen welke termijn we opnemen, en dat zetten we op papier in plaats van het vaag te houden. Wat realistisch is, hangt af van je scope. Een winkel die niet kan verkopen is dringender dan een trage printer.',
+  },
+  {
+    q: 'Doen jullie ook hardware?',
+    a: 'We adviseren erover, bestellen het en zetten het klaar. We zijn geen doorverkoper met een eigen magazijn, dus we hebben er geen belang bij om je meer te laten kopen dan je nodig hebt.',
+  },
+  {
+    q: 'Wat kost IT-beheer?',
+    a: 'Een maandbedrag op basis van het aantal werkplekken en wat er precies onder valt. Je weet dus vooraf wat het kost, ook in een maand waarin er veel misgaat.',
+  },
+  {
+    q: 'Zijn back-ups echt nodig als we in de cloud werken?',
+    a: 'Ja. Een veelgemaakte fout is denken dat Microsoft of Google je bestanden voor je bewaart. Ze zorgen dat hun dienst blijft draaien, niet dat jij een map terugkrijgt die iemand drie weken geleden per ongeluk wiste. Daar hoort een aparte back-up bij.',
+  },
+];
+
+const diensten = [
+  {
+    icon: 'app',
+    t: 'Werkplekken',
+    d: 'Laptops en desktops klaarzetten, updates opvolgen en zorgen dat een nieuwe collega op dag één kan werken.',
+  },
+  {
+    icon: 'lock',
+    t: 'Beveiliging',
+    d: 'Mailbeveiliging, tweestapsverificatie en toegangsrechten die kloppen. Ook als iemand vertrekt.',
+  },
+  {
+    icon: 'refresh',
+    t: 'Back-ups',
+    d: 'Een back-up die effectief teruggezet kan worden. We testen dat, want een back-up die niemand ooit uitprobeerde telt niet.',
+  },
+  {
+    icon: 'euro',
+    t: 'Licenties',
+    d: 'Overzicht van wat je betaalt en waarvoor. Vaak zit hier de eerste besparing zonder dat er iets verandert.',
+  },
+  {
+    icon: 'plug',
+    t: 'Netwerk',
+    d: 'Internet, wifi en de verbinding tussen je vestigingen. Inclusief wat er moet gebeuren als het uitvalt.',
+  },
+  {
+    icon: 'chat',
+    t: 'Helpdesk',
+    d: 'Eén nummer voor als er iets vastloopt, bij mensen die je bedrijf al kennen als je belt.',
+  },
+];
+---
+
+<ServiceLayout
+  slug="it-beheer"
+  title="IT-beheer en ondersteuning"
+  h1="Eén aanspreekpunt voor je IT én je AI"
+  metaTitle="IT-beheer voor KMO’s"
+  description="IT-beheer voor KMO’s: werkplekken, beveiliging, back-ups, licenties en helpdesk. Eén partner voor je IT én je AI-oplossingen, met een vast maandbedrag."
+  lead="De meeste KMO’s bellen de ene partij voor de server, de andere voor de software en een derde voor “iets met AI”. Bij elk probleem begint het gesprek opnieuw."
+  highlights={[
+    'Vast maandbedrag, geen verrassingen',
+    'Afgesproken reactietermijn op papier',
+    'Back-ups die we effectief testen',
+    'Overzicht van al je licenties',
+    'Dezelfde mensen die je AI bouwden',
+  ]}
+  faq={faq}
+>
+  <!-- ======================================================== diensten -->
+  <section class="section band-paper">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Wat eronder valt</p>
+        <h2>De dingen die pas opvallen als ze stuk zijn</h2>
+      </div>
+      <div class="grid grid--3 reveal">
+        {
+          diensten.map((d) => (
+            <article class="card">
+              <span class="icon-tile">
+                <Icon name={d.icon} />
+              </span>
+              <h3>{d.t}</h3>
+              <p>{d.d}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================== waarom samen -->
+  <section class="section band-sand">
+    <div class="container split">
+      <div class="reveal">
+        <p class="eyebrow">Waarom samen</p>
+        <h2>AI is geen los eiland naast je IT</h2>
+        <p>
+          Een assistent die je documenten doorzoekt, heeft toegangsrechten nodig.
+          Een automatisering die je facturen uitleest, hangt aan je mailserver.
+          Een app voor je ploeg werkt alleen als de gsm’s beheerd zijn.
+        </p>
+        <p>
+          Zit die kennis bij twee verschillende partijen, dan wordt elke storing
+          een discussie over wiens schuld het is. Wij houden het bij elkaar,
+          zodat er niemand naar de ander kan wijzen.
+        </p>
+      </div>
+      <div class="reveal">
+        <div class="panel">
+          <h3 class="panel__title">Wat je van ons mag verwachten</h3>
+          <ul class="checklist">
+            <li>
+              <Icon name="check" size={18} />
+              We leggen uit wat er mis is in gewone taal
+            </li>
+            <li>
+              <Icon name="check" size={18} />
+              We zeggen het als iets niet dringend is
+            </li>
+            <li>
+              <Icon name="check" size={18} />
+              We verkopen je geen hardware die je niet nodig hebt
+            </li>
+            <li>
+              <Icon name="check" size={18} />
+              Je krijgt jaarlijks een overzicht van kosten en risico’s
+            </li>
+            <li>
+              <Icon name="check" size={18} />
+              Stoppen kan, met een nette overdracht naar je volgende partij
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== overstap -->
+  <section class="section band-teal">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Overstappen</p>
+        <h2>Van leverancier wisselen zonder stilstand</h2>
+        <p class="lead">
+          De vrees is altijd dezelfde: dat er iets kwijtraakt of dat het bedrijf
+          een dag plat ligt. Daarom doen we het in deze volgorde.
+        </p>
+      </div>
+      <ol class="numbered reveal">
+        <li>
+          <span class="numbered__n">01</span>
+          <div>
+            <h3>We brengen eerst in kaart</h3>
+            <p>
+              Welke systemen draaien er, waar staan de wachtwoorden, welke
+              contracten lopen er en tot wanneer. Nog voor er iets verandert.
+            </p>
+          </div>
+        </li>
+        <li>
+          <span class="numbered__n">02</span>
+          <div>
+            <h3>We nemen over in stukken</h3>
+            <p>
+              Eerst de helpdesk, dan de werkplekken, dan de rest. Zo is er altijd
+              iemand verantwoordelijk en valt er niets tussen.
+            </p>
+          </div>
+        </li>
+        <li>
+          <span class="numbered__n">03</span>
+          <div>
+            <h3>We ruimen op wat scheef staat</h3>
+            <p>
+              Oude accounts, vergeten licenties, back-ups die al maanden falen.
+              Dat zit in bijna elk bedrijf, en het is zelden iemands schuld.
+            </p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+</ServiceLayout>
+
+<style>
+  .panel__title {
+    margin-bottom: 20px;
+  }
+</style>

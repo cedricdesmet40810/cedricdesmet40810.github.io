@@ -1,0 +1,53 @@
+---
+import Seo from '../components/Seo.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../config.js';
+
+// Zelf gehoste fonts: geen verzoek naar Google, dus niets om AVG-gewijs te regelen.
+import '@fontsource/spectral/400.css';
+import '@fontsource/spectral/500.css';
+import '@fontsource-variable/hanken-grotesk';
+import '../styles/global.css';
+
+const props = Astro.props;
+---
+
+<!doctype html>
+<html lang={SITE.lang}>
+  <head>
+    <Seo {...props} />
+  </head>
+  <body>
+    <a class="skip-link" href="#hoofdinhoud">Naar de inhoud</a>
+    <Header />
+    <main id="hoofdinhoud">
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      // Secties komen in beeld: 800ms, 22px van onderaf.
+      // Wie beweging heeft uitgezet, krijgt alles meteen te zien.
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const items = document.querySelectorAll('.reveal');
+
+      if (reduced || !('IntersectionObserver' in window)) {
+        items.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: '0px 0px -10% 0px', threshold: 0.06 }
+        );
+        items.forEach((el) => io.observe(el));
+      }
+    </script>
+  </body>
+</html>

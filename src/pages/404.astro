@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import { SERVICES } from '../config.js';
+---
+
+<BaseLayout
+  title="Pagina niet gevonden"
+  description="Deze pagina bestaat niet of is verhuisd. Bekijk onze oplossingen voor AI en IT, of neem gerust contact op met Auxilia."
+  noindex={true}
+>
+  <PageHero
+    badge="Foutmelding 404"
+    title="Deze pagina bestaat niet"
+    lead="Waarschijnlijk is ze verhuisd of staat er een tikfout in het adres. Hieronder vind je de weg terug."
+    size="compact"
+    secondary={{ label: 'Naar de homepagina', href: '/' }}
+  />
+
+  <section class="section band-paper">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Misschien zocht je dit</p>
+        <h2>Onze oplossingen</h2>
+      </div>
+      <div class="grid grid--3">
+        {
+          SERVICES.map((s) => (
+            <a href={`/oplossingen/${s.slug}/`} class="card">
+              <span class="icon-tile">
+                <Icon name={s.icon} />
+              </span>
+              <h3>{s.short}</h3>
+              <p>{s.excerpt}</p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

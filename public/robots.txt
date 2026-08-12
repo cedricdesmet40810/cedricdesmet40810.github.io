@@ -1,0 +1,8 @@
+# Auxilia — www.auxilia-ai.be
+User-agent: *
+Allow: /
+
+# Geen nut om de bedanktpagina te indexeren.
+Disallow: /bedankt/
+
+Sitemap: https://www.auxilia-ai.be/sitemap-index.xml
