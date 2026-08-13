@@ -51,6 +51,7 @@ export const SERVICES = [
     excerpt:
       'Een assistent die antwoordt uit jouw documenten, prijzen en procedures in plaats van uit het internet.',
     icon: 'chat',
+    beeld: '/opl-chatbots.jpg',
   },
   {
     slug: 'apps-op-maat',
@@ -60,6 +61,7 @@ export const SERVICES = [
     excerpt:
       'Software gebouwd rond hoe jij werkt, in plaats van een pakket waar je je aan aanpast.',
     icon: 'app',
+    beeld: '/opl-apps.jpg',
   },
   {
     slug: 'ai-integratie',
@@ -69,6 +71,7 @@ export const SERVICES = [
     excerpt:
       'AI die meedraait in de systemen die je vandaag al gebruikt, en een team dat ermee overweg kan.',
     icon: 'flow',
+    beeld: '/opl-integratie.jpg',
   },
   {
     slug: 'kostenbesparing',
@@ -78,6 +81,7 @@ export const SERVICES = [
     excerpt:
       'We rekenen door waar AI je geld oplevert, en waar het je alleen maar tijd kost.',
     icon: 'chart',
+    beeld: '/opl-kosten.jpg',
   },
   {
     slug: 'it-beheer',
@@ -87,5 +91,6 @@ export const SERVICES = [
     excerpt:
       'Eén aanspreekpunt voor je werkplekken, licenties, back-ups en beveiliging.',
     icon: 'shield',
+    beeld: '/opl-it-beheer.jpg',
   },
 ];

@@ -67,11 +67,6 @@ const itemList = {
         {
           SERVICES.map((s) => (
             <article class="hub-item reveal">
-              <div class="hub-item__head">
-                <span class="icon-tile">
-                  <Icon name={s.icon} />
-                </span>
-              </div>
               <div class="hub-item__body">
                 <h2>
                   <a href={`/oplossingen/${s.slug}/`}>{s.title}</a>
@@ -90,6 +85,16 @@ const itemList = {
                   <span class="arrow" aria-hidden="true">→</span>
                 </a>
               </div>
+
+              <img
+                class="hub-item__beeld"
+                src={s.beeld}
+                width="478"
+                height="640"
+                loading="lazy"
+                decoding="async"
+                alt=""
+              />
             </article>
           ))
         }
@@ -137,21 +142,23 @@ const itemList = {
     border-bottom: 1px solid var(--line-soft);
   }
 
+  /* De rechterhelft stond leeg; daar hoort de illustratie. Het icoontje
+     dat hier stond is overbodig geworden. */
   @media (min-width: 860px) {
     .hub-item {
-      grid-template-columns: 200px 1fr;
-      gap: 40px;
+      grid-template-columns: 1fr 300px;
+      gap: clamp(32px, 4vw, 56px);
+      align-items: center;
     }
   }
 
-  .hub-item__head {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .hub-item__head :global(.icon-tile) {
-    margin-bottom: 0;
+  .hub-item__beeld {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin-inline: auto;
+    border-radius: var(--r);
   }
 
   .hub-item h2 {
