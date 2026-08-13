@@ -237,38 +237,40 @@ const waarom = [
   <!-- ========================================================== stappen -->
   <section class="section band-sand">
     <div class="container">
-      <div class="stappen__intro reveal">
-        <div class="section-head">
-          <p class="eyebrow">Hoe we werken</p>
-          <h2 class="stappen__kop">Auxilia AI zorgt ervoor dat AI ten dienste staat van uw hele organisatie.</h2>
-        </div>
-        <img
-          class="stappen__beeld"
-          src="/aan-de-slag.jpg"
-          width="672"
-          height="900"
-          loading="lazy"
-          decoding="async"
-          alt=""
-        />
-      </div>
+      <div class="stappen__layout">
+        <aside class="stappen__zij reveal">
+          <div class="section-head">
+            <p class="eyebrow">Hoe we werken</p>
+            <h2 class="stappen__kop">Auxilia AI zorgt ervoor dat AI ten dienste staat van uw hele organisatie.</h2>
+          </div>
+          <img
+            class="stappen__beeld"
+            src="/aan-de-slag.jpg"
+            width="672"
+            height="900"
+            loading="lazy"
+            decoding="async"
+            alt=""
+          />
+        </aside>
 
-      <ol class="bigsteps">
-        {
-          stappen.map((s, i) => (
-            <li class="bigstep reveal">
-              <div class="bigstep__visual" aria-hidden="true">
-                <StepScene name={s.scene} />
-                <span class="bigstep__n">{String(i + 1).padStart(2, '0')}</span>
-              </div>
-              <div class="bigstep__body">
-                <h3>{s.t}</h3>
-                <p>{s.d}</p>
-              </div>
-            </li>
-          ))
-        }
-      </ol>
+        <ol class="bigsteps">
+          {
+            stappen.map((s, i) => (
+              <li class="bigstep reveal">
+                <div class="bigstep__visual" aria-hidden="true">
+                  <StepScene name={s.scene} />
+                  <span class="bigstep__n">{String(i + 1).padStart(2, '0')}</span>
+                </div>
+                <div class="bigstep__body">
+                  <h3>{s.t}</h3>
+                  <p>{s.d}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
     </div>
   </section>
 
@@ -579,29 +581,45 @@ const waarom = [
     flex: none;
   }
 
-  /* De illustratie loopt mee met de sectiekop, niet met de stappen zelf. */
-  .stappen__intro {
+  /* Kop en beeld blijven links staan terwijl de stappen rechts passeren. */
+  .stappen__layout {
     display: grid;
-    gap: clamp(24px, 4vw, 48px);
-    align-items: center;
+    gap: clamp(28px, 4vw, 56px);
   }
 
-  @media (min-width: 880px) {
-    .stappen__intro {
-      grid-template-columns: 1.4fr 1fr;
+  @media (min-width: 980px) {
+    .stappen__layout {
+      grid-template-columns: 0.82fr 1.18fr;
+      align-items: start;
+    }
+
+    .stappen__zij {
+      position: sticky;
+      /* onder de plakkende header, met wat lucht */
+      top: 108px;
     }
   }
 
-  .stappen__intro .section-head {
-    margin-bottom: 0;
+  .stappen__zij {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 3vw, 32px);
+  }
+
+  .stappen__zij .section-head { margin-bottom: 0; }
+
+  /* Een kolom die blijft staan mag niet hoger worden dan het scherm, anders
+     schuift de kop er bovenaan uit. Vandaar kleiner dan een gewone sectiekop —
+     en hij hoort de kaarten rechts ook niet te overstemmen. */
+  .stappen__kop {
+    font-size: clamp(1.6rem, 2.4vw, 2.1rem);
   }
 
   .stappen__beeld {
     display: block;
     width: 100%;
-    max-width: 340px;
+    max-width: 250px;
     height: auto;
-    margin-inline: auto;
     border-radius: var(--r);
   }
 
@@ -612,35 +630,26 @@ const waarom = [
     margin: 0;
     padding: 0;
     display: grid;
-    gap: 28px;
-    max-width: 960px;
-    margin-inline: auto;
+    gap: 24px;
   }
 
   .bigstep {
     display: grid;
-    gap: 24px;
+    gap: 22px;
     background: var(--paper);
     border: 1px solid var(--line-soft);
     border-radius: var(--r-xl);
     box-shadow: var(--shadow);
-    padding: clamp(28px, 4vw, 52px);
+    padding: clamp(26px, 3.2vw, 40px);
   }
 
-  @media (min-width: 720px) {
+  /* In een smallere kolom valt de strip-afwisseling weg: elke kaart krijgt
+     dezelfde opbouw, tegel links en tekst rechts. */
+  @media (min-width: 560px) {
     .bigstep {
-      grid-template-columns: 190px 1fr;
+      grid-template-columns: 132px 1fr;
       align-items: center;
-      gap: clamp(32px, 4.5vw, 56px);
-    }
-
-    /* om en om, zoals een strip */
-    .bigstep:nth-child(even) {
-      grid-template-columns: 1fr 190px;
-    }
-
-    .bigstep:nth-child(even) .bigstep__visual {
-      order: 2;
+      gap: clamp(24px, 3vw, 36px);
     }
   }
 
@@ -649,8 +658,8 @@ const waarom = [
     display: grid;
     place-items: center;
     aspect-ratio: 1;
-    max-width: 190px;
-    border-radius: 24px;
+    max-width: 132px;
+    border-radius: 20px;
     background: linear-gradient(150deg, rgba(15, 92, 90, 0.1), rgba(15, 92, 90, 0.04));
   }
 
