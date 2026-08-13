@@ -58,21 +58,25 @@ const servicesSchema = SERVICES.map((s) => ({
 const stappen = [
   {
     scene: 'werkvloer',
+    beeld: '/stap-werkvloer.jpg',
     t: 'We beginnen bij jou op de werkvloer',
     d: 'We geven geen presentatie over AI, maar we willen identificeren wat je bedrijf eigenlijk doet en wat de core business is. Welke tools je bedrijf gebruikt, en waar AI mogelijks een hulp kan zijn om je dagelijkse taken te versnellen.',
   },
   {
     scene: 'systemen',
+    beeld: '/stap-tools.jpg',
     t: 'We bouwen toepassingen op de tools die je al hebt',
     d: 'Je boekhoudpakket, je mailbox, je tools, je CRM en je mappen blijven gewoon staan. We koppelen AI aan Microsoft 365, Google Workspace, SharePoint, Odoo of Billit en bouwen skills die je dagdagelijkse handelingen nabootsen en versnellen.',
   },
   {
     scene: 'team',
+    beeld: '/stap-team.jpg',
     t: 'We geven het in handen van je team',
     d: 'Wij overhandigen de skills en workflows aan jou en je team, en geven uitleg over hoe je ze het beste gebruikt. We tonen waar het waarde heeft om een taak op een vast schema te laten lopen, en waar AI het grote werk doet terwijl iemand van jullie telkens nakijkt.',
   },
   {
     scene: 'buurt',
+    beeld: '/stap-opvolgen.jpg',
     t: 'Wij volgen het proces op en helpen je verder bij onduidelijkheden',
     d: 'Bedrijven veranderen, nieuwe tools worden geïntroduceerd. Wij houden deze draaiend voor jou en breiden uit wat goed werkt. Zo moet je niemand in huis aannemen op je loonlijst en ben je altijd up-to-date.',
   },
@@ -259,7 +263,19 @@ const waarom = [
             stappen.map((s, i) => (
               <li class="bigstep reveal">
                 <div class="bigstep__visual" aria-hidden="true">
-                  <StepScene name={s.scene} />
+                  {s.beeld ? (
+                    <img
+                      class="bigstep__beeld"
+                      src={s.beeld}
+                      width="418"
+                      height="560"
+                      loading="lazy"
+                      decoding="async"
+                      alt=""
+                    />
+                  ) : (
+                    <StepScene name={s.scene} />
+                  )}
                   <span class="bigstep__n">{String(i + 1).padStart(2, '0')}</span>
                 </div>
                 <div class="bigstep__body">
@@ -647,7 +663,7 @@ const waarom = [
      dezelfde opbouw, tegel links en tekst rechts. */
   @media (min-width: 560px) {
     .bigstep {
-      grid-template-columns: 132px 1fr;
+      grid-template-columns: 158px 1fr;
       align-items: center;
       gap: clamp(24px, 3vw, 36px);
     }
@@ -657,10 +673,18 @@ const waarom = [
     position: relative;
     display: grid;
     place-items: center;
-    aspect-ratio: 1;
-    max-width: 132px;
+    aspect-ratio: 3 / 4;
+    max-width: 158px;
     border-radius: 20px;
+    overflow: hidden;
     background: linear-gradient(150deg, rgba(15, 92, 90, 0.1), rgba(15, 92, 90, 0.04));
+  }
+
+  .bigstep__beeld {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
   }
 
   .bigstep__visual :global(svg) {
