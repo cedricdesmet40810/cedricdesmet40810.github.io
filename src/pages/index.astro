@@ -132,6 +132,16 @@ const waarom = [
     t: 'Je data blijft van jou',
     d: 'Vooraf afgesproken welke bestanden meespelen en wie erbij kan. Volgens de GDPR, waar het kan op Europese servers.',
   },
+  {
+    icon: 'chat',
+    t: 'Geautomatiseerd, maar persoonlijk',
+    d: 'Het werk draait vanzelf, maar je spreekt nog altijd de mensen die het gebouwd hebben. Geen ticketnummer, geen helpdesk.',
+  },
+  {
+    icon: 'check',
+    t: 'We zeggen het als je ons niet nodig hebt',
+    d: 'Volstaat een gewoon AI-abonnement voor wat je wil doen? Dan zeggen we dat, in plaats van je iets te verkopen.',
+  },
 ];
 
 // Illustratieve werkstromen, in de stijl van hoe we ze echt bouwen.
@@ -372,7 +382,7 @@ const stromen = [
         <h2>Waarom kiezen voor ons?</h2>
       </div>
 
-      <div class="grid grid--4 reveal">
+      <div class="grid grid--3 reveal">
         {
           waarom.map((w) => (
             <article class="card waarom">
