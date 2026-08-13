@@ -327,6 +327,15 @@ const stromen = [
             <span class="arrow" aria-hidden="true">→</span>
           </a>
         </div>
+        <img
+          class="succes__shot"
+          src="/tobseen-app.png"
+          width="1440"
+          height="1080"
+          loading="lazy"
+          decoding="async"
+          alt="De rapportage-app van To B-Seen op een telefoon: de observaties van een inspectieronde onder elkaar, met ernaast hoe AI een losse notitie uitschrijft tot een zin in het verslag."
+        />
       </article>
     </div>
   </section>
@@ -746,7 +755,23 @@ const stromen = [
   }
 
   .succes {
+    display: grid;
+    gap: clamp(28px, 4vw, 48px);
+    align-items: center;
     padding: clamp(30px, 4vw, 52px);
+  }
+
+  @media (min-width: 880px) {
+    .succes {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* De mockup heeft zelf al een witte rand, dus geen kader eromheen. */
+  .succes__shot {
+    display: block;
+    width: 100%;
+    height: auto;
   }
 
   .succes__klant {
