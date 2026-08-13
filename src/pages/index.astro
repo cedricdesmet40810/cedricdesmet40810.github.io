@@ -269,9 +269,20 @@ const waarom = [
   <!-- ========================================================== stappen -->
   <section class="section band-sand">
     <div class="container">
-      <div class="section-head section-head--center reveal">
-        <p class="eyebrow eyebrow--center">Hoe we werken</p>
-        <h2 class="stappen__kop">Auxilia AI zorgt ervoor dat AI ten dienste staat van uw hele organisatie.</h2>
+      <div class="stappen__intro reveal">
+        <div class="section-head">
+          <p class="eyebrow">Hoe we werken</p>
+          <h2 class="stappen__kop">Auxilia AI zorgt ervoor dat AI ten dienste staat van uw hele organisatie.</h2>
+        </div>
+        <img
+          class="stappen__beeld"
+          src="/aan-de-slag.jpg"
+          width="672"
+          height="900"
+          loading="lazy"
+          decoding="async"
+          alt=""
+        />
       </div>
 
       <ol class="bigsteps">
@@ -601,6 +612,32 @@ const waarom = [
     width: 18px;
     height: 18px;
     flex: none;
+  }
+
+  /* De illustratie loopt mee met de sectiekop, niet met de stappen zelf. */
+  .stappen__intro {
+    display: grid;
+    gap: clamp(24px, 4vw, 48px);
+    align-items: center;
+  }
+
+  @media (min-width: 880px) {
+    .stappen__intro {
+      grid-template-columns: 1.4fr 1fr;
+    }
+  }
+
+  .stappen__intro .section-head {
+    margin-bottom: 0;
+  }
+
+  .stappen__beeld {
+    display: block;
+    width: 100%;
+    max-width: 340px;
+    height: auto;
+    margin-inline: auto;
+    border-radius: var(--r);
   }
 
   /* ---------------------------------------------------------- bigsteps --- */
