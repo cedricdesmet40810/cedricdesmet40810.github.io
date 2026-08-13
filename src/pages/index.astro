@@ -54,14 +54,6 @@ const servicesSchema = SERVICES.map((s) => ({
   url: `${SITE.url}/oplossingen/${s.slug}/`,
 }));
 
-// De regels die oplichten terwijl je scrolt.
-const poem = [
-  'AI can transform the way you work.',
-  'So why does work still feel the same?',
-  'Because knowing AI exists isn’t the same as knowing how to use it.',
-  'The best ideas live with the few people who figured it out.',
-  'Everyone else keeps doing things the old way.',
-];
 
 const stappen = [
   {
@@ -271,15 +263,6 @@ const waarom = [
           Billit
         </li>
       </ul>
-    </div>
-  </section>
-
-  <!-- ================================================== probleem-gedicht -->
-  <section class="poemband band-paper">
-    <div class="container">
-      <div class="poem" data-poem>
-        {poem.map((line) => <p class="poem__line">{line}</p>)}
-      </div>
     </div>
   </section>
 
@@ -620,50 +603,6 @@ const waarom = [
     flex: none;
   }
 
-  /* ------------------------------------------------------------- poem --- */
-
-  /* Het gedicht krijgt het volledige scherm: één beeldvullende adempauze. */
-  .poemband {
-    display: grid;
-    align-items: center;
-    min-height: 100svh;
-    padding-block: clamp(6rem, 9vw, 9rem);
-  }
-
-  .poem {
-    max-width: none;
-    text-align: center;
-  }
-
-  .poem__line {
-    font-family: var(--font-display);
-    font-weight: 500;
-    letter-spacing: -0.022em;
-    font-size: clamp(1.8rem, 4vw, 3.3rem);
-    line-height: 1.22;
-    max-width: 26ch;
-    margin: 0 auto clamp(1.1rem, 2vw, 1.9rem);
-    color: var(--ink);
-    transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
-  }
-
-  /* dimmen gebeurt pas als JS meedoet; zonder JS is alles gewoon leesbaar */
-  [data-poem].is-enhanced .poem__line {
-    opacity: 0.12;
-    transform: translateY(12px);
-  }
-
-  [data-poem].is-enhanced .poem__line.is-lit {
-    opacity: 1;
-    transform: none;
-  }
-
-  /* Een volle zin als kop: iets kleiner dan de standaard h2, anders duwt hij
-     de sectie uit balans. */
-  .stappen__kop {
-    font-size: clamp(2rem, 4.4vw, 3.5rem);
-  }
-
   /* ---------------------------------------------------------- bigsteps --- */
 
   .bigsteps {
@@ -952,25 +891,3 @@ const waarom = [
   }
 </style>
 
-<script>
-  // Het probleem-gedicht licht regel per regel op tijdens het scrollen.
-  // Zonder JS of met reduced-motion blijft alles gewoon zichtbaar.
-  const poemEl = document.querySelector('[data-poem]');
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if (poemEl && !reduced && 'IntersectionObserver' in window) {
-    poemEl.classList.add('is-enhanced');
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-lit');
-            io.unobserve(entry.target);
-          }
-        });
-      },
-      { rootMargin: '0px 0px -30% 0px', threshold: 0.5 }
-    );
-    poemEl.querySelectorAll('.poem__line').forEach((el) => io.observe(el));
-  }
-</script>
