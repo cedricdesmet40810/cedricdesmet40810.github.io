@@ -260,7 +260,7 @@ const waarom = [
 
         <ol class="bigsteps">
           {
-            stappen.map((s, i) => (
+            stappen.map((s) => (
               <li class="bigstep reveal">
                 <div class="bigstep__visual" aria-hidden="true">
                   {s.beeld ? (
@@ -276,7 +276,6 @@ const waarom = [
                   ) : (
                     <StepScene name={s.scene} />
                   )}
-                  <span class="bigstep__n">{String(i + 1).padStart(2, '0')}</span>
                 </div>
                 <div class="bigstep__body">
                   <h3>{s.t}</h3>
@@ -692,15 +691,6 @@ const waarom = [
     height: 100%;
     display: block;
     padding: 14px;
-  }
-
-  .bigstep__n {
-    position: absolute;
-    top: 14px;
-    left: 18px;
-    font-family: var(--font-display);
-    font-size: 1.05rem;
-    color: var(--ink-faint);
   }
 
   .bigstep__body h3 {
