@@ -144,33 +144,6 @@ const waarom = [
   },
 ];
 
-// Illustratieve werkstromen, in de stijl van hoe we ze echt bouwen.
-const stromen = [
-  {
-    icon: 'euro',
-    label: 'Offertes',
-    in_: '“Kunnen jullie een prijs maken voor 24 ramen, levering eind mei?”',
-    uit: 'Een offerte in jullie huisstijl, met prijzen uit je eigen lijst. Jij kijkt na en verstuurt.',
-  },
-  {
-    icon: 'mail',
-    label: 'Mailbox',
-    in_: 'Veertien nieuwe mails, alles door elkaar: prijsvragen, facturen, een klacht.',
-    uit: 'Gesorteerd op wat dringend is, met per mail een voorstel van antwoord klaar.',
-  },
-  {
-    icon: 'app',
-    label: 'Verslagen',
-    in_: 'Foto’s, notities en bevindingen van op de werf of het event.',
-    uit: 'Een afgewerkt verslag in jullie sjabloon. Zo draait het vandaag bij To B-Seen.',
-  },
-  {
-    icon: 'chart',
-    label: 'Maandcijfers',
-    in_: 'Omzet in het boekhoudpakket, orders in de webshop, uren in Excel.',
-    uit: 'Eén rapport, elke eerste van de maand, zonder dat iemand het moet samenstellen.',
-  },
-];
 ---
 
 <BaseLayout
@@ -466,47 +439,6 @@ const stromen = [
           <span class="arrow" aria-hidden="true">→</span>
         </a>
       </article>
-    </div>
-  </section>
-
-  <!-- ======================================================= werkstromen -->
-  <section class="section band-sand-deep">
-    <div class="container">
-      <div class="section-head reveal">
-        <p class="eyebrow">In de praktijk</p>
-        <h2>Wat er binnenkomt, en wat eruit komt</h2>
-        <p class="lead">
-          Vier werkstromen zoals we ze bouwen. Bij jou draait het op je eigen
-          prijzen, sjablonen en systemen.
-        </p>
-      </div>
-
-      <div class="grid grid--2 reveal">
-        {
-          stromen.map((w) => (
-            <article class="stroom card">
-              <p class="stroom__label">
-                <Icon name={w.icon} size={18} />
-                {w.label}
-              </p>
-              <div class="stroom__flow">
-                <p class="stroom__in">{w.in_}</p>
-                <span class="stroom__pijl" aria-hidden="true">
-                  <Icon name="arrow" size={18} />
-                </span>
-                <p class="stroom__uit">{w.uit}</p>
-              </div>
-            </article>
-          ))
-        }
-      </div>
-
-      <p class="stromen__vraag reveal">
-        Kunnen we zo iets voor jou bouwen? Dat weten we na één gesprek.
-      </p>
-      <p class="stromen__noot reveal">
-        Illustratieve voorbeelden, geen echte klantdata.
-      </p>
     </div>
   </section>
 
@@ -963,75 +895,6 @@ const stromen = [
   .waarom__titel {
     font-size: 1.15rem;
     margin-bottom: 10px;
-  }
-
-  /* ------------------------------------------------------- werkstromen --- */
-
-  .stroom__label {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    font-size: 0.82rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--teal);
-    margin-bottom: 20px;
-  }
-
-  .stroom__label :global(svg) {
-    flex: none;
-  }
-
-  .stroom__flow {
-    display: grid;
-    gap: 14px;
-  }
-
-  .stroom__in {
-    margin: 0;
-    padding: 16px 18px;
-    border-radius: 14px;
-    background: var(--sand-deep);
-    color: var(--ink-soft);
-    font-size: 0.98rem;
-  }
-
-  .stroom__pijl {
-    display: grid;
-    place-items: center;
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    background: var(--clay);
-    color: #fff;
-    transform: rotate(90deg);
-    margin-inline: auto;
-  }
-
-  .stroom__uit {
-    margin: 0;
-    padding: 16px 18px;
-    border-radius: 14px;
-    background: rgba(15, 92, 90, 0.06);
-    border: 1px solid rgba(15, 92, 90, 0.16);
-    color: var(--ink);
-    font-size: 0.98rem;
-    font-weight: 500;
-  }
-
-  .stromen__vraag {
-    margin-top: 36px;
-    font-family: var(--font-display);
-    font-size: clamp(1.2rem, 1.8vw, 1.45rem);
-    line-height: 1.35;
-    color: var(--ink);
-  }
-
-  .stromen__noot {
-    margin-top: 12px;
-    font-size: 0.88rem;
-    color: var(--ink-faint);
   }
 
   /* ------------------------------------------------------------- slot --- */
