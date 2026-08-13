@@ -147,64 +147,32 @@ const waarom = [
   <!-- ====================================================== hero (teal) -->
   <section class="hero band-teal">
     <div class="container hero__inner">
-      <h1>Meer tijd voor het echte werk</h1>
-      <p class="hero__lead">
-        Papierwerk slorpt je dagen op. Auxilia bouwt AI en apps op maat die
-        het overnemen, in de software die je al gebruikt, met je team aan het
-        stuur.
-      </p>
-      <div class="btn-row hero__actions">
-        <a href={SITE.bookingUrl || '/contact/'} class="btn btn--primary btn--xl">
-          Plan 30 minuten
-          <span class="arrow" aria-hidden="true">→</span>
-        </a>
+      <div class="hero__tekst">
+        <h1>Meer tijd voor het echte werk</h1>
+        <p class="hero__lead">
+          Papierwerk slorpt je dagen op. Auxilia bouwt AI en apps op maat die
+          het overnemen, in de software die je al gebruikt, met je team aan het
+          stuur.
+        </p>
+        <div class="btn-row hero__actions">
+          <a href={SITE.bookingUrl || '/contact/'} class="btn btn--primary btn--xl">
+            Plan 30 minuten
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+        <p class="hero__sub">Vaste prijs · vaste deadline · je data blijft van jou</p>
       </div>
-      <p class="hero__sub">Vaste prijs · vaste deadline · je data blijft van jou</p>
-    </div>
 
-    <!-- De Kempen bij valavond: heuvels, dennen en een lage klei-zon. -->
-    <svg
-      class="hero__horizon"
-      viewBox="0 0 1440 300"
-      preserveAspectRatio="xMidYMax slice"
-      aria-hidden="true"
-    >
-      <circle cx="1080" cy="170" r="72" fill="#D2691E" opacity="0.9" />
-      <circle cx="1080" cy="170" r="110" fill="#D2691E" opacity="0.12" />
-      <!-- verre heuvelrug -->
-      <path
-        d="M-10 232 Q 220 200 480 222 T 940 214 T 1450 226 L1450 300 L-10 300 Z"
-        fill="rgba(11,69,67,0.4)"
+      <img
+        class="hero__beeld"
+        src="/hero-thuiswerk.jpg"
+        width="1400"
+        height="781"
+        fetchpriority="high"
+        decoding="async"
+        alt=""
       />
-      <!-- dennen op de rug -->
-      <g
-        fill="none"
-        stroke="rgba(250,247,242,0.35)"
-        stroke-width="2.2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path d="M150 224 l17 -38 l17 38 m-25 -20 l8 -20 l8 20 m-8 20 v14" />
-        <path d="M205 228 l13 -28 l13 28 m-19 -15 l6 -15 l6 15 m-6 15 v11" />
-        <path d="M248 226 l10 -22 l10 22 m-15 -11 l5 -13 l5 13 m-5 11 v9" />
-        <path d="M620 220 l15 -33 l15 33 m-22 -17 l7 -18 l7 18 m-7 17 v12" />
-        <path d="M668 224 l11 -24 l11 24 m-16 -12 l5 -14 l5 14 m-5 12 v10" />
-        <path d="M860 218 l19 -42 l19 42 m-28 -22 l9 -22 l9 22 m-9 22 v15" />
-        <path d="M920 222 l14 -30 l14 30 m-21 -16 l7 -16 l7 16 m-7 16 v12" />
-        <path d="M1280 224 l16 -35 l16 35 m-24 -18 l8 -19 l8 19 m-8 18 v13" />
-        <path d="M1330 228 l11 -24 l11 24 m-16 -12 l5 -13 l5 13 m-5 12 v10" />
-      </g>
-      <!-- veldlijnen -->
-      <g fill="none" stroke="rgba(250,247,242,0.14)" stroke-width="1.6" stroke-linecap="round">
-        <path d="M-10 258 Q 400 244 900 254 T 1450 250" />
-        <path d="M-10 276 Q 500 264 1000 272 T 1450 268" />
-      </g>
-      <!-- voorgrond -->
-      <path
-        d="M-10 300 L-10 250 Q 340 232 760 246 T 1450 248 L1450 300 Z"
-        fill="rgba(11,69,67,0.75)"
-      />
-    </svg>
+    </div>
   </section>
 
   <!-- ==================================================== integraties -->
@@ -504,45 +472,43 @@ const waarom = [
     overflow: hidden;
     /* de donkere header loopt visueel door in het hero */
     margin-top: -78px;
-    padding-top: calc(78px + clamp(6.5rem, 11vw, 11rem));
-    padding-bottom: clamp(13rem, 20vw, 19rem);
-    /* Kantoorfoto achter een teal-sluier: licht en rustig, het merk draagt. */
-    background:
-      linear-gradient(
-        180deg,
-        rgba(11, 69, 67, 0.94) 0%,
-        rgba(11, 69, 67, 0.86) 40%,
-        rgba(15, 92, 90, 0.74) 68%,
-        rgba(11, 69, 67, 0.92) 100%
-      ),
-      url('/hero-kantoor.jpg') center 70% / cover no-repeat,
-      var(--teal);
+    padding-top: calc(78px + clamp(3.5rem, 6vw, 6rem));
+    padding-bottom: clamp(3.5rem, 6vw, 6rem);
+    background: var(--teal);
   }
 
   .hero__inner {
     position: relative;
     z-index: 1;
-    text-align: center;
-    max-width: 940px;
+    display: grid;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: center;
+    max-width: 1180px;
+  }
+
+  /* Tekst links, beeld rechts. Het beeld krijgt iets meer ruimte dan de
+     tekst, want de figuur zit midden in het kader. */
+  @media (min-width: 900px) {
+    .hero__inner {
+      grid-template-columns: 1fr 1.05fr;
+    }
   }
 
   .hero h1 {
-    font-size: clamp(3rem, 7.6vw, 6.4rem);
-    max-width: 16ch;
-    margin-inline: auto;
+    font-size: clamp(2.6rem, 5.4vw, 4.4rem);
+    max-width: 13ch;
   }
 
   .hero__lead {
-    font-size: clamp(1.2rem, 1.9vw, 1.5rem);
+    font-size: clamp(1.1rem, 1.5vw, 1.3rem);
     line-height: 1.55;
     color: rgba(250, 247, 242, 0.8);
-    max-width: 46ch;
-    margin: 28px auto 0;
+    max-width: 44ch;
+    margin: 24px 0 0;
   }
 
   .hero__actions {
-    justify-content: center;
-    margin-top: 44px;
+    margin-top: 36px;
   }
 
   .btn--xl {
@@ -551,19 +517,18 @@ const waarom = [
   }
 
   .hero__sub {
-    margin: 22px auto 0;
+    margin: 20px 0 0;
     font-size: 0.9rem;
     letter-spacing: 0.04em;
     color: rgba(250, 247, 242, 0.75);
     max-width: none;
   }
 
-  .hero__horizon {
-    position: absolute;
-    inset: auto 0 0;
-    width: 100%;
-    height: clamp(160px, 22vw, 300px);
+  .hero__beeld {
     display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--r-lg);
   }
 
   /* ------------------------------------------------------------ strip --- */
