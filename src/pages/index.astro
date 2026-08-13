@@ -110,6 +110,30 @@ const producten = [
   },
 ];
 
+// Wat ons anders maakt dan een gewoon IT-bureau of een AI-abonnement.
+const waarom = [
+  {
+    icon: 'users',
+    t: 'Eén aanspreekpunt',
+    d: 'AI én IT bij dezelfde mensen. Geen leveranciers die naar elkaar wijzen als er iets hapert.',
+  },
+  {
+    icon: 'euro',
+    t: 'Vaste prijs, vaste deadline',
+    d: 'Je weet vooraf wat het kost en wanneer het klaar is. Geen uurtje-factuurtje achteraf.',
+  },
+  {
+    icon: 'plug',
+    t: 'Op je eigen systemen',
+    d: 'Microsoft 365, Odoo, Billit, je eigen mappen. Je hoeft niets te vervangen of opnieuw te leren.',
+  },
+  {
+    icon: 'lock',
+    t: 'Je data blijft van jou',
+    d: 'Vooraf afgesproken welke bestanden meespelen en wie erbij kan. Volgens de GDPR, waar het kan op Europese servers.',
+  },
+];
+
 // Illustratieve werkstromen, in de stijl van hoe we ze echt bouwen.
 const stromen = [
   {
@@ -340,6 +364,30 @@ const stromen = [
     </div>
   </section>
 
+  <!-- =========================================================== waarom -->
+  <section class="section band-paper">
+    <div class="container">
+      <div class="section-head section-head--center reveal">
+        <p class="eyebrow eyebrow--center">Waarom Auxilia</p>
+        <h2>Waarom kiezen voor ons?</h2>
+      </div>
+
+      <div class="grid grid--4 reveal">
+        {
+          waarom.map((w) => (
+            <article class="card waarom">
+              <span class="waarom__icoon" aria-hidden="true">
+                <Icon name={w.icon} size={22} />
+              </span>
+              <h3 class="waarom__titel">{w.t}</h3>
+              <p>{w.d}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
   <!-- ======================================================== producten -->
   <section class="section band-paper">
     <div class="container">
@@ -416,7 +464,7 @@ const stromen = [
     <div class="container">
       <div class="section-head reveal">
         <p class="eyebrow">In de praktijk</p>
-        <h2>Wat krijg je van ons?</h2>
+        <h2>Wat er binnenkomt, en wat eruit komt</h2>
         <p class="lead">
           Vier werkstromen zoals we ze bouwen. Bij jou draait het op je eigen
           prijzen, sjablonen en systemen.
@@ -882,6 +930,29 @@ const stromen = [
   .wacht .btn--secondary:hover {
     border-color: var(--sand);
     background: rgba(250, 247, 242, 0.1);
+  }
+
+  /* ----------------------------------------------------------- waarom --- */
+
+  .waarom {
+    text-align: center;
+  }
+
+  .waarom__icoon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    margin-bottom: 18px;
+    border-radius: 50%;
+    background: var(--clay-soft);
+    color: var(--clay-700);
+  }
+
+  .waarom__titel {
+    font-size: 1.15rem;
+    margin-bottom: 10px;
   }
 
   /* ------------------------------------------------------- werkstromen --- */
