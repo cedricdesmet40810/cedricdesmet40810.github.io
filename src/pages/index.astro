@@ -56,33 +56,33 @@ const servicesSchema = SERVICES.map((s) => ({
 
 // De regels die oplichten terwijl je scrolt.
 const poem = [
-  'ChatGPT staat intussen op ieders telefoon.',
-  'En toch wordt elke offerte nog met de hand gemaakt.',
-  'Elke mail zelf getypt. Elk verslag op vrijdagavond.',
-  'Niet omdat het moet.',
-  'Omdat niemand de tijd had om het anders te bouwen.',
+  'AI can transform the way you work.',
+  'So why does work still feel the same?',
+  'Because knowing AI exists isn’t the same as knowing how to use it.',
+  'The best ideas live with the few people who figured it out.',
+  'Everyone else keeps doing things the old way.',
 ];
 
 const stappen = [
   {
     scene: 'werkvloer',
-    t: 'We beginnen bij jouw werkvloer',
-    d: 'Geen presentatie over AI, maar een halve dag tussen je mensen. We volgen het werk dat zich herhaalt en zetten op papier waar de tijd blijft hangen, met de rekensom erbij.',
+    t: 'We beginnen bij jou op de werkvloer',
+    d: 'We geven geen presentatie over AI, maar we willen identificeren wat je bedrijf eigenlijk doet en wat de core business is. Welke tools je bedrijf gebruikt, en waar AI mogelijks een hulp kan zijn om je dagelijkse taken te versnellen.',
   },
   {
     scene: 'systemen',
-    t: 'We bouwen op wat er al staat',
-    d: 'Je boekhoudpakket, je mailbox en je mappen blijven gewoon staan. We hangen AI aan Microsoft 365, Google Workspace, SharePoint, Odoo of Billit en maken één proces volledig af.',
+    t: 'We bouwen toepassingen op de tools die je al hebt',
+    d: 'Je boekhoudpakket, je mailbox, je tools, je CRM en je mappen blijven gewoon staan. We koppelen AI aan Microsoft 365, Google Workspace, SharePoint, Odoo of Billit en bouwen skills die je dagdagelijkse handelingen nabootsen en versnellen.',
   },
   {
     scene: 'team',
     t: 'We geven het in handen van je team',
-    d: 'Opleiding op jullie eigen dossiers, een handleiding in gewone taal, en een week proefdraaien met echte vragen. Pas als je team er zelf mee weg is, is het af.',
+    d: 'Wij overhandigen de skills en workflows aan jou en je team, en geven uitleg over hoe je ze het beste gebruikt. We tonen waar het waarde heeft om een taak op een vast schema te laten lopen, en waar AI het grote werk doet terwijl iemand van jullie telkens nakijkt.',
   },
   {
     scene: 'buurt',
-    t: 'We blijven in de buurt',
-    d: 'Documenten veranderen, systemen krijgen updates. Wij houden het draaiend, breiden uit wat goed werkt, en nemen desgewenst ook de rest van je IT erbij.',
+    t: 'Wij volgen het proces op en helpen je verder bij onduidelijkheden',
+    d: 'Bedrijven veranderen, nieuwe tools worden geïntroduceerd. Wij houden deze draaiend voor jou en breiden uit wat goed werkt. Zo moet je niemand in huis aannemen op je loonlijst en ben je altijd up-to-date.',
   },
 ];
 
@@ -97,7 +97,7 @@ const producten = [
   {
     vraag: 'Eén proces dat blijft vreten aan je week?',
     naam: 'Bouw',
-    d: 'Een automatisering of een app op maat, werkend opgeleverd op de afgesproken datum, voor het afgesproken bedrag. Zoals de rapportage-app van To B-Seen.',
+    d: 'Een app op maat die AI gebruikt waar dat loont, zoals de rapportage-app van To B-Seen. Werkend opgeleverd op de afgesproken datum, voor het afgesproken bedrag.',
     href: '/oplossingen/apps-op-maat/',
     label: 'Bekijk wat we bouwen',
   },
@@ -148,11 +148,11 @@ const stromen = [
   <!-- ====================================================== hero (teal) -->
   <section class="hero band-teal">
     <div class="container hero__inner">
-      <p class="hero-badge">In gebruik bij To B-Seen</p>
       <h1>Meer tijd voor het echte werk</h1>
       <p class="hero__lead">
-        Papierwerk slorpt je dagen op. Auxilia bouwt AI die het overneemt, in
-        de software die je al gebruikt, met je team aan het stuur.
+        Papierwerk slorpt je dagen op. Auxilia bouwt AI en apps op maat die
+        het overnemen, in de software die je al gebruikt, met je team aan het
+        stuur.
       </p>
       <div class="btn-row hero__actions">
         <a href={SITE.bookingUrl || '/contact/'} class="btn btn--primary btn--xl">
@@ -271,12 +271,7 @@ const stromen = [
   <section class="poemband band-paper">
     <div class="container">
       <div class="poem" data-poem>
-        <h2 class="poem__opener">Iedereen zegt dat je iets met AI moet.</h2>
         {poem.map((line) => <p class="poem__line">{line}</p>)}
-        <p class="poem__kicker">
-          <span aria-hidden="true"></span>
-          Wij hebben daar wél de tijd voor. Het is letterlijk ons vak.
-        </p>
       </div>
     </div>
   </section>
@@ -286,7 +281,7 @@ const stromen = [
     <div class="container">
       <div class="section-head section-head--center reveal">
         <p class="eyebrow eyebrow--center">Hoe we werken</p>
-        <h2>AI die blijft draaien als wij naar huis zijn</h2>
+        <h2 class="stappen__kop">Auxilia AI zorgt ervoor dat AI ten dienste staat van uw hele organisatie.</h2>
       </div>
 
       <ol class="bigsteps">
@@ -305,11 +300,6 @@ const stromen = [
           ))
         }
       </ol>
-
-      <p class="steps__note reveal">
-        Loopt iets niet zoals afgesproken, dan lossen wij dat op. Zonder
-        discussie en zonder kleine lettertjes.
-      </p>
     </div>
   </section>
 
@@ -318,29 +308,24 @@ const stromen = [
     <div class="container">
       <div class="section-head reveal">
         <p class="eyebrow">Succesverhalen</p>
-        <h2>Waar het vandaag al draait</h2>
+        <h2>Kleine KMO’s die we vandaag al hebben geholpen</h2>
       </div>
 
       <!-- Elk afgerond traject krijgt hier zo'n kaart. -->
       <article class="card succes reveal">
         <div class="succes__body">
           <p class="succes__klant">To B-Seen · eventveiligheid</p>
-          <h3>Elk event een verslag, zonder dat iemand ervoor moet blijven zitten</h3>
+          <h3>Elk event een verslag, zonder dat iemand het thuis nog manueel moet typen</h3>
           <p>
-            To B-Seen begeleidt de veiligheid van evenementen. Elk event
-            eindigt in een verslag, en dat opmaken vrat uren. Vandaag rolt
-            het er vanzelf uit.
+            To B-Seen begeleidt de veiligheid van evenementen. Bij elk event
+            doen zij een rondgang en schrijven ze daarover een verslag. Dat
+            verslag werd meestal thuis na de uren geschreven. Vandaag zorgt AI
+            ervoor dat het voor hen klaarstaat.
           </p>
           <a href="/ons-werk/" class="link-arrow">
             Lees het hele verhaal
             <span class="arrow" aria-hidden="true">→</span>
           </a>
-        </div>
-        <div class="succes__stat">
-          <span class="succes__big">1 functie</span>
-          <span class="succes__label">
-            voltijds administratief werk dat er nu vanzelf loopt
-          </span>
         </div>
       </article>
     </div>
@@ -351,7 +336,7 @@ const stromen = [
     <div class="container">
       <div class="section-head section-head--center reveal">
         <p class="eyebrow eyebrow--center">Kies je vertrekpunt</p>
-        <h2>Drie manieren om te starten</h2>
+        <h2>Drie van onze opties</h2>
       </div>
 
       <div class="grid grid--3 reveal">
@@ -545,10 +530,6 @@ const stromen = [
     max-width: 940px;
   }
 
-  .hero-badge {
-    margin: 0 0 34px;
-  }
-
   .hero h1 {
     font-size: clamp(3rem, 7.6vw, 6.4rem);
     max-width: 16ch;
@@ -652,13 +633,6 @@ const stromen = [
     text-align: center;
   }
 
-  .poem__opener {
-    font-size: clamp(2.5rem, 5.6vw, 4.6rem);
-    max-width: 18ch;
-    margin-inline: auto;
-    margin-bottom: clamp(2.2rem, 4vw, 3.4rem);
-  }
-
   .poem__line {
     font-family: var(--font-display);
     font-weight: 500;
@@ -682,27 +656,10 @@ const stromen = [
     transform: none;
   }
 
-  .poem__kicker {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    margin-top: clamp(2.6rem, 4.4vw, 4rem);
-    margin-inline: auto;
-    font-family: var(--font-display);
-    font-size: clamp(1.5rem, 2.8vw, 2.2rem);
-    letter-spacing: -0.02em;
-    line-height: 1.3;
-    color: var(--teal);
-    max-width: 30ch;
-  }
-
-  .poem__kicker span {
-    width: 38px;
-    height: 3px;
-    border-radius: 3px;
-    background: var(--clay);
-    flex: none;
+  /* Een volle zin als kop: iets kleiner dan de standaard h2, anders duwt hij
+     de sectie uit balans. */
+  .stappen__kop {
+    font-size: clamp(2rem, 4.4vw, 3.5rem);
   }
 
   /* ---------------------------------------------------------- bigsteps --- */
@@ -781,38 +738,15 @@ const stromen = [
     margin: 0;
   }
 
-  .steps__note {
-    margin: 48px auto 0;
-    text-align: center;
-    font-family: var(--font-display);
-    font-size: clamp(1.2rem, 1.8vw, 1.45rem);
-    color: var(--ink-soft);
-    max-width: 42ch;
-  }
-
   /* --------------------------------------------------- succesverhalen --- */
 
-  /* De warme popband: klei-zacht, het verhaal voorop, het cijfer als bijrol. */
+  /* De warme popband: klei-zacht, het verhaal voorop. */
   .succesband {
     background: var(--clay-soft);
   }
 
   .succes {
-    display: grid;
-    gap: clamp(28px, 4vw, 56px);
-    align-items: center;
     padding: clamp(30px, 4vw, 52px);
-  }
-
-  @media (min-width: 880px) {
-    .succes {
-      grid-template-columns: 1.5fr 1fr;
-    }
-
-    .succes__stat {
-      border-left: 1px solid var(--line-soft);
-      padding-left: clamp(28px, 4vw, 56px);
-    }
   }
 
   .succes__klant {
@@ -834,24 +768,6 @@ const stromen = [
     color: var(--ink-soft);
     margin-bottom: 22px;
     max-width: 52ch;
-  }
-
-  .succes__big {
-    display: block;
-    font-family: var(--font-display);
-    font-weight: 500;
-    letter-spacing: -0.03em;
-    line-height: 1;
-    font-size: clamp(2.6rem, 5vw, 4rem);
-    color: var(--clay-700);
-  }
-
-  .succes__label {
-    display: block;
-    margin-top: 12px;
-    line-height: 1.55;
-    color: var(--ink-soft);
-    max-width: 24ch;
   }
 
   /* -------------------------------------------------------- producten --- */
