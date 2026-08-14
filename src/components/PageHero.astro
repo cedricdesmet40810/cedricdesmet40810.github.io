@@ -93,30 +93,33 @@ const {
 </section>
 
 <style>
+  /* Zelfde ritme als de hero op de homepage: de donkere header loopt visueel
+     door in de band, en de tekst lijnt links uit. */
   .phero {
     position: relative;
     overflow: hidden;
-    padding-block: clamp(4.5rem, 8vw, 7.5rem) clamp(7rem, 11vw, 10rem);
+    margin-top: -78px;
+    padding-top: calc(78px + clamp(3.5rem, 6vw, 6rem));
+    padding-bottom: clamp(6rem, 9vw, 8rem);
     background:
-      radial-gradient(80rem 36rem at 50% -16rem, rgba(62, 132, 130, 0.5), transparent 60%),
+      radial-gradient(80rem 36rem at 20% -16rem, rgba(62, 132, 130, 0.5), transparent 60%),
       var(--teal);
   }
 
   .phero--compact {
-    padding-block: clamp(3.5rem, 6vw, 5.5rem) clamp(5.5rem, 8vw, 7.5rem);
+    padding-top: calc(78px + clamp(2.75rem, 4.5vw, 4.25rem));
+    padding-bottom: clamp(5rem, 7vw, 6.5rem);
   }
 
   .phero__inner {
     position: relative;
     z-index: 1;
-    text-align: center;
-    max-width: 900px;
+    max-width: 1180px;
   }
 
   .phero__crumbs ol {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 8px;
     list-style: none;
     margin: 0 0 28px;
@@ -145,26 +148,24 @@ const {
   }
 
   .phero h1 {
-    font-size: clamp(2.6rem, 5.8vw, 4.8rem);
-    max-width: 18ch;
-    margin-inline: auto;
+    font-size: clamp(2.6rem, 5.4vw, 4.4rem);
+    max-width: 19ch;
   }
 
   .phero--compact h1 {
-    font-size: clamp(2.3rem, 4.6vw, 3.8rem);
+    font-size: clamp(2.3rem, 4.4vw, 3.6rem);
   }
 
   .phero__lead {
-    font-size: clamp(1.16rem, 1.7vw, 1.4rem);
-    line-height: 1.6;
-    color: rgba(250, 247, 242, 0.78);
-    max-width: 54ch;
-    margin: 24px auto 0;
+    font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+    line-height: 1.55;
+    color: rgba(250, 247, 242, 0.8);
+    max-width: 50ch;
+    margin: 24px 0 0;
   }
 
   .phero__actions {
-    justify-content: center;
-    margin-top: 38px;
+    margin-top: 36px;
   }
 
   .phero__horizon {

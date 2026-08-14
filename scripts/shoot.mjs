@@ -1,7 +1,7 @@
 import { chromium } from 'playwright';
 import { mkdirSync } from 'node:fs';
 
-const OUT = '/private/tmp/claude-501/-Users-cedricdesmet/ed73d84c-529b-4485-89a2-cc4257e8ade9/scratchpad/shots';
+const OUT = process.env.SHOT_OUT || './.shots';
 mkdirSync(OUT, { recursive: true });
 
 const BASE = 'http://localhost:4321';
