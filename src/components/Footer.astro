@@ -8,17 +8,6 @@ const year = new Date().getFullYear();
 
 <footer class="site-footer">
   <div class="container">
-    <!-- Eén grote gedachte, zoals een aftiteling. -->
-    <div class="footer__statement">
-      <p class="statement">
-        Het papierwerk doet zichzelf.<br />Jij doet weer je vak.
-      </p>
-      <a href={SITE.bookingUrl || '/contact/'} class="btn btn--primary">
-        Plan 30 minuten
-        <span class="arrow" aria-hidden="true">→</span>
-      </a>
-    </div>
-
     <div class="footer__top">
       <div class="footer__brand">
         <Logo variant="dark" />
@@ -84,21 +73,6 @@ const year = new Date().getFullYear();
     background: var(--teal-700);
     color: rgba(250, 247, 242, 0.72);
     padding-block: clamp(4.5rem, 8vw, 7.5rem) 2.5rem;
-  }
-
-  .footer__statement {
-    display: grid;
-    gap: 32px;
-    justify-items: start;
-    padding-bottom: clamp(3.5rem, 6vw, 5.5rem);
-    margin-bottom: clamp(3rem, 5vw, 4.5rem);
-    border-bottom: 1px solid rgba(250, 247, 242, 0.14);
-  }
-
-  .footer__statement .statement {
-    color: var(--sand);
-    margin: 0;
-    max-width: 18ch;
   }
 
   .footer__top {
