@@ -15,8 +15,9 @@ const {
   lead,
   /** Korte opsomming in de kaart onder de hero. */
   highlights = [],
-  /** Illustratie naast die kaart. Zonder beeld blijft de kaart volle breedte. */
+  /** 3D-render rechts in de hero. */
   beeld,
+  beeldAlt = '',
   faq = [],
 } = Astro.props;
 
@@ -74,12 +75,14 @@ const faqSchema =
     lead={lead}
     cta={true}
     secondary={{ label: 'Alle oplossingen', href: '/oplossingen/' }}
+    beeld={beeld}
+    beeldAlt={beeldAlt}
   />
 
   {
     highlights.length > 0 && (
       <section class="band-sand svc-kort-band">
-        <div class:list={['container', 'svc-kort-grid', beeld && 'svc-kort-grid--beeld']}>
+        <div class="container svc-kort-grid">
           <aside class="svc-kort">
             <h2 class="svc-kort__title">In het kort</h2>
             <ul class="checklist svc-kort__list">
@@ -91,18 +94,6 @@ const faqSchema =
               ))}
             </ul>
           </aside>
-
-          {beeld && (
-            <img
-              class="svc-beeld"
-              src={beeld}
-              width="478"
-              height="640"
-              loading="lazy"
-              decoding="async"
-              alt=""
-            />
-          )}
         </div>
       </section>
     )
@@ -165,23 +156,6 @@ const faqSchema =
     display: grid;
     gap: clamp(24px, 3vw, 40px);
     align-items: end;
-  }
-
-  /* Alleen splitsen als er echt een beeld is; anders houdt de kaart de
-     volle breedte in plaats van een lege kolom open te laten. */
-  @media (min-width: 900px) {
-    .svc-kort-grid--beeld {
-      grid-template-columns: 1fr 280px;
-    }
-  }
-
-  .svc-beeld {
-    display: block;
-    width: 100%;
-    max-width: 280px;
-    height: auto;
-    margin-inline: auto;
-    border-radius: var(--r);
   }
 
   .svc-kort {

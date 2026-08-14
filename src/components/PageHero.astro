@@ -17,11 +17,21 @@ const {
   secondary = null,
   /** 'compact' voor tekstpagina's zoals privacy. */
   size = 'default',
+  /** 3D-render rechts naast de tekst. Zonder beeld blijft de tekst volle breedte. */
+  beeld,
+  beeldAlt = '',
 } = Astro.props;
 ---
 
-<section class:list={['phero band-teal', size === 'compact' && 'phero--compact']}>
+<section
+  class:list={[
+    'phero band-teal',
+    size === 'compact' && 'phero--compact',
+    beeld && 'phero--beeld',
+  ]}
+>
   <div class="container phero__inner">
+    <div class="phero__tekst">
     {
       crumbs.length > 0 && (
         <nav class="phero__crumbs" aria-label="Kruimelpad">
@@ -61,6 +71,21 @@ const {
             </a>
           )}
         </div>
+      )
+    }
+    </div>
+
+    {
+      beeld && (
+        <img
+          class="phero__beeld"
+          src={beeld}
+          width="1000"
+          height="1340"
+          fetchpriority="high"
+          decoding="async"
+          alt={beeldAlt}
+        />
       )
     }
   </div>
@@ -117,6 +142,33 @@ const {
     max-width: 1180px;
   }
 
+  /* Met beeld: tekst links, render rechts. Het beeld staat hoger in de
+     bronvolgorde dan de horizon, dus het blijft er netjes voor. */
+  @media (min-width: 900px) {
+    .phero--beeld .phero__inner {
+      display: grid;
+      grid-template-columns: 1fr 0.78fr;
+      gap: clamp(32px, 5vw, 64px);
+      align-items: center;
+    }
+  }
+
+  .phero__beeld {
+    display: block;
+    width: 100%;
+    max-width: 380px;
+    height: auto;
+    margin: 40px auto 0;
+    border-radius: var(--r-lg);
+  }
+
+  @media (min-width: 900px) {
+    .phero__beeld {
+      max-width: none;
+      margin: 0;
+    }
+  }
+
   .phero__crumbs ol {
     display: flex;
     flex-wrap: wrap;
@@ -154,6 +206,15 @@ const {
 
   .phero--compact h1 {
     font-size: clamp(2.3rem, 4.4vw, 3.6rem);
+  }
+
+  /* De tekstkolom is smaller zodra er een render naast staat. */
+  .phero--beeld h1 {
+    max-width: 14ch;
+  }
+
+  .phero--beeld .phero__lead {
+    max-width: 44ch;
   }
 
   .phero__lead {
