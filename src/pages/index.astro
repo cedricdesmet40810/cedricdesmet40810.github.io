@@ -388,36 +388,6 @@ const waarom = [
         }
       </div>
 
-      <!-- De vaste partner: breed, want dit is het einddoel. -->
-      <article class="wacht reveal">
-        <div>
-          <p class="product__vraag">Liever iemand die er blijvend op let?</p>
-          <h3 class="product__naam product__naam--light">
-            <span class="product__mark product__mark--light" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="20" height="20">
-                <path
-                  d="M5 14 L12 7.5 L19 14"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.4"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </span>
-            Partner
-          </h3>
-          <p class="wacht__d">
-            Ons vaste partnerschap: wij houden de wacht over je AI én de rest
-            van je IT. Werkplekken, licenties, back-ups, beveiliging en alles
-            wat hapert. Eén nummer, vast maandbedrag.
-          </p>
-        </div>
-        <a href="/oplossingen/it-beheer/" class="btn btn--secondary">
-          Zo werkt het partnerschap
-          <span class="arrow" aria-hidden="true">→</span>
-        </a>
-      </article>
     </div>
   </section>
 
@@ -788,54 +758,6 @@ const waarom = [
   .product__d {
     flex: 1;
     margin-bottom: 22px;
-  }
-
-  .wacht {
-    display: grid;
-    gap: 28px;
-    align-items: center;
-    margin-top: 28px;
-    padding: clamp(30px, 4vw, 52px);
-    border-radius: var(--r-xl);
-    background: var(--teal);
-    color: var(--sand);
-    box-shadow: var(--shadow-lg);
-  }
-
-  @media (min-width: 860px) {
-    .wacht {
-      grid-template-columns: 1fr auto;
-      gap: clamp(32px, 5vw, 64px);
-    }
-  }
-
-  .wacht .product__vraag {
-    color: var(--clay-soft);
-  }
-
-  .product__naam--light {
-    color: var(--sand);
-  }
-
-  .product__mark--light {
-    background: rgba(250, 247, 242, 0.14);
-    color: var(--sand);
-  }
-
-  .wacht__d {
-    color: rgba(250, 247, 242, 0.8);
-    margin: 0;
-    max-width: 58ch;
-  }
-
-  .wacht .btn--secondary {
-    color: var(--sand);
-    border-color: rgba(250, 247, 242, 0.32);
-  }
-
-  .wacht .btn--secondary:hover {
-    border-color: var(--sand);
-    background: rgba(250, 247, 242, 0.1);
   }
 
   /* ----------------------------------------------------------- waarom --- */
