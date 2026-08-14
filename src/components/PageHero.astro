@@ -138,6 +138,25 @@ const {
     padding-bottom: clamp(5rem, 7vw, 6.5rem);
   }
 
+  /* Elke pagina dezelfde bandhoogte, ongeacht hoe lang de kop is of er een
+     render naast staat. Op smalle schermen laten we de hoogte los, want daar
+     stapelt alles en zou een vaste maat alleen gaten opleveren. */
+  @media (min-width: 900px) {
+    .phero {
+      display: flex;
+      align-items: center;
+      min-height: 880px;
+    }
+
+    .phero--compact {
+      min-height: 650px;
+    }
+
+    .phero__inner {
+      width: 100%;
+    }
+  }
+
   .phero__inner {
     position: relative;
     z-index: 1;
@@ -174,7 +193,9 @@ const {
   @media (min-width: 900px) {
     .phero__beeld {
       max-width: none;
-      margin: 0;
+      max-height: 540px;
+      width: auto;
+      margin: 0 0 0 auto;
     }
   }
 
