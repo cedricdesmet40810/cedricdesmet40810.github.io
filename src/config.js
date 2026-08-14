@@ -34,7 +34,6 @@ export const SITE = {
 
 export const NAV = [
   { label: 'Oplossingen', href: '/oplossingen/' },
-  { label: 'Aanpak', href: '/aanpak/' },
   { label: 'Ons werk', href: '/ons-werk/' },
   { label: 'Over ons', href: '/over-ons/' },
   { label: 'Blog', href: '/blog/' },

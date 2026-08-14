@@ -67,7 +67,7 @@ Bij een uurtarief betaal jij voor onze leercurve, en draag jij het risico als
 iets tegenvalt. Dat vinden we een rare verdeling: wij weten beter dan jij hoeveel
 werk het is.
 
-Daarom spreken we een vast bedrag af na [de scan](/aanpak/). Loopt het bouwen uit, dan is dat
+Daarom spreken we een vast bedrag af na [de scan](/#werkwijze). Loopt het bouwen uit, dan is dat
 ons probleem. Dat dwingt ons om vooraf goed te kijken, en het geeft jou een cijfer
 waarmee je kan plannen.
 

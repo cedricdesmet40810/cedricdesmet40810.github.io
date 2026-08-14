@@ -12,13 +12,18 @@ export default defineConfig({
     format: 'directory',
     inlineStylesheets: 'auto',
   },
+  // De aanpak-pagina is opgegaan in de werkwijze-sectie op de homepage.
+  // Oude links en zoekresultaten mogen daar niet op stuklopen.
+  redirects: {
+    '/aanpak/': '/#werkwijze',
+  },
   integrations: [
     sitemap({
       i18n: {
         defaultLocale: 'nl',
         locales: { nl: 'nl-BE' },
       },
-      filter: (page) => !page.includes('/bedankt/'),
+      filter: (page) => !page.includes('/bedankt/') && !page.includes('/aanpak/'),
       serialize(item) {
         const path = new URL(item.url).pathname;
         if (path === '/') item.priority = 1.0;

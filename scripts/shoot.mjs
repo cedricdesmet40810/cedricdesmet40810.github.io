@@ -7,7 +7,7 @@ mkdirSync(OUT, { recursive: true });
 const BASE = 'http://localhost:4321';
 const pages = process.argv[2]
   ? [process.argv[2]]
-  : ['/', '/oplossingen/', '/oplossingen/ai-chatbots/', '/aanpak/', '/over-ons/', '/contact/', '/blog/'];
+  : ['/', '/oplossingen/', '/oplossingen/ai-chatbots/', '/ons-werk/', '/over-ons/', '/contact/', '/blog/'];
 
 const widths = [
   ['desktop', 1440, 900],
