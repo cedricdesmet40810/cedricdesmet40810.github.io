@@ -194,6 +194,15 @@ a:hover {
   padding-block: var(--section-y);
 }
 
+/* De eerste sectie onder een paginakop begint hoger dan een sectie midden in
+   de pagina. De hero geeft al rust; de volle sectiemarge levert daar alleen
+   een lege witte band op voor de eerste regel tekst begint. Pagina's waar een
+   kaart over de hero heen valt hebben hun eigen marge en blijven ongemoeid. */
+.phero + .section,
+.hero + .section {
+  padding-top: clamp(3rem, 4.5vw, 4rem);
+}
+
 .section--tight {
   padding-block: clamp(4rem, 6vw, 6rem);
 }
