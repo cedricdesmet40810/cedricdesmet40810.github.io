@@ -464,6 +464,19 @@ const waarom = [
     background: var(--teal);
   }
 
+  /* Zelfde bandhoogte als de hero op alle andere pagina's. */
+  @media (min-width: 900px) {
+    .hero {
+      display: flex;
+      align-items: center;
+      min-height: 730px;
+    }
+
+    .hero__inner {
+      width: 100%;
+    }
+  }
+
   .hero__inner {
     position: relative;
     z-index: 1;

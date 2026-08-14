@@ -126,16 +126,16 @@ const {
     position: relative;
     overflow: hidden;
     margin-top: -78px;
-    padding-top: calc(78px + clamp(3.5rem, 6vw, 6rem));
-    padding-bottom: clamp(6rem, 9vw, 8rem);
+    padding-top: calc(78px + clamp(2.5rem, 4vw, 3.5rem));
+    padding-bottom: clamp(4rem, 6vw, 5.5rem);
     background:
       radial-gradient(80rem 36rem at 20% -16rem, rgba(62, 132, 130, 0.5), transparent 60%),
       var(--teal);
   }
 
   .phero--compact {
-    padding-top: calc(78px + clamp(2.75rem, 4.5vw, 4.25rem));
-    padding-bottom: clamp(5rem, 7vw, 6.5rem);
+    padding-top: calc(78px + clamp(2.5rem, 4vw, 3.5rem));
+    padding-bottom: clamp(4rem, 6vw, 5.5rem);
   }
 
   /* Elke pagina dezelfde bandhoogte, ongeacht hoe lang de kop is of er een
@@ -145,11 +145,7 @@ const {
     .phero {
       display: flex;
       align-items: center;
-      min-height: 880px;
-    }
-
-    .phero--compact {
-      min-height: 650px;
+      min-height: 730px;
     }
 
     .phero__inner {
@@ -193,7 +189,7 @@ const {
   @media (min-width: 900px) {
     .phero__beeld {
       max-width: none;
-      max-height: 540px;
+      max-height: 430px;
       width: auto;
       margin: 0 0 0 auto;
     }
@@ -236,7 +232,8 @@ const {
 
   /* De tekstkolom is smaller zodra er een render naast staat. */
   .phero--beeld h1 {
-    max-width: 14ch;
+    max-width: 18ch;
+    font-size: clamp(2.4rem, 4.6vw, 3.7rem);
   }
 
   .phero--beeld .phero__lead {
@@ -248,11 +245,11 @@ const {
     line-height: 1.55;
     color: rgba(250, 247, 242, 0.8);
     max-width: 50ch;
-    margin: 24px 0 0;
+    margin: 20px 0 0;
   }
 
   .phero__actions {
-    margin-top: 36px;
+    margin-top: 30px;
   }
 
   .phero__horizon {
