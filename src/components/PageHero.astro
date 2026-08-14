@@ -20,6 +20,8 @@ const {
   /** 3D-render rechts naast de tekst. Zonder beeld blijft de tekst volle breedte. */
   beeld,
   beeldAlt = '',
+  /** Uitgesneden render met alfa: geen kaartje, wel een eigen slagschaduw. */
+  beeldVrij = false,
 } = Astro.props;
 ---
 
@@ -78,7 +80,7 @@ const {
     {
       beeld && (
         <img
-          class="phero__beeld"
+          class:list={['phero__beeld', beeldVrij && 'phero__beeld--vrij']}
           src={beeld}
           width="1000"
           height="1340"
@@ -160,6 +162,13 @@ const {
     height: auto;
     margin: 40px auto 0;
     border-radius: var(--r-lg);
+  }
+
+  /* Uitgesneden render: geen kader, wel een zachte schaduw zodat de figuur
+     niet los op de band zweeft nu de grondschaduw uit het beeld weg is. */
+  .phero__beeld--vrij {
+    border-radius: 0;
+    filter: drop-shadow(0 26px 34px rgba(4, 32, 31, 0.42));
   }
 
   @media (min-width: 900px) {
