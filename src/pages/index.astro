@@ -60,13 +60,13 @@ const stappen = [
     scene: 'werkvloer',
     beeld: '/stap-werkvloer.jpg',
     t: 'We beginnen bij jou op de werkvloer',
-    d: 'We geven geen presentatie over AI, maar we willen identificeren wat je bedrijf eigenlijk doet en wat de core business is. Welke tools je bedrijf gebruikt, en waar AI mogelijks een hulp kan zijn om je dagelijkse taken te versnellen.',
+    d: 'We willen identificeren wat je bedrijf eigenlijk doet en wat de core business is. Welke tools je bedrijf gebruikt, en waar AI mogelijks een hulp kan zijn om je dagelijkse taken te versnellen.',
   },
   {
     scene: 'systemen',
     beeld: '/stap-tools.jpg',
     t: 'We bouwen toepassingen op de tools die je al hebt',
-    d: 'Je boekhoudpakket, je mailbox, je tools, je CRM en je mappen blijven gewoon staan. We koppelen AI aan Microsoft 365, Google Workspace, SharePoint, Odoo of Billit en bouwen skills die je dagdagelijkse handelingen nabootsen en versnellen.',
+    d: 'Je boekhoudpakket, je mailbox, je CRM en je mappen blijven staan waar ze staan. We hangen er AI aan vast en bouwen handelingen na die je team vandaag manueel doet.',
   },
   {
     scene: 'team',
@@ -78,7 +78,7 @@ const stappen = [
     scene: 'buurt',
     beeld: '/stap-opvolgen.jpg',
     t: 'Wij volgen het proces op en helpen je verder bij onduidelijkheden',
-    d: 'Bedrijven veranderen, nieuwe tools worden geïntroduceerd. Wij houden deze draaiend voor jou en breiden uit wat goed werkt. Zo moet je niemand in huis aannemen op je loonlijst en ben je altijd up-to-date.',
+    d: 'Bedrijven veranderen en tools ook. Wij houden het draaiend en bouwen uit wat werkt.',
   },
 ];
 
@@ -86,14 +86,15 @@ const producten = [
   {
     vraag: 'Weet je dat er iets moet, maar niet wat?',
     naam: 'Scan',
-    d: 'We lichten je processen door. Je krijgt een rapport met de kansen, de berekening erbij en een volgorde van aanpak. Het rapport is van jou, ook zonder vervolg.',
+    prijs: '€ 1.450 excl. btw',
+    d: 'We lichten je processen door. Je krijgt een rapport met de kansen, de berekening erbij en een volgorde van aanpak. Het rapport is van jou, ook zonder vervolg. Ga je binnen de drie maanden verder met een traject, dan wordt de scan volledig verrekend.',
     href: '/oplossingen/kostenbesparing/',
     label: 'Hoe de scan werkt',
   },
   {
     vraag: 'Eén proces dat blijft vreten aan je week?',
     naam: 'Bouw',
-    d: 'Een app op maat die AI gebruikt waar dat loont, zoals de rapportage-app van To B-Seen. Werkend opgeleverd op de afgesproken datum, voor het afgesproken bedrag.',
+    d: 'Een app op maat die AI gebruikt waar dat loont. Werkend opgeleverd op de afgesproken datum, voor het afgesproken bedrag.',
     href: '/oplossingen/apps-op-maat/',
     label: 'Bekijk wat we bouwen',
   },
@@ -124,16 +125,6 @@ const waarom = [
     d: 'Microsoft 365, Odoo, Billit, je eigen mappen. Je hoeft niets te vervangen of opnieuw te leren.',
   },
   {
-    icon: 'lock',
-    t: 'Je data blijft van jou',
-    d: 'Vooraf afgesproken welke bestanden meespelen en wie erbij kan. Volgens de GDPR, waar het kan op Europese servers.',
-  },
-  {
-    icon: 'chat',
-    t: 'Geautomatiseerd, maar persoonlijk',
-    d: 'Het werk draait vanzelf, maar je spreekt nog altijd de mensen die het gebouwd hebben.',
-  },
-  {
     icon: 'check',
     t: 'We zeggen het als je ons niet nodig hebt',
     d: 'Volstaat een gewoon AI-abonnement voor wat je wil doen? Dan zeggen we dat, in plaats van je iets te verkopen.',
@@ -152,11 +143,12 @@ const waarom = [
   <section class="hero band-teal">
     <div class="container hero__inner">
       <div class="hero__tekst">
-        <h1>Meer tijd voor het echte werk</h1>
+        <h1>Het papierwerk van je KMO doet zichzelf</h1>
         <p class="hero__lead">
-          Papierwerk slorpt je dagen op. Auxilia bouwt AI en apps op maat die
-          het overnemen, in de software die je al gebruikt, met je team aan het
-          stuur.
+          Offertes opmaken, verslagen schrijven, mails sorteren, gegevens van
+          het ene systeem naar het andere kloppen. Wij bouwen AI en apps op
+          maat die dat overnemen — in de software die je vandaag al gebruikt,
+          met je eigen team aan het stuur.
         </p>
         <div class="btn-row hero__actions">
           <a href={SITE.bookingUrl || '/contact/'} class="btn btn--primary btn--xl">
@@ -235,6 +227,13 @@ const waarom = [
           Billit
         </li>
       </ul>
+      <p class="strip__meer">
+        Staat jouw pakket er niet bij? Meestal kunnen we er toch aan.
+        <a href="/contact/" class="link-arrow">
+          Vraag het even
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </p>
     </div>
   </section>
 
@@ -294,7 +293,7 @@ const waarom = [
     <div class="container">
       <div class="section-head reveal">
         <p class="eyebrow">Succesverhalen</p>
-        <h2>Kleine KMO’s die we vandaag al hebben geholpen</h2>
+        <h2>Wat het opleverde</h2>
       </div>
 
       <!-- Elk afgerond traject krijgt hier zo'n kaart. -->
@@ -378,6 +377,7 @@ const waarom = [
                 </span>
                 {p.naam}
               </h3>
+              {p.prijs && <p class="product__prijs">{p.prijs}</p>}
               <p class="product__d">{p.d}</p>
               <a href={p.href} class="link-arrow">
                 {p.label}
@@ -573,6 +573,18 @@ const waarom = [
     color: var(--ink-soft);
   }
 
+  .strip__meer {
+    flex-basis: 100%;
+    margin: 4px 0 0;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    max-width: none;
+  }
+
+  .strip__meer .link-arrow {
+    margin-left: 6px;
+  }
+
   .strip__logo {
     width: 18px;
     height: 18px;
@@ -755,6 +767,13 @@ const waarom = [
     gap: 12px;
     font-size: clamp(1.6rem, 2.4vw, 2rem);
     margin-bottom: 12px;
+  }
+
+  .product__prijs {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--teal);
+    margin-bottom: 14px;
   }
 
   .product__mark {

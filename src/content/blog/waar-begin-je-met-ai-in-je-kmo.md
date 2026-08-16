@@ -57,9 +57,7 @@ keer leren.
 ## Reken het vooraf door
 
 Voor je iets bouwt, maak de rekensom. Hoe vaak gebeurt het, hoe lang duurt het
-nu, hoe lang zou het daarna duren. Vermenigvuldig dat met je eigen uurkost. Hoe
-je die som precies maakt, staat in
-[wat kost AI voor een KMO](/blog/wat-kost-ai-voor-een-kmo/).
+nu, hoe lang zou het daarna duren. Vermenigvuldig dat met je eigen uurkost.
 
 Komt daar een bedrag uit dat de bouwkost niet ruim overstijgt, doe het dan niet.
 Er is geen schande aan de conclusie dat AI hier niets oplevert. Die conclusie

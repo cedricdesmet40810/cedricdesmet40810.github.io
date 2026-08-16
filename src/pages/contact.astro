@@ -84,6 +84,10 @@ const verloop = [
               <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
             </li>
             <li>
+              <Icon name="phone" size={18} />
+              <a href={`tel:${SITE.phone.replace(/\s+/g, '')}`}>{SITE.phone}</a>
+            </li>
+            <li>
               <Icon name="pin" size={18} />
               <span>{SITE.region}, België</span>
             </li>
