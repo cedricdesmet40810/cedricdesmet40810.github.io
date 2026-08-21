@@ -11,16 +11,17 @@ import { SITE } from '../../config.js';
  */
 
 const geleverd = [
-  'Een rapportage-app op maat, gebouwd rond hun eigen sjabloon',
-  'Inspecties, foto’s en bevindingen lopen in één keer uit op een afgewerkt verslag',
+  'Een rapportage-app op maat, volledig in de branding van To B-Seen',
+  'Foto’s en kernwoorden ter plaatse, de AI schrijft het verslag',
+  'AI die de schrijfstijl van elke expert leert en overneemt',
+  'Een centraal admin-portaal waarin alle verslagen samenkomen',
   'Gekoppeld aan de software die er al stond',
-  'Administratie stap voor stap geautomatiseerd, van klein naar groot',
 ];
 
 const caseSchema = {
   '@type': 'Article',
   '@id': `${SITE.url}/ons-werk/#to-b-seen`,
-  headline: 'To B-Seen: een rapportage-app die een volle functie aan administratie overneemt',
+  headline: 'To B-Seen: een rapportage-app die 2 à 3 uur schrijfwerk per rondgang overneemt',
   author: { '@id': `${SITE.url}/#organization` },
   publisher: { '@id': `${SITE.url}/#organization` },
   about: {
@@ -34,7 +35,7 @@ const caseSchema = {
 <BaseLayout
   title="Ons werk"
   metaTitle="Ons werk: de rapportage-app van To B-Seen"
-  description="Wat Auxilia bouwt en wat het opbrengt. Bij To B-Seen loopt sinds de rapportage-app en de automatisaties een volle functie aan administratief werk vanzelf."
+  description="Wat Auxilia bouwt en wat het opbrengt. Bij To B-Seen staat het verslag klaar zodra de rondgang is afgerond: 2 à 3 uur schrijfwerk per rondgang die terug naar klanten gaat."
   schema={[caseSchema]}
   breadcrumbs={[{ name: 'Ons werk', href: '/ons-werk/' }]}
 >
@@ -53,30 +54,39 @@ const caseSchema = {
     <div class="container">
       <div class="case__kop reveal">
         <p class="eyebrow">To B-Seen · eventveiligheid</p>
-        <h2>Van een avond verslagen typen naar een document dat klaarstaat</h2>
+        <h2>Van uren schrijfwerk na elke rondgang naar een verslag dat klaarstaat</h2>
       </div>
 
       <div class="split split--top">
         <div class="reveal">
           <h3>De situatie</h3>
           <p>
-            To B-Seen begeleidt de veiligheid van evenementen. Elk event
-            eindigt in een verslag: inspecties, foto’s, notities en
-            bevindingen die iemand achteraf moest samenbrengen tot een
-            afgewerkt document. Dat opmaken vrat uren, en het kwam bovenop het
-            werk waarvoor klanten hen eigenlijk bellen.
+            To B-Seen begeleidt de veiligheid van evenementen. Bij elk event
+            hoort een rondgang: ter plaatse notities maken en foto’s nemen,
+            en achteraf nog uren aan de slag om daar een volledig verslag van
+            te maken. Dat schrijfwerk gebeurde meestal ’s avonds of pas dagen
+            later, wanneer de details al minder scherp zijn. En het kwam
+            bovenop het werk waarvoor klanten hen eigenlijk bellen.
           </p>
           <h3>Wat we bouwden</h3>
           <p>
-            Een rapportage-app op maat. Wat op het event wordt vastgelegd,
-            loopt er in één keer uit op een afgewerkt verslag in hun eigen
-            sjabloon. Geen nieuw pakket ernaast: de app hangt aan de software
-            die er al stond.
+            Een rapportage-app op maat, volledig in hun eigen branding. Bij
+            elke stap van de rondgang neemt de expert foto’s en noteert een
+            paar kernwoorden. Meer is niet nodig. De AI schrijft die
+            kernwoorden uit tot volzinnen en bundelt alle stappen tot één
+            gestructureerd verslag in hun eigen sjabloon.
           </p>
           <p>
-            We begonnen bewust klein, bij de verslagen. Pas toen dat draaide
-            en het team ermee weg was, kwamen de volgende automatisaties
-            erbij. Zo groeit het er vandaag nog steeds, stap voor stap.
+            Die AI schrijft niet in een generieke stijl. Hij leert uit
+            eerdere verslagen van dezelfde expert en neemt de woordkeuze en
+            toon van de persoon én het bedrijf over. Voor de lezer is niet te
+            zien dat AI meeschreef.
+          </p>
+          <p>
+            Daarnaast bouwden we een centraal admin-portaal waarin alle
+            verslagen samenkomen. Het team kan ze daar nalezen en bijsturen,
+            handmatig of met AI. Zo verdwijnen verslagen niet langer in
+            mailboxen, losse documenten of verschillende systemen.
           </p>
         </div>
 
@@ -103,16 +113,17 @@ const caseSchema = {
   <section class="section case__cijferband">
     <div class="container case__cijfer reveal">
       <div>
-        <span class="case__big">1 functie</span>
+        <span class="case__big">2 à 3 uur</span>
         <span class="case__label">
-          aan administratief werk dat sindsdien vanzelf loopt
+          minder schrijfwerk per rondgang. Het verslag staat klaar zodra de
+          rondgang is afgerond.
         </span>
       </div>
       <div>
         <p>
-          Administratie die vroeger een volledige functie vulde, doet nu
-          zichzelf. De mensen die er werken, doen weer het werk waarvoor
-          klanten hen bellen.
+          Met meerdere rondgangen per expert loopt dat op weekbasis al snel
+          op tot een volledige werkdag. Die tijd gaat opnieuw naar klanten,
+          in plaats van naar administratie.
         </p>
         <p>
           Het is ons eerste traject, en meteen de lat die we bij elke
