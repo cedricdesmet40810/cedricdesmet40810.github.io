@@ -302,11 +302,19 @@ const waarom = [
           <p class="succes__klant">To B-Seen · eventveiligheid</p>
           <h3>Elk event een verslag, zonder dat iemand het thuis nog manueel moet typen</h3>
           <p>
-            To B-Seen begeleidt de veiligheid van evenementen. Bij elk event
-            doen zij een rondgang en schrijven ze daarover een verslag. Dat
-            verslag werd meestal thuis na de uren geschreven. Vandaag zorgt AI
-            ervoor dat het voor hen klaarstaat.
+            Foto’s en kernwoorden ter plaatse volstaan: AI schrijft het
+            verslag, in de stijl van de expert zelf.
           </p>
+          <div class="succes__cijfers">
+            <div>
+              <strong>2 à 3 uur</strong>
+              <span>bespaard per rondgang</span>
+            </div>
+            <div>
+              <strong>1 werkdag</strong>
+              <span>per week terug naar klanten</span>
+            </div>
+          </div>
           <a href="/ons-werk/" class="link-arrow">
             Lees het hele verhaal
             <span class="arrow" aria-hidden="true">→</span>
@@ -745,6 +753,31 @@ const waarom = [
     color: var(--ink-soft);
     margin-bottom: 22px;
     max-width: 52ch;
+  }
+
+  /* De cijfers als korte popjes: het resultaat in één oogopslag. */
+  .succes__cijfers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(24px, 4vw, 44px);
+    margin-bottom: 26px;
+  }
+
+  .succes__cijfers strong {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    font-size: clamp(1.7rem, 2.8vw, 2.3rem);
+    color: var(--clay-700);
+  }
+
+  .succes__cijfers span {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
   }
 
   /* -------------------------------------------------------- producten --- */
