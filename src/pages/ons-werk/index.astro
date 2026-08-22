@@ -132,8 +132,8 @@ const caseSchema = {
       <div>
         <p>
           Met meerdere rondgangen per expert loopt dat op weekbasis al snel
-          op tot een volledige werkdag. Die tijd gaat opnieuw naar hun
-          klanten, in plaats van naar administratie.
+          op tot <strong>een volledige werkdag</strong>. Die tijd gaat
+          opnieuw naar hun klanten, in plaats van naar administratie.
         </p>
       </div>
     </div>
@@ -266,5 +266,10 @@ const caseSchema = {
   .case__cijfer p {
     color: var(--ink-soft);
     font-size: 1.05rem;
+  }
+
+  .case__cijfer strong {
+    font-weight: 600;
+    color: var(--ink);
   }
 </style>
