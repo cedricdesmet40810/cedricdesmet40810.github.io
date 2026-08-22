@@ -28,10 +28,9 @@ export default defineConfig({
         const path = new URL(item.url).pathname;
         if (path === '/') item.priority = 1.0;
         else if (path.startsWith('/oplossingen/')) item.priority = 0.9;
-        else if (path.startsWith('/blog/')) item.priority = 0.7;
         else if (path === '/privacy/') item.priority = 0.2;
         else item.priority = 0.8;
-        item.changefreq = path.startsWith('/blog') ? 'weekly' : 'monthly';
+        item.changefreq = 'monthly';
         return item;
       },
     }),

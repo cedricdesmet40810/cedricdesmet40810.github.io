@@ -14,20 +14,6 @@ const contactSchema = {
   mainEntity: { '@id': `${SITE.url}/#organization` },
 };
 
-const verloop = [
-  {
-    t: 'Je vertelt waar het vastloopt',
-    d: 'Geen presentatie van onze kant. We willen vooral horen hoe je vandaag werkt en waar de tijd blijft hangen.',
-  },
-  {
-    t: 'We zeggen wat we ervan denken',
-    d: 'Soms is dat een concreet voorstel. Soms is het “daar hebben wij niet de juiste mensen voor”. Dat hoor je dan meteen.',
-  },
-  {
-    t: 'Je beslist zelf wat je ermee doet',
-    d: 'Je krijgt geen offerte in je mailbox die je niet gevraagd hebt, en we bellen je niet drie keer na.',
-  },
-];
 ---
 
 <BaseLayout
@@ -39,8 +25,7 @@ const verloop = [
 >
   <PageHero
     crumbs={[{ name: 'Contact', href: '/contact/' }]}
-    badge="We antwoorden meestal binnen één werkdag"
-    title="Vertel ons waar het kraakt"
+    title="Vertel ons waar wij jou kunnen helpen"
     lead="We luisteren, denken mee en je zit nergens aan vast. Online of bij je op kantoor."
     beeld="/hero-contact.webp"
     beeldVrij={true}
@@ -110,28 +95,6 @@ const verloop = [
     </div>
   </section>
 
-  <!-- ======================================================== verloop -->
-  <section class="section band-teal">
-    <div class="container">
-      <div class="section-head reveal">
-        <p class="eyebrow">Wat je mag verwachten</p>
-        <h2>Hoe zo’n eerste gesprek verloopt</h2>
-      </div>
-      <ol class="numbered reveal">
-        {
-          verloop.map((v, i) => (
-            <li>
-              <span class="numbered__n">{String(i + 1).padStart(2, '0')}</span>
-              <div>
-                <h3>{v.t}</h3>
-                <p>{v.d}</p>
-              </div>
-            </li>
-          ))
-        }
-      </ol>
-    </div>
-  </section>
 </BaseLayout>
 
 <style>

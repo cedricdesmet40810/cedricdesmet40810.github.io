@@ -45,20 +45,10 @@ const year = new Date().getFullYear();
         <ul>
           <li><a href="/ons-werk/">Ons werk</a></li>
           <li><a href="/over-ons/">Over ons</a></li>
-          <li><a href="/blog/">Blog</a></li>
           <li><a href="/contact/">Contact</a></li>
           <li><a href="/privacy/">Privacybeleid</a></li>
         </ul>
       </nav>
-
-      <div class="footer__col">
-        <h2>In gebruik bij</h2>
-        <p class="footer__proof">
-          To B-Seen, eventveiligheid. Verslagen die vroeger uren kostten,
-          staan sinds de automatisering vanzelf klaar.
-          <a href="/ons-werk/">Lees het verhaal</a>
-        </p>
-      </div>
     </div>
 
     <div class="footer__bottom">
@@ -92,7 +82,7 @@ const year = new Date().getFullYear();
 
   @media (min-width: 1000px) {
     .footer__top {
-      grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+      grid-template-columns: 1.6fr 1fr 1fr;
       gap: 32px;
     }
   }
@@ -151,12 +141,6 @@ const year = new Date().getFullYear();
 
   .site-footer a:not(.btn):hover {
     color: #fff;
-  }
-
-  .footer__proof {
-    font-size: 0.95rem;
-    line-height: 1.65;
-    max-width: 30ch;
   }
 
   .footer__bottom {

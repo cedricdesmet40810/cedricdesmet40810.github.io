@@ -3,7 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { SITE } from '../config.js';
 
 /**
  * De portretten zijn bewust nog initialen. Zodra er documentaire foto's zijn
@@ -34,8 +33,7 @@ const team = [
 >
   <PageHero
     crumbs={[{ name: 'Over ons', href: '/over-ons/' }]}
-    badge="Cedric & Kevin · Kempen"
-    title="We gaan je niet wijsmaken dat we een groot bureau zijn"
+    title="Wie er achter Auxilia zit"
     lead="Auxilia, dat zijn Cedric en Kevin. Gestart in 2026, allebei geschoold in software, en met één klant die vandaag al toont wat het oplevert."
   />
 
@@ -133,68 +131,6 @@ const team = [
     </div>
   </section>
 
-  <!-- ===================================================== het bewijs -->
-  <section class="section band-teal">
-    <div class="container">
-      <div class="bewijs reveal">
-        <p class="eyebrow">Het eerste bewijs</p>
-        <h2>Praatjes vullen geen gaatjes, dus kijk naar To B-Seen</h2>
-        <p class="lead">
-          Ons eerste traject draait er elke week mee: een rapportage-app op
-          maat en een administratie die stap voor stap zichzelf doet.
-        </p>
-        <p class="bewijs__body">
-          Voor ons is het meer dan een referentie. Het is de manier van werken
-          die we bij elke volgende klant opnieuw willen waarmaken.
-        </p>
-        <a href="/ons-werk/" class="link-arrow link-arrow--licht">
-          Lees het hele verhaal
-          <span class="arrow" aria-hidden="true">→</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ======================================================== praktisch -->
-  <section class="section band-sand-deep">
-    <div class="container">
-      <div class="section-head reveal">
-        <p class="eyebrow">Praktisch</p>
-        <h2>De gegevens die je op een factuur verwacht</h2>
-      </div>
-      <dl class="feiten reveal">
-        <div>
-          <dt>Vestiging</dt>
-          <dd>{SITE.region}, België</dd>
-        </div>
-        <div>
-          <dt>Werkgebied</dt>
-          <dd>Kempen, provincie Antwerpen en heel Vlaanderen</dd>
-        </div>
-        <div>
-          <dt>Gestart</dt>
-          <dd>2026</dd>
-        </div>
-        <div>
-          <dt>Ondernemingsnummer</dt>
-          <dd>{SITE.companyNumber}</dd>
-        </div>
-        <div>
-          <dt>Btw-nummer</dt>
-          <dd>{SITE.vat}</dd>
-        </div>
-        <div>
-          <dt>E-mail</dt>
-          <dd><a href={`mailto:${SITE.email}`}>{SITE.email}</a></dd>
-        </div>
-        <div>
-          <dt>Talen</dt>
-          <dd>Nederlands en Engels</dd>
-        </div>
-      </dl>
-    </div>
-  </section>
-
   <CtaBand
     eyebrow="Kennismaken"
     title="Kom eens langs met je vraag"
@@ -229,20 +165,6 @@ const team = [
 
   .panel__title {
     margin-bottom: 20px;
-  }
-
-  .bewijs {
-    max-width: 720px;
-  }
-
-  .bewijs__body {
-    color: rgba(250, 247, 242, 0.82);
-  }
-
-  /* De pijltjeslink op de donkere band: zandkleur in plaats van teal. */
-  .link-arrow--licht {
-    color: var(--sand);
-    margin-top: 8px;
   }
 
   /* ----------------------------------------------------------- team --- */
@@ -285,45 +207,5 @@ const team = [
       grid-template-columns: 1fr;
       gap: 18px;
     }
-  }
-
-  /* -------------------------------------------------------- praktisch --- */
-
-  .feiten {
-    display: grid;
-    gap: 0;
-    margin: 0;
-    max-width: 760px;
-  }
-
-  .feiten > div {
-    display: grid;
-    gap: 4px 32px;
-    padding: 18px 0;
-    border-top: 1px solid var(--line);
-  }
-
-  @media (min-width: 620px) {
-    .feiten > div {
-      grid-template-columns: 240px 1fr;
-      align-items: baseline;
-    }
-  }
-
-  .feiten > div:last-child {
-    border-bottom: 1px solid var(--line);
-  }
-
-  .feiten dt {
-    font-size: 0.88rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-  }
-
-  .feiten dd {
-    margin: 0;
-    color: var(--ink);
   }
 </style>

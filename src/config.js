@@ -36,7 +36,6 @@ export const NAV = [
   { label: 'Oplossingen', href: '/oplossingen/' },
   { label: 'Ons werk', href: '/ons-werk/' },
   { label: 'Over ons', href: '/over-ons/' },
-  { label: 'Blog', href: '/blog/' },
   { label: 'Contact', href: '/contact/' },
 ];
 
@@ -48,7 +47,7 @@ export const SERVICES = [
     short: 'AI-chatbots',
     nav: 'Chatbot op je eigen data',
     excerpt:
-      'Een assistent die antwoordt uit jouw documenten, prijzen en procedures in plaats van uit het internet.',
+      'Een assistent die antwoordt uit jouw documenten, prijzen en procedures.',
     icon: 'chat',
     beeld: '/opl-chatbots.jpg',
   },
@@ -58,7 +57,7 @@ export const SERVICES = [
     short: 'Apps op maat',
     nav: 'App op maat',
     excerpt:
-      'Software gebouwd rond hoe jij werkt, in plaats van een pakket waar je je aan aanpast.',
+      'Software gebouwd rond hoe jij werkt, in plaats van een duur pakket waar je je aan moet aanpassen.',
     icon: 'app',
     beeld: '/opl-apps.jpg',
   },
@@ -78,7 +77,7 @@ export const SERVICES = [
     short: 'Kostenbesparing',
     nav: 'Kosten besparen',
     excerpt:
-      'We rekenen door waar AI je geld oplevert, en waar het je alleen maar tijd kost.',
+      'We rekenen uit waar AI je geld en tijd oplevert, die je opnieuw kan besteden aan de verdere uitbouw van je bedrijf.',
     icon: 'chart',
     beeld: '/opl-kosten.jpg',
   },
@@ -88,7 +87,7 @@ export const SERVICES = [
     short: 'IT-beheer',
     nav: 'IT-beheer',
     excerpt:
-      'Eén aanspreekpunt voor je werkplekken, licenties, back-ups en beveiliging.',
+      'Wij zijn jouw aanspreekpunt voor al je softwareproblemen.',
     icon: 'shield',
     beeld: '/opl-it-beheer.jpg',
   },

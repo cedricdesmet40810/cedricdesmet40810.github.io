@@ -12,16 +12,8 @@ const faq = [
     a: 'Het meeste kantoorwerk is lezen en schrijven: offertes opmaken, mails sorteren en beantwoorden, verslagen schrijven, gegevens van het ene systeem naar het andere brengen, vragen beantwoorden uit je eigen documenten. Daar is AI sterk in. Beslissingen nemen, klanten bellen en producten afleveren blijven werk voor mensen.',
   },
   {
-    q: 'Hoe bouwen jullie zoiets?',
-    a: 'We hangen AI aan de software die je al gebruikt: Microsoft 365, Google Workspace, SharePoint, Odoo, Billit. Eerst één proces, van begin tot eind. Pas als dat draait en je team ermee weg is, kijken we naar het volgende.',
-  },
-  {
-    q: 'Wat kunnen we zelf al doen, zonder jullie?',
-    a: 'Meer dan je denkt. Voor losse taken, een mail herschrijven of een tekst samenvatten, volstaat ChatGPT of Copilot. Daar heb je ons niet voor nodig, en dat zeggen we er ook bij. Wij komen in beeld zodra het aan je systemen moet hangen en er elke dag betrouwbaar hetzelfde uit moet komen.',
-  },
-  {
     q: 'Wat kost dat?',
-    a: 'We starten met een korte scan van je processen. Daarna krijg je één vast bedrag voor het hele traject, vooraf. Geen uurtje-factuurtje. Wat het precies wordt, hangt af van hoeveel systemen we moeten aansluiten.',
+    a: 'We starten met een korte scan van je processen. Hiervoor wordt een standaard bedrag aangerekend; de grootte en de hoeveelheid van de processen maakt ons niet uit. Na de identificatie zitten we met jou samen en bekijken we welke processen nuttig zijn om verder uit te werken, en bespreken we de prijs.',
   },
   {
     q: 'Moet ons team technisch zijn?',
@@ -72,7 +64,7 @@ const stappen = [
     scene: 'team',
     beeld: '/stap-team.jpg',
     t: 'We geven het in handen van je team',
-    d: 'Wij overhandigen de skills en workflows aan jou en je team, en geven uitleg over hoe je ze het beste gebruikt. We tonen waar het waarde heeft om een taak op een vast schema te laten lopen, en waar AI het grote werk doet terwijl iemand van jullie telkens nakijkt.',
+    d: 'Wij overhandigen de skills en workflows aan jou en je team, en leren jou hoe je ze het beste gebruikt. We tonen waar het waarde heeft om een taak op een vast schema te laten lopen, en waar AI het repetitieve werk doet terwijl iemand van jullie telkens nakijkt.',
   },
   {
     scene: 'buurt',
@@ -86,13 +78,12 @@ const producten = [
   {
     vraag: 'Weet je dat er iets moet, maar niet wat?',
     naam: 'Scan',
-    prijs: '€ 1.450 excl. btw',
     d: 'We lichten je processen door. Je krijgt een rapport met de kansen, de berekening erbij en een volgorde van aanpak. Het rapport is van jou, ook zonder vervolg. Ga je binnen de drie maanden verder met een traject, dan wordt de scan volledig verrekend.',
     href: '/oplossingen/kostenbesparing/',
     label: 'Hoe de scan werkt',
   },
   {
-    vraag: 'Eén proces dat blijft vreten aan je week?',
+    vraag: 'Eén proces dat je wil aanpakken in je week?',
     naam: 'Bouw',
     d: 'Een app op maat die AI gebruikt waar dat loont. Werkend opgeleverd op de afgesproken datum, voor het afgesproken bedrag.',
     href: '/oplossingen/apps-op-maat/',
@@ -129,6 +120,11 @@ const waarom = [
     t: 'We zeggen het als je ons niet nodig hebt',
     d: 'Volstaat een gewoon AI-abonnement voor wat je wil doen? Dan zeggen we dat, in plaats van je iets te verkopen.',
   },
+  {
+    icon: 'clock',
+    t: 'Er wanneer jij ons nodig hebt',
+    d: 'Gemaakt voor kleine KMO’s: je belt ons rechtstreeks, niet een ticketsysteem. Wij komen langs wanneer het jou past, niet wanneer het ons uitkomt.',
+  },
 ];
 
 ---
@@ -143,12 +139,12 @@ const waarom = [
   <section class="hero band-teal">
     <div class="container hero__inner">
       <div class="hero__tekst">
-        <h1>Het papierwerk van je KMO doet zichzelf</h1>
+        <h1>AI die voor je KMO werkt</h1>
         <p class="hero__lead">
           Offertes opmaken, verslagen schrijven, mails sorteren, gegevens van
-          het ene systeem naar het andere kloppen. Wij bouwen AI en apps op
-          maat die dat overnemen — in de software die je vandaag al gebruikt,
-          met je eigen team aan het stuur.
+          het ene systeem naar het andere sturen. Wij bouwen AI en apps op
+          maat die dat voor jou overnemen, we gebruiken de software die je
+          vandaag al gebruikt, met je eigen team aan het stuur.
         </p>
         <div class="btn-row hero__actions">
           <a href={SITE.bookingUrl || '/contact/'} class="btn btn--primary btn--xl">
@@ -156,7 +152,6 @@ const waarom = [
             <span class="arrow" aria-hidden="true">→</span>
           </a>
         </div>
-        <p class="hero__sub">Vaste prijs · vaste deadline · je data blijft van jou</p>
       </div>
 
       <img
@@ -227,13 +222,6 @@ const waarom = [
           Billit
         </li>
       </ul>
-      <p class="strip__meer">
-        Staat jouw pakket er niet bij? Meestal kunnen we er toch aan.
-        <a href="/contact/" class="link-arrow">
-          Vraag het even
-          <span class="arrow" aria-hidden="true">→</span>
-        </a>
-      </p>
     </div>
   </section>
 
@@ -293,26 +281,26 @@ const waarom = [
     <div class="container">
       <div class="section-head reveal">
         <p class="eyebrow">Succesverhalen</p>
-        <h2>Wat het opleverde</h2>
+        <h2>Waar hebben wij al geholpen?</h2>
       </div>
 
       <!-- Elk afgerond traject krijgt hier zo'n kaart. -->
       <article class="card succes reveal">
         <div class="succes__body">
           <p class="succes__klant">To B-Seen · eventveiligheid</p>
-          <h3>Elk event een verslag, zonder dat iemand het thuis nog manueel moet typen</h3>
+          <h3>Elk event een verslag zonder typen met behulp van AI</h3>
           <p>
             Foto’s en kernwoorden ter plaatse volstaan: AI schrijft het
             verslag, in de stijl van de expert zelf.
           </p>
           <div class="succes__cijfers">
             <div>
-              <strong>2 à 3 uur</strong>
+              <strong>3 uur</strong>
               <span>bespaard per rondgang</span>
             </div>
             <div>
               <strong>1 werkdag</strong>
-              <span>per week terug naar klanten</span>
+              <span>per week terug gespendeerd aan klanten</span>
             </div>
           </div>
           <a href="/ons-werk/" class="link-arrow">
@@ -337,8 +325,7 @@ const waarom = [
   <section class="section band-paper">
     <div class="container">
       <div class="section-head section-head--center reveal">
-        <p class="eyebrow eyebrow--center">Waarom Auxilia</p>
-        <h2>Waarom kiezen voor ons?</h2>
+        <h2>Waarom voor Auxilia kiezen?</h2>
       </div>
 
       <div class="grid grid--3 reveal">
@@ -403,11 +390,14 @@ const waarom = [
   <section class="section band-sand" id="faq">
     <div class="container">
       <div class="section-head reveal">
-        <p class="eyebrow">Veelgestelde vragen</p>
-        <h2>Wat mensen ons als eerste vragen</h2>
+        <h2>Veelgestelde vragen</h2>
         <p class="lead">
-          Staat je vraag er niet bij? De rest beantwoorden we bij een koffie.
+          Staat je vraag er niet bij? De rest beantwoorden we jou bij een koffie.
         </p>
+        <a href="/contact/" class="btn btn--primary faq__cta">
+          Maak een afspraak
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
       </div>
       <div class="reveal">
         <Faq items={faq} />
@@ -419,10 +409,10 @@ const waarom = [
   <section class="section band-teal slot">
     <div class="container">
       <div class="slot__head reveal">
-        <h2 class="statement">Na dertig minuten weet je het</h2>
+        <h2 class="statement">Overtuigd? Plan een afspraak in.</h2>
         <p class="lead">
-          Eén gesprek, online of bij jou op kantoor. Dit neem je sowieso mee
-          naar huis:
+          Nog niet overtuigd? We hebben maar 30 minuten van je tijd nodig om
+          je te overtuigen. Dit neem je sowieso mee naar huis:
         </p>
       </div>
 
@@ -447,14 +437,8 @@ const waarom = [
             Plan 30 minuten
             <span class="arrow" aria-hidden="true">→</span>
           </a>
-          <a href="#werkwijze" class="btn btn--secondary">Lees eerst hoe we werken</a>
         </div>
       </div>
-
-      <p class="slot__data reveal">
-        <Icon name="lock" size={16} />
-        Je data blijft van jou. GDPR en de Europese AI Act, vanaf dag één.
-      </p>
     </div>
   </section>
 </BaseLayout>
@@ -504,7 +488,7 @@ const waarom = [
 
   .hero h1 {
     font-size: clamp(2.6rem, 5.4vw, 4.4rem);
-    max-width: 13ch;
+    max-width: 14ch;
   }
 
   .hero__lead {
@@ -522,14 +506,6 @@ const waarom = [
   .btn--xl {
     padding: 18px 38px;
     font-size: 1.08rem;
-  }
-
-  .hero__sub {
-    margin: 20px 0 0;
-    font-size: 0.9rem;
-    letter-spacing: 0.04em;
-    color: rgba(250, 247, 242, 0.75);
-    max-width: none;
   }
 
   .hero__beeld {
@@ -579,18 +555,6 @@ const waarom = [
     font-family: var(--font-display);
     font-size: 1.12rem;
     color: var(--ink-soft);
-  }
-
-  .strip__meer {
-    flex-basis: 100%;
-    margin: 4px 0 0;
-    font-size: 0.92rem;
-    color: var(--ink-soft);
-    max-width: none;
-  }
-
-  .strip__meer .link-arrow {
-    margin-left: 6px;
   }
 
   .strip__logo {
@@ -825,6 +789,12 @@ const waarom = [
     margin-bottom: 22px;
   }
 
+  /* -------------------------------------------------------------- faq --- */
+
+  .faq__cta {
+    margin-top: 24px;
+  }
+
   /* ----------------------------------------------------------- waarom --- */
 
   .waarom {
@@ -850,6 +820,10 @@ const waarom = [
 
   /* ------------------------------------------------------------- slot --- */
 
+  .slot {
+    padding-block: clamp(4rem, 6vw, 6rem);
+  }
+
   .slot__head {
     text-align: center;
     max-width: 720px;
@@ -857,11 +831,13 @@ const waarom = [
   }
 
   .slot__head .statement {
+    font-size: clamp(1.9rem, 3.6vw, 2.9rem);
     max-width: 20ch;
     margin-inline: auto;
   }
 
   .slot__head .lead {
+    font-size: clamp(1.05rem, 1.4vw, 1.2rem);
     margin: 22px auto 0;
   }
 
@@ -882,24 +858,6 @@ const waarom = [
   .slot__cta {
     display: grid;
     gap: 12px;
-  }
-
-  .slot__data {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin: clamp(3rem, 5vw, 4rem) auto 0;
-    padding-top: 28px;
-    border-top: 1px solid rgba(250, 247, 242, 0.16);
-    font-size: 0.92rem;
-    color: rgba(250, 247, 242, 0.75);
-    max-width: none;
-  }
-
-  .slot__data :global(svg) {
-    color: rgba(250, 247, 242, 0.75);
-    flex: none;
   }
 </style>
 

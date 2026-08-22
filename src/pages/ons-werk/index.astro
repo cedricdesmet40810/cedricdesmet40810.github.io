@@ -21,7 +21,7 @@ const geleverd = [
 const caseSchema = {
   '@type': 'Article',
   '@id': `${SITE.url}/ons-werk/#to-b-seen`,
-  headline: 'To B-Seen: een rapportage-app die 2 à 3 uur schrijfwerk per rondgang overneemt',
+  headline: 'To B-Seen: een rapportage-app die 3 uur schrijfwerk per verslag overneemt',
   author: { '@id': `${SITE.url}/#organization` },
   publisher: { '@id': `${SITE.url}/#organization` },
   about: {
@@ -35,7 +35,7 @@ const caseSchema = {
 <BaseLayout
   title="Ons werk"
   metaTitle="Ons werk: de rapportage-app van To B-Seen"
-  description="Wat Auxilia bouwt en wat het opbrengt. Bij To B-Seen staat het verslag klaar zodra de rondgang is afgerond: een tijdsbesparing van 2 à 3 uur per rondgang."
+  description="Wat Auxilia bouwt en wat het opbrengt. Bij To B-Seen staat het verslag klaar zodra de rondgang is afgerond: 3 uur schrijfwerk per verslag die terug naar klanten gaat."
   schema={[caseSchema]}
   breadcrumbs={[{ name: 'Ons werk', href: '/ons-werk/' }]}
 >
@@ -54,13 +54,7 @@ const caseSchema = {
       <div class="case__kop reveal">
         <div class="case__kop-tekst">
           <p class="eyebrow">To B-Seen · eventveiligheid</p>
-          <h2>Wat hebben we gebouwd?</h2>
-          <p class="case__intro">
-            Voor dit bedrijf ontwikkelden we een app die rondgangen bij
-            klanten van begin tot einde eenvoudiger maakt. Van het vastleggen
-            van observaties op het terrein tot het automatisch opleveren van
-            een volledig verslag.
-          </p>
+          <h2>Van uren schrijfwerk na elke rondgang naar een verslag dat klaarstaat</h2>
         </div>
         <!-- JPG met witte achtergrond; multiply maskeert dat op de witte band.
              Bij de klant een PNG/SVG met transparantie opvragen. -->
@@ -76,53 +70,34 @@ const caseSchema = {
 
       <div class="split split--top">
         <div class="reveal">
-          <h3>Het probleem</h3>
+          <h3>De situatie</h3>
           <p>
-            Wie regelmatig rondgangen uitvoert, kent het proces. Ter plaatse
-            worden notities gemaakt en foto’s genomen, waarna achteraf nog
-            uren nodig zijn om alles te verwerken tot een volledig verslag.
+            To B-Seen begeleidt de veiligheid van evenementen. Bij elk event
+            hoort een rondgang: ter plaatse notities maken en foto’s nemen,
+            en achteraf nog uren aan de slag om daar een volledig verslag van
+            te maken. Dat schrijfwerk gebeurde meestal ’s avonds of pas dagen
+            later, wanneer de details al minder scherp zijn. En het kwam
+            bovenop het werk waarvoor klanten hen eigenlijk bellen.
+          </p>
+          <h3>Wat we bouwden</h3>
+          <p>
+            Een rapportage-app op maat, volledig in hun eigen branding. Bij
+            elke stap van de rondgang neemt de expert foto’s en noteert een
+            paar kernwoorden. Meer is niet nodig. De AI schrijft die
+            kernwoorden uit tot volzinnen en bundelt alle stappen tot één
+            gestructureerd verslag in hun eigen sjabloon.
           </p>
           <p>
-            Dat administratieve werk kost niet alleen veel tijd. Het gebeurt
-            vaak pas ’s avonds of zelfs enkele dagen later, waardoor
-            belangrijke details minder scherp zijn.
-          </p>
-          <h3>De oplossing</h3>
-          <p>
-            Met de app legt de rondgangsexpert alles meteen vast op het
-            moment zelf. Bij elke stap neemt hij of zij foto’s van de
-            situatie en noteert enkele kernwoorden. Meer is niet nodig.
-          </p>
-          <p>
-            De AI doet de rest. Hij zet de kernwoorden om in volwaardige
-            zinnen en bundelt alle stappen tot één compleet en gestructureerd
-            verslag.
-          </p>
-          <p>
-            Daarbij werkt de AI niet met een generieke schrijfstijl. Hij
-            leert uit eerdere verslagen van diezelfde expert en neemt zo de
-            typische woordkeuze en schrijfstijl van de persoon én het bedrijf
-            over. Het resultaat voelt daardoor alsof de expert het verslag
-            zelf heeft geschreven. Voor de lezer is niet zichtbaar dat AI een
-            rol heeft gespeeld.
-          </p>
-          <h3>Volledig op maat</h3>
-          <p>
-            De app werd volledig opgebouwd in de branding van het bedrijf.
-            Daardoor voelt hij aan als een eigen intern product en sluit hij
-            ook naar klanten toe perfect aan bij de professionele uitstraling
-            van het bedrijf.
+            Die AI schrijft niet in een generieke stijl. Hij leert uit
+            eerdere verslagen van dezelfde expert en neemt de woordkeuze en
+            toon van de persoon én het bedrijf over. Voor de lezer is niet te
+            zien dat AI meeschreef.
           </p>
           <p>
             Daarnaast bouwden we een centraal admin-portaal waarin alle
-            verslagen samenkomen. Medewerkers kunnen er hun verslagen
-            raadplegen en waar nodig aanpassen, handmatig of met behulp van
-            AI.
-          </p>
-          <p>
-            Zo heeft het hele team altijd één centraal overzicht en
-            verdwijnen verslagen niet langer in mailboxen, losse documenten
-            of verschillende systemen.
+            verslagen samenkomen. Het team kan ze daar nalezen en bijsturen,
+            handmatig of met AI. Zo verdwijnen verslagen niet langer in
+            mailboxen, losse documenten of verschillende systemen.
           </p>
         </div>
 
@@ -149,23 +124,16 @@ const caseSchema = {
   <section class="section case__cijferband">
     <div class="container case__cijfer reveal">
       <div>
-        <span class="case__big">2 à 3 uur</span>
-        <span class="case__label">tijdsbesparing per rondgang</span>
+        <span class="case__big">3 uur</span>
+        <span class="case__label">
+          per verslag uitgespaard. Het verslag staat klaar voor de agent.
+        </span>
       </div>
       <div>
         <p>
-          Waar na een rondgang vroeger nog uren schrijfwerk volgden, staat
-          het volledige verslag nu klaar zodra de rondgang is afgerond.
-        </p>
-        <p>
-          Voor dit bedrijf betekent dat een tijdsbesparing van
-          <strong>2 à 3 uur per rondgang</strong>. Met meerdere rondgangen
-          per expert loopt dat op weekbasis al snel op tot een volledige
-          werkdag.
-        </p>
-        <p>
-          Die tijd kan opnieuw naar klanten gaan, in plaats van naar
-          administratie.
+          Met meerdere rondgangen per expert loopt dat op weekbasis al snel
+          op tot een volledige werkdag. Die tijd gaat opnieuw naar hun
+          klanten, in plaats van naar administratie.
         </p>
       </div>
     </div>
@@ -240,10 +208,6 @@ const caseSchema = {
     margin-top: 14px;
   }
 
-  .case__intro {
-    margin-top: 14px;
-    color: var(--ink-soft);
-  }
 
   .split h3 {
     font-size: clamp(1.25rem, 1.8vw, 1.5rem);
