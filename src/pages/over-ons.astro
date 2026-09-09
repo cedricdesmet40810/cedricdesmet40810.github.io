@@ -5,7 +5,7 @@ import Icon from '../components/Icon.astro';
 import CtaBand from '../components/CtaBand.astro';
 
 /**
- * De portretten zijn bewust nog initialen. Zodra er documentaire foto's zijn
+ * Portretten zijn bewust nog initialen. Zodra er documentaire foto's zijn
  * (natuurlijk licht, aan het werk, niet poserend), vervang je `initialen`
  * door een <Image>. De rest van de kaart blijft gelijk.
  */
@@ -14,13 +14,31 @@ const team = [
     initialen: 'CD',
     naam: 'Cedric De Smet',
     rol: 'Bouw & implementatie',
-    d: 'Bouwt de apps en automatisaties, en zorgt dat ze blijven draaien nadat iedereen ze vanzelfsprekend is gaan vinden.',
+    d: 'Cedric bouwt wat afgesproken is, en dan nog iets extra zodat het ook over zes maanden nog werkt. Vraag hem hoe iets technisch in elkaar zit en hij legt het uit totdat jij het snapt, niet totdat híj denkt dat je het snapt.',
   },
   {
     initialen: 'KV',
     naam: 'Kevin Vaal',
     rol: 'Proces & opleiding',
-    d: 'Vertaalt hoe je bedrijf werkt naar iets dat je team zelf kan dragen, ook als wij er niet bij zijn.',
+    d: 'Kevin stelt de vraag die niemand stelt: "Maar waarom doen jullie dit eigenlijk zo?" Niet om lastig te zijn, maar omdat het antwoord bijna altijd bepaalt wat er gebouwd moet worden. Hij gaat pas weg als je team het zonder hem kan.',
+  },
+];
+
+const overtuigingen = [
+  {
+    n: '01',
+    titel: 'Groot bureau, kleine aandacht',
+    tekst: 'Hoe groter het bureau, hoe verder de afstand tussen jou en wie het werk doet. Wij blijven klein met opzet.',
+  },
+  {
+    n: '02',
+    titel: 'Opleveren is niet hetzelfde als helpen',
+    tekst: 'Software die niemand gebruikt heeft nul waarde. Pas als je team er zelfstandig mee verder kan, is het project echt klaar.',
+  },
+  {
+    n: '03',
+    titel: 'AI is geen toverspreuk',
+    tekst: 'We gebruiken het dagelijks, maar verkopen het niet als oplossing voor alles. Een goed proces heeft AI nodig als hulp, niet als alibi.',
   },
 ];
 ---
@@ -34,43 +52,33 @@ const team = [
   <PageHero
     crumbs={[{ name: 'Over ons', href: '/over-ons/' }]}
     title="Wie er achter Auxilia zit"
-    lead="Auxilia, dat zijn Cedric en Kevin. Gestart in 2026, allebei geschoold in software, en met één klant die vandaag al toont wat het oplevert."
+    lead="Cedric bouwt. Kevin vertaalt. Samen zijn we Auxilia, gestart in 2026, met één duidelijk idee over hoe IT voor KMO's anders kan."
   />
 
+  <!-- Naam origin -->
   <section class="band-sand naam-band">
     <div class="container">
       <div class="panel intro-card">
-        <p>
-          De naam komt van de hulptroepen die het Romeinse leger kwamen
-          versterken. Ze namen het niet over, ze maakten het sterker.
-        </p>
-        <p>
-          Dat leek ons een juiste naam voor wat we doen: naast je team gaan
-          staan, het saaie werk automatiseren en pas vertrekken als het zonder
-          ons verder kan.
-        </p>
+        <div>
+          <p class="eyebrow">De naam</p>
+          <p class="intro-statement">Auxilia waren de hulptroepen die het Romeinse leger kwamen versterken. Ze namen het niet over: ze maakten het sterker.</p>
+        </div>
+        <div class="intro-tekst">
+          <p>Dat leek ons een juiste naam voor wat we doen: naast je team gaan staan, het saaie werk automatiseren en pas vertrekken als het zonder ons verder kan.</p>
+          <p>Geen externe dienstverlener die je afhankelijk houdt. Een partij die zichzelf overbodig maakt.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================================================== waarom jong -->
+  <!-- Jong bedrijf -->
   <section class="section band-paper">
     <div class="container split split--top">
       <div class="reveal">
         <p class="eyebrow">Waarom dat geen nadeel is</p>
         <h2>Jong bedrijf, en dat merk je aan de goede kant</h2>
         <p>
-          Wie ons belt, krijgt geen accountmanager en geen junior die het
-          dossier erbij neemt. Je krijgt de twee mensen die het ook echt
-          bouwen, met de aandacht die een eerste generatie klanten nu eenmaal
-          krijgt: veel.
-        </p>
-        <p>
-          En omdat we nergens aan vastzitten, geen oude contracten, geen
-          software van tien jaar geleden die we moeten blijven verkopen, bouwen
-          we met wat vandaag het beste werkt. Dit is waar we allebei voor
-          gestudeerd hebben en waar we onze dagen mee vullen. Dat enthousiasme
-          krijg je er gratis bij.
+          Wie ons belt, krijgt geen accountmanager en geen junior die het dossier erbij neemt. Je krijgt de twee mensen die het ook echt bouwen, met de aandacht die een eerste generatie klanten nu eenmaal krijgt: veel.
         </p>
       </div>
       <div class="reveal">
@@ -83,12 +91,7 @@ const team = [
             </li>
             <li>
               <Icon name="check" size={18} />
-              Weinig trajecten tegelijk, dus veel aandacht per klant
-            </li>
-            <li>
-              <Icon name="check" size={18} />
-              Gebouwd met de huidige generatie AI-tools, niet met wat we
-              toevallig in de kast hadden liggen
+              Gebouwd met de huidige generatie AI-tools, niet met wat we toevallig in de kast hadden
             </li>
             <li>
               <Icon name="check" size={18} />
@@ -100,15 +103,37 @@ const team = [
     </div>
   </section>
 
-  <!-- ============================================================ team -->
+  <!-- Mini-manifest -->
   <section class="section band-sand">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Wat wij geloven</p>
+        <h2>Drie dingen die de meeste IT-trajecten doen mislukken</h2>
+      </div>
+      <ol class="numbered reveal">
+        {
+          overtuigingen.map((o) => (
+            <li>
+              <span class="numbered__n">{o.n}</span>
+              <div>
+                <h3>{o.titel}</h3>
+                <p>{o.tekst}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="section band-paper">
     <div class="container">
       <div class="section-head reveal">
         <p class="eyebrow">Wie je krijgt</p>
         <h2>Er zit niemand tussen jou en wie het bouwt</h2>
         <p class="lead">
-          Van het eerste gesprek tot lang na de oplevering praat je met dezelfde
-          twee mensen.
+          Van het eerste gesprek tot lang na de oplevering praat je met dezelfde twee mensen.
         </p>
       </div>
 
@@ -134,7 +159,7 @@ const team = [
   <CtaBand
     eyebrow="Kennismaken"
     title="Kom eens langs met je vraag"
-    text="Of wij komen naar jou, dat rijdt snel genoeg in de Kempen. Vertel wat je doet en waar het kraakt, dan zeggen we wat wij zouden aanpakken."
+    text="Of wij komen naar jou, dat rijdt snel genoeg in de Kempen. Vertel wat je doet en waar het kraakt, dan zeggen we eerlijk wat wij zouden aanpakken."
     secondary={{ label: 'Bekijk de oplossingen', href: '/oplossingen/' }}
   />
 </BaseLayout>
@@ -150,7 +175,8 @@ const team = [
     z-index: 2;
     box-shadow: var(--shadow-lg);
     display: grid;
-    gap: 0 40px;
+    gap: 0 48px;
+    align-items: center;
   }
 
   @media (min-width: 820px) {
@@ -159,7 +185,18 @@ const team = [
     }
   }
 
-  .intro-card p {
+  .intro-statement {
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 2.2vw, 1.9rem);
+    font-weight: 500;
+    letter-spacing: -0.018em;
+    line-height: 1.22;
+    color: var(--ink);
+    margin: 0;
+    max-width: none;
+  }
+
+  .intro-tekst p {
     color: var(--ink-soft);
   }
 
