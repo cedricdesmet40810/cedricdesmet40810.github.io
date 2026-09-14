@@ -13,7 +13,7 @@ const faq = [
   },
   {
     q: 'Wat kost dat?',
-    a: 'We starten met een korte scan van je processen. Daarvoor rekenen we een vast bedrag aan, afgesproken voor we beginnen. Hoe groot je bedrijf is of hoeveel processen je hebt, maakt voor die prijs niets uit. Daarna bekijken we samen welke processen de moeite waard zijn om aan te pakken, en spreken we de prijs af voor de verdere stappen.',
+    a: 'Voor de scan krijg je een offerte op maat. We spreken vooraf af wat we onderzoeken en wat dat kost. Na de scan bekijken we samen welke verbeteringen we uitwerken en maken we daarvoor een aparte offerte.',
   },
   {
     q: 'Moet ons team technisch zijn?',
@@ -240,15 +240,11 @@ const waarom = [
         <div class="succes__body">
           <div class="section-head"><p class="eyebrow">Succesverhalen</p><h2>Waar hebben wij al geholpen?</h2></div>
           <p class="succes__klant">To B-Seen · eventveiligheid</p>
-          <h3>Voor elk event een verslag zonder typen met behulp van AI</h3>
+          <h3>Van foto’s en kernwoorden naar een uitgewerkt verslag</h3>
           <p>Foto’s en kernwoorden ter plaatse volstaan: AI schrijft het verslag, in de stijl van de expert zelf.</p>
           <a href="/ons-werk/" class="btn btn--secondary">Lees het hele verhaal <span class="arrow" aria-hidden="true">↗</span></a>
         </div>
         <div class="succes__visual"><SiteImage class="succes__shot" src="/tobseen-app.png" width="1440" loading="lazy" decoding="async" alt="De rapportage-app van To B-Seen op een telefoon: de observaties van een inspectieronde onder elkaar, met ernaast hoe AI een losse notitie uitschrijft tot een zin in het verslag." /></div>
-        <div class="succes__cijfers">
-          <div><strong>3 uur</strong><span>bespaard per rondgang</span></div>
-          <div><strong>1 werkdag</strong><span>per week terug gespendeerd aan klanten</span></div>
-        </div>
       </article>
     </div>
   </section>
@@ -358,10 +354,6 @@ const waarom = [
   .succes__body > p:not(.succes__klant) { color: #cadcd3; margin-bottom: 32px; }
   .succes__visual { align-self: start; background: #fff; padding: 8px; border-radius: 16px; }
   .succes__shot { width: 100%; height: auto; }
-  .succes__cijfers { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1.12fr; gap: 72px; padding-top: 42px; border-top: 1px solid #ffffff30; }
-  .succes__cijfers > div { display: flex; align-items: center; gap: 28px; }
-  .succes__cijfers strong { color: #efd7b9; font-size: clamp(2.7rem, 4.7vw, 4.25rem); font-weight: 500; letter-spacing: -.055em; line-height: 1; white-space: nowrap; }
-  .succes__cijfers span { max-width: 21ch; font-size: .92rem; color: #cadcd3; }
   .stappen__layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 80px; align-items: start; }
   .stappen__zij { position: sticky; top: 126px; }
   .stappen__kop { font-size: clamp(2rem, 3.2vw, 2.85rem); max-width: 17ch; }
@@ -402,8 +394,7 @@ const waarom = [
     .bigstep__beeld { width: 88px; }
     .why-layout, .faq-layout { gap: 48px; }
     .slot { padding: 44px; }
-    .succes, .succes__cijfers { column-gap: 40px; }
-    .succes__cijfers > div { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .succes { column-gap: 40px; }
   }
   @media (max-width: 899px) {
     .hero { padding-top: 32px; }
@@ -419,7 +410,6 @@ const waarom = [
     .product__visual { height: 220px; margin: 24px 20px; }
     .product__naam { font-size: 1.65rem; }
     .succes { grid-template-columns: 1fr; gap: 32px; }
-    .succes__cijfers { gap: 24px; }
     .stappen__layout { grid-template-columns: 1fr; gap: 40px; }
     .stappen__zij { position: static; display: grid; grid-template-columns: 1fr 180px; gap: 32px; align-items: center; }
     .stappen__zij .section-head { margin-bottom: 0; }
@@ -456,9 +446,6 @@ const waarom = [
     .succes { grid-template-columns: 1fr; }
     .succesband .section-head { margin-bottom: 30px; }
     .succes h3 { font-size: 1.8rem; }
-    .succes__cijfers { grid-template-columns: 1fr 1fr; padding-top: 28px; gap: 20px; }
-    .succes__cijfers strong { font-size: clamp(2rem, 7vw, 2.8rem); }
-    .succes__cijfers span { font-size: .83rem; }
     .stappen__zij { grid-template-columns: 1fr; }
     .stappen__visual { display: none; }
     .stappen__kop { max-width: 18ch; }

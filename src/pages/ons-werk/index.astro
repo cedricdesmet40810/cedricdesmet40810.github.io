@@ -22,7 +22,7 @@ const geleverd = [
 const caseSchema = {
   '@type': 'Article',
   '@id': `${SITE.url}/ons-werk/#to-b-seen`,
-  headline: 'To B-Seen: een rapportage-app die 3 uur schrijfwerk per verslag overneemt',
+  headline: 'To B-Seen: van foto’s en kernwoorden naar een verslag',
   author: { '@id': `${SITE.url}/#organization` },
   publisher: { '@id': `${SITE.url}/#organization` },
   about: {
@@ -36,7 +36,7 @@ const caseSchema = {
 <BaseLayout
   title="Ons werk"
   metaTitle="Ons werk: de rapportage-app van To B-Seen"
-  description="Wat Auxilia bouwt en wat het opbrengt. Bij To B-Seen staat het verslag klaar zodra de rondgang is afgerond: 3 uur schrijfwerk per verslag, tijd die weer naar klanten gaat."
+  description="Een rapportage-app voor To B-Seen: de expert verzamelt foto’s en kernwoorden, waarna AI helpt om het verslag uit te schrijven."
   schema={[caseSchema]}
   breadcrumbs={[{ name: 'Ons werk', href: '/ons-werk/' }]}
 >
@@ -55,7 +55,7 @@ const caseSchema = {
       <div class="case__kop reveal">
         <div class="case__kop-tekst">
           <p class="eyebrow">To B-Seen · eventveiligheid</p>
-          <h2>Van uren schrijfwerk na elke rondgang naar een verslag dat klaarstaat</h2>
+          <h2>Van foto’s en kernwoorden naar een uitgewerkt verslag</h2>
         </div>
         <!-- JPG met witte achtergrond; multiply maskeert dat op de witte band.
              Bij de klant een PNG/SVG met transparantie opvragen. -->
@@ -117,25 +117,6 @@ const caseSchema = {
             </ul>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ====================================================== het resultaat -->
-  <section class="section case__cijferband">
-    <div class="container case__cijfer reveal">
-      <div>
-        <span class="case__big">3 uur</span>
-        <span class="case__label">
-          per verslag uitgespaard. Het verslag staat klaar voor de agent.
-        </span>
-      </div>
-      <div>
-        <p>
-          Met meerdere rondgangen per expert loopt dat op weekbasis al snel
-          op tot <strong>een volledige werkdag</strong>. Die tijd gaat
-          opnieuw naar hun klanten, in plaats van naar administratie.
-        </p>
       </div>
     </div>
   </section>
@@ -225,52 +206,5 @@ const caseSchema = {
 
   .panel__title {
     margin-bottom: 20px;
-  }
-
-  /* --------------------------------------------------------- resultaat --- */
-
-  .case__cijferband {
-    background: var(--clay-soft);
-  }
-
-  .case__cijfer {
-    display: grid;
-    gap: clamp(40px, 5vw, 72px);
-    align-items: center;
-  }
-
-  @media (min-width: 920px) {
-    .case__cijfer {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  .case__big {
-    display: block;
-    font-family: var(--font-display);
-    font-weight: 500;
-    letter-spacing: -0.03em;
-    line-height: 0.95;
-    font-size: clamp(4rem, 9.5vw, 8rem);
-    color: var(--clay-700);
-  }
-
-  .case__label {
-    display: block;
-    margin-top: 20px;
-    font-size: 1.08rem;
-    line-height: 1.6;
-    color: var(--ink-soft);
-    max-width: 40ch;
-  }
-
-  .case__cijfer p {
-    color: var(--ink-soft);
-    font-size: 1.05rem;
-  }
-
-  .case__cijfer strong {
-    font-weight: 600;
-    color: var(--ink);
   }
 </style>
