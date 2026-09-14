@@ -28,12 +28,12 @@ const overtuigingen = [
   {
     n: '01',
     titel: 'Groot bureau, kleine aandacht',
-    tekst: 'Hoe groter het bureau, hoe verder de afstand tussen jou en wie het werk doet. Wij blijven klein met opzet.',
+    tekst: 'Hoe groter het bureau, hoe groter de afstand tussen jou en wie het werk doet. Wij blijven klein met opzet.',
   },
   {
     n: '02',
     titel: 'Opleveren is niet hetzelfde als helpen',
-    tekst: 'Software die niemand gebruikt heeft nul waarde. Pas als je team er zelfstandig mee verder kan, is het project echt klaar.',
+    tekst: 'Software die niemand gebruikt, heeft nul waarde. Pas als je team er zelfstandig mee verder kan, is het project echt klaar.',
   },
   {
     n: '03',
@@ -52,7 +52,7 @@ const overtuigingen = [
   <PageHero
     crumbs={[{ name: 'Over ons', href: '/over-ons/' }]}
     title="Wie er achter Auxilia zit"
-    lead="Cedric bouwt. Kevin vertaalt. Samen zijn we Auxilia, gestart in 2026, met één duidelijk idee over hoe IT voor KMO's anders kan."
+    lead="Cedric bouwt. Kevin vertaalt. Samen zijn we Auxilia, gestart in 2026, met één duidelijk idee over hoe IT voor kmo's anders kan."
   />
 
   <!-- Naam origin -->
@@ -170,12 +170,12 @@ const overtuigingen = [
   }
 
   .intro-card {
-    margin-top: clamp(-4.5rem, -6vw, -3rem);
+    margin-top: -24px;
     position: relative;
     z-index: 2;
-    box-shadow: var(--shadow-lg);
+    box-shadow: none;
     display: grid;
-    gap: 0 48px;
+    gap: 28px 48px;
     align-items: center;
   }
 
@@ -188,13 +188,15 @@ const overtuigingen = [
   .intro-statement {
     font-family: var(--font-display);
     font-size: clamp(1.35rem, 2.2vw, 1.9rem);
-    font-weight: 500;
+    font-weight: 550;
     letter-spacing: -0.018em;
     line-height: 1.22;
     color: var(--ink);
     margin: 0;
     max-width: none;
   }
+
+  .split h2 { margin-bottom: 24px; }
 
   .intro-tekst p {
     color: var(--ink-soft);
@@ -233,8 +235,8 @@ const overtuigingen = [
   .person__rol {
     font-size: 0.88rem;
     font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    letter-spacing: 0;
+    text-transform: none;
     color: var(--teal);
     margin-bottom: 12px;
   }

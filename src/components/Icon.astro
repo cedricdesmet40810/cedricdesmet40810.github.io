@@ -5,7 +5,7 @@
  */
 const { name, size = 24, class: className = '' } = Astro.props;
 
-const paths = {
+const paths: Record<string, string[]> = {
   // vinkje — lijndikte 2, de enige uitzondering
   check: ['M4 12.5 L9 17.5 L20 6.5'],
   arrow: ['M4 12h15', 'M13 6l6 6-6 6'],

@@ -13,7 +13,7 @@ const {
   /** Titel exact zo gebruiken, zonder " · Auxilia" erachter (alleen de homepage). */
   exactTitle = false,
   image = '/og-image.png',
-  imageAlt = 'Auxilia, AI en IT voor KMO’s',
+  imageAlt = 'Auxilia, AI en IT voor kmo’s',
   noindex = false,
   /** Extra schema-objecten die in de @graph komen. */
   schema = [],
@@ -137,7 +137,7 @@ const graph = {
 }
 
 <meta name="author" content={SITE.name} />
-<meta name="theme-color" content="#0F5C5A" />
+<meta name="theme-color" content="#174C46" />
 <link rel="alternate" hreflang="nl-be" href={canonical} />
 <link rel="alternate" hreflang="x-default" href={canonical} />
 
@@ -167,4 +167,4 @@ const graph = {
 <link rel="manifest" href="/site.webmanifest" />
 <link rel="sitemap" href="/sitemap-index.xml" />
 
-<script type="application/ld+json" set:html={JSON.stringify(graph)} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(graph)} />

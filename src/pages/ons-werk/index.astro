@@ -1,4 +1,5 @@
 ---
+import SiteImage from '../../components/SiteImage.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import Icon from '../../components/Icon.astro';
@@ -35,7 +36,7 @@ const caseSchema = {
 <BaseLayout
   title="Ons werk"
   metaTitle="Ons werk: de rapportage-app van To B-Seen"
-  description="Wat Auxilia bouwt en wat het opbrengt. Bij To B-Seen staat het verslag klaar zodra de rondgang is afgerond: 3 uur schrijfwerk per verslag die terug naar klanten gaat."
+  description="Wat Auxilia bouwt en wat het opbrengt. Bij To B-Seen staat het verslag klaar zodra de rondgang is afgerond: 3 uur schrijfwerk per verslag, tijd die weer naar klanten gaat."
   schema={[caseSchema]}
   breadcrumbs={[{ name: 'Ons werk', href: '/ons-werk/' }]}
 >
@@ -43,7 +44,7 @@ const caseSchema = {
     crumbs={[{ name: 'Ons werk', href: '/ons-werk/' }]}
     title="Onze succesverhalen"
     lead="We zijn pas gestart, dus deze pagina telt één traject. We vertellen het liever eerlijk en volledig dan dat we het opblazen. Elk volgend project komt hier bij."
-    beeld="/hero-ons-werk.webp"
+    beeld="/hero-ons-werk-clean.png"
     beeldVrij={true}
     beeldAlt="Illustratie: iemand naast een verslag dat zichzelf invult, met een stapel afgewerkte verslagen"
   />
@@ -59,7 +60,7 @@ const caseSchema = {
         <!-- JPG met witte achtergrond; multiply maskeert dat op de witte band.
              Bij de klant een PNG/SVG met transparantie opvragen. -->
         <a href="https://www.tob-seen.be/" target="_blank" rel="noopener">
-          <img
+          <SiteImage
             src="/tobseen-logo.jpg"
             alt="To B-Seen, safety solutions for events"
             width="190"
@@ -151,7 +152,7 @@ const caseSchema = {
         <p class="eyebrow">Wat dit voor jou betekent</p>
         <h2>Bij jou beginnen we ook bij één proces</h2>
         <p>
-          Niet met een groot, kostelijk plan, maar met één proces dat het
+          Niet met een groot, kostelijk plan, maar met één proces dat de
           meeste tijd van je wegneemt. We bouwen dat volledig naar jouw noden
           en sturen bij tot je tevreden bent.
         </p>

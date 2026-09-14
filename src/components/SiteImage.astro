@@ -1,0 +1,15 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+// Repaired cutouts stay PNG; all other artwork uses responsive WebP variants.
+const images = import.meta.glob<ImageMetadata>('../assets/*', { eager: true, import: 'default' });
+const { src, alt = '', width, height: _height, sizes = '(max-width: 700px) 100vw, 50vw', ...rest } = Astro.props;
+const source = images[`../assets${src}`];
+if (!source) throw new Error(`Unknown site image: ${src}`);
+const losslessCutouts = new Set(['/hero-contact-clean.png', '/hero-ons-werk-clean.png']);
+const outputFormat = losslessCutouts.has(src) ? 'png' : 'webp';
+const displayWidth = Number(width) || source.width;
+const widths = [...new Set([320, 640, 960, 1280, source.width].filter(w => w <= source.width))].sort((a,b) => a-b);
+---
+<Image src={source} alt={alt} width={displayWidth} height={Math.round(displayWidth * source.height / source.width)} widths={widths} sizes={sizes} format={outputFormat} quality={outputFormat === 'png' ? undefined : 82} {...rest} />

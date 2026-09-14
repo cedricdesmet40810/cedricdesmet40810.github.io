@@ -1,257 +1,76 @@
 ---
-/**
- * De donkere paginakop die elke pagina hetzelfde filmische ritme geeft:
- * badge, één grote zin, een korte lead en de Kempen-horizon onderaan.
- */
 import { SITE } from '../config.js';
-
-const {
-  badge,
-  title,
-  lead,
-  /** [{ name, href }] — subtiel kruimelpad boven de badge. */
-  crumbs = [],
-  /** Toon de primaire knop. */
-  cta = false,
-  ctaLabel = 'Plan 30 minuten',
-  secondary = null,
-  /** 'compact' voor tekstpagina's zoals privacy. */
-  size = 'default',
-  /** 3D-render rechts naast de tekst. Zonder beeld blijft de tekst volle breedte. */
-  beeld,
-  beeldAlt = '',
-  /** Uitgesneden render met alfa: geen kaartje, wel een eigen slagschaduw. */
-  beeldVrij = false,
-} = Astro.props;
+import SiteImage from './SiteImage.astro';
+interface Props {
+  title: string;
+  lead?: string;
+  badge?: string;
+  crumbs?: { name: string; href: string }[];
+  cta?: boolean;
+  ctaLabel?: string;
+  secondary?: { label: string; href: string } | null;
+  size?: string;
+  beeld?: string;
+  beeldAlt?: string;
+  beeldVrij?: boolean;
+}
+const { badge, title, lead, crumbs = [], cta = false, ctaLabel = 'Plan 30 minuten', secondary = null, size = 'default', beeld, beeldAlt = '', beeldVrij = false } = Astro.props;
 ---
-
-<section
-  class:list={[
-    'phero band-teal',
-    size === 'compact' && 'phero--compact',
-    beeld && 'phero--beeld',
-  ]}
->
+<section class:list={['phero', size === 'compact' && 'phero--compact', beeld && 'phero--beeld']}>
   <div class="container phero__inner">
     <div class="phero__tekst">
-    {
-      crumbs.length > 0 && (
-        <nav class="phero__crumbs" aria-label="Kruimelpad">
-          <ol>
-            <li>
-              <a href="/">Home</a>
-            </li>
-            {crumbs.map((c, i) => (
-              <li aria-current={i === crumbs.length - 1 ? 'page' : undefined}>
-                {i === crumbs.length - 1 ? c.name : <a href={c.href}>{c.name}</a>}
-              </li>
-            ))}
-          </ol>
-        </nav>
-      )
-    }
-
-    {badge && <p class="hero-badge">{badge}</p>}
-
-    <h1>{title}</h1>
-    {lead && <p class="phero__lead">{lead}</p>}
-
-    {
-      (cta || secondary) && (
-        <div class="btn-row phero__actions">
-          {cta && (
-            <a href={SITE.bookingUrl || '/contact/'} class="btn btn--primary">
-              {ctaLabel}
-              <span class="arrow" aria-hidden="true">
-                →
-              </span>
-            </a>
-          )}
-          {secondary && (
-            <a href={secondary.href} class="btn btn--secondary">
-              {secondary.label}
-            </a>
-          )}
-        </div>
-      )
-    }
+      {crumbs.length > 0 && <nav class="phero__crumbs" aria-label="Kruimelpad"><ol><li><a href="/">Home</a></li>{crumbs.map((c, i) => <li aria-current={i === crumbs.length - 1 ? 'page' : undefined}>{i === crumbs.length - 1 ? c.name : <a href={c.href}>{c.name}</a>}</li>)}</ol></nav>}
+      {badge && <p class="hero-badge">{badge}</p>}
+      <h1>{title}</h1>
+      {lead && <p class="phero__lead">{lead}</p>}
+      {(cta || secondary) && <div class="btn-row phero__actions">
+        {cta && <a href={SITE.bookingUrl || '/contact/'} class="btn btn--primary">{ctaLabel}<span class="arrow" aria-hidden="true">↗</span></a>}
+        {secondary && <a href={secondary.href} class="btn btn--secondary">{secondary.label}</a>}
+      </div>}
     </div>
-
-    {
-      beeld && (
-        <img
-          class:list={['phero__beeld', beeldVrij && 'phero__beeld--vrij']}
-          src={beeld}
-          width="1000"
-          height="1340"
-          fetchpriority="high"
-          decoding="async"
-          alt={beeldAlt}
-        />
-      )
-    }
+    {beeld && <div class:list={['phero__visual', beeldVrij && 'phero__visual--free']}><SiteImage class="phero__beeld" src={beeld} width="1000" fetchpriority="high" loading="eager" decoding="async" alt={beeldAlt} sizes="(max-width: 899px) 80vw, 40vw" /></div>}
   </div>
-
-  <svg
-    class="phero__horizon"
-    viewBox="0 0 1440 150"
-    preserveAspectRatio="xMidYMax slice"
-    aria-hidden="true"
-  >
-    <g
-      fill="none"
-      stroke="rgba(250,247,242,0.3)"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
-      <path d="M-10 128 Q 260 112 560 124 T 1100 120 T 1450 128" />
-    </g>
-    <path
-      d="M-10 150 L-10 132 Q 320 116 740 128 T 1450 132 L1450 150 Z"
-      fill="rgba(11,69,67,0.55)"
-    />
-  </svg>
 </section>
 
 <style>
-  /* Zelfde ritme als de hero op de homepage: de donkere header loopt visueel
-     door in de band, en de tekst lijnt links uit. */
-  .phero {
-    position: relative;
-    overflow: hidden;
-    margin-top: -78px;
-    padding-top: calc(78px + clamp(2.5rem, 4vw, 3.5rem));
-    padding-bottom: clamp(4rem, 6vw, 5.5rem);
-    background:
-      radial-gradient(80rem 36rem at 20% -16rem, rgba(62, 132, 130, 0.5), transparent 60%),
-      var(--teal);
-  }
-
-  .phero--compact {
-    padding-top: calc(78px + clamp(2.5rem, 4vw, 3.5rem));
-    padding-bottom: clamp(4rem, 6vw, 5.5rem);
-  }
-
-  /* Elke pagina dezelfde bandhoogte, ongeacht hoe lang de kop is of er een
-     render naast staat. Op smalle schermen laten we de hoogte los, want daar
-     stapelt alles en zou een vaste maat alleen gaten opleveren. */
+  .phero { padding: 48px 0 96px; background: var(--hero-sage); }
+  .phero__inner { display: grid; gap: 48px; align-items: center; }
+  .phero__tekst { padding: 10px 0; }
+  .phero h1 { max-width: 18ch; font-size: clamp(2.8rem, 5.8vw, 5.2rem); line-height: 1.08; letter-spacing: -.05em; font-weight: 560; }
+  .phero__lead { color: var(--ink-soft); margin: 26px 0 0; max-width: 52ch; font-size: 1.15rem; line-height: 1.7; }
+  .phero__actions { margin-top: 32px; }
+  .phero__crumbs ol { display: flex; flex-wrap: wrap; gap: 9px; list-style: none; padding: 0; margin: 0 0 32px; font-size: .84rem; color: var(--ink-faint); }
+  .phero__crumbs li + li::before { content: '/'; margin-right: 9px; opacity: .6; }
+  .phero__crumbs a { color: var(--ink-soft); text-decoration: none; }
+  .phero__crumbs a:hover { color: var(--clay); }
+  .hero-badge { margin: 0 0 28px; }
+  .phero__visual { background: #f5eee5; border-radius: 100px 20px 20px 20px; overflow: hidden; display: grid; place-items: center; min-width: 0; height: 500px; padding: 14px; }
+  .phero__beeld { width: 100%; height: 100%; max-height: 472px; object-fit: contain; mix-blend-mode: multiply; }
+  .phero__visual--free { background: transparent; border-radius: 0; padding: 24px; }
+  .phero__visual--free .phero__beeld { mix-blend-mode: normal; }
+  .phero--compact { padding-bottom: 72px; }
+  .phero--compact h1 { font-size: clamp(2.8rem, 5.4vw, 4.6rem); }
   @media (min-width: 900px) {
-    .phero {
-      display: flex;
-      align-items: center;
-      min-height: 730px;
-    }
-
-    .phero__inner {
-      width: 100%;
-    }
+    .phero--beeld .phero__inner { grid-template-columns: 1.1fr .9fr; gap: 72px; }
+    .phero--beeld h1 { font-size: clamp(2.8rem, 4.8vw, 4.5rem); }
   }
-
-  .phero__inner {
-    position: relative;
-    z-index: 1;
-    max-width: 1180px;
+  @media (max-width: 1100px) and (min-width: 900px) {
+    .phero--beeld .phero__inner { gap: 40px; }
+    .phero__visual { height: 430px; }
+    .phero__beeld { max-height: 400px; }
   }
-
-  /* Met beeld: tekst links, render rechts. Het beeld staat hoger in de
-     bronvolgorde dan de horizon, dus het blijft er netjes voor. */
-  @media (min-width: 900px) {
-    .phero--beeld .phero__inner {
-      display: grid;
-      grid-template-columns: 1fr 0.78fr;
-      gap: clamp(32px, 5vw, 64px);
-      align-items: center;
-    }
+  @media (max-width: 899px) {
+    .phero { padding: 24px 0 64px; }
+    .phero__visual { height: 380px; max-width: 520px; width: 100%; }
+    .phero__beeld { max-height: 350px; }
+    .phero__lead { font-size: 1.08rem; }
+    .phero h1 { max-width: 17ch; }
   }
-
-  .phero__beeld {
-    display: block;
-    width: 100%;
-    max-width: 380px;
-    height: auto;
-    margin: 40px auto 0;
-    border-radius: var(--r-lg);
-  }
-
-  /* Uitgesneden render: geen kader, wel een zachte schaduw zodat de figuur
-     niet los op de band zweeft nu de grondschaduw uit het beeld weg is. */
-  .phero__beeld--vrij {
-    border-radius: 0;
-    filter: drop-shadow(0 26px 34px rgba(4, 32, 31, 0.42));
-  }
-
-  @media (min-width: 900px) {
-    .phero__beeld {
-      max-width: none;
-      max-height: 430px;
-      width: auto;
-      margin: 0 0 0 auto;
-    }
-  }
-
-  .phero__crumbs ol {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    list-style: none;
-    margin: 0 0 28px;
-    padding: 0;
-    font-size: 0.85rem;
-    color: rgba(250, 247, 242, 0.75);
-  }
-
-  .phero__crumbs li + li::before {
-    content: '/';
-    margin-right: 8px;
-    opacity: 0.6;
-  }
-
-  .phero__crumbs a {
-    color: rgba(250, 247, 242, 0.75);
-    text-decoration: none;
-  }
-
-  .phero__crumbs a:hover {
-    color: var(--sand);
-  }
-
-  .hero-badge {
-    margin: 0 0 28px;
-  }
-
-  .phero h1 {
-    font-size: clamp(2.6rem, 5.4vw, 4.4rem);
-    max-width: 19ch;
-  }
-
-  /* De tekstkolom is smaller zodra er een render naast staat. */
-  .phero--beeld h1 {
-    max-width: 18ch;
-    font-size: clamp(2.4rem, 4.6vw, 3.7rem);
-  }
-
-  .phero--beeld .phero__lead {
-    max-width: 44ch;
-  }
-
-  .phero__lead {
-    font-size: clamp(1.1rem, 1.5vw, 1.3rem);
-    line-height: 1.55;
-    color: rgba(250, 247, 242, 0.8);
-    max-width: 50ch;
-    margin: 20px 0 0;
-  }
-
-  .phero__actions {
-    margin-top: 30px;
-  }
-
-  .phero__horizon {
-    position: absolute;
-    inset: auto 0 0;
-    width: 100%;
-    height: clamp(80px, 10vw, 150px);
-    display: block;
+  @media (max-width: 600px) {
+    .phero h1 { font-size: clamp(2.55rem, 9vw, 3.5rem); }
+    .phero__crumbs ol { font-size: .78rem; margin-bottom: 28px; }
+    .phero__inner { gap: 32px; }
+    .phero__visual { height: 340px; border-radius: 70px 16px 16px 16px; }
+    .phero__beeld { max-height: 310px; }
   }
 </style>

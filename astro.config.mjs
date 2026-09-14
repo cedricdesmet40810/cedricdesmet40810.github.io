@@ -7,6 +7,8 @@ import { SITE } from './src/config.js';
 export default defineConfig({
   site: SITE.url,
   trailingSlash: 'always',
+  // Keep natural spaces between the existing inline text elements.
+  compressHTML: true,
   build: {
     // Clean URLs: /contact/ instead of /contact.html
     format: 'directory',
@@ -19,6 +21,7 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
+      changefreq: 'monthly',
       i18n: {
         defaultLocale: 'nl',
         locales: { nl: 'nl-BE' },
@@ -30,7 +33,6 @@ export default defineConfig({
         else if (path.startsWith('/oplossingen/')) item.priority = 0.9;
         else if (path === '/privacy/') item.priority = 0.2;
         else item.priority = 0.8;
-        item.changefreq = 'monthly';
         return item;
       },
     }),

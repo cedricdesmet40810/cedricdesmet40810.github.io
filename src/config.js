@@ -6,10 +6,10 @@ export const SITE = {
   url: 'https://www.auxilia-ai.be',
   name: 'Auxilia',
   legalName: 'Auxilia',
-  tagline: "AI en IT voor KMO's",
+  tagline: "AI en IT voor kmo's",
   // Max ~155 tekens voor de zoekresultatenpagina
   description:
-    "Auxilia bouwt AI-chatbots op je eigen data, apps op maat en automatisaties voor KMO's. Eén aanspreekpunt voor AI en IT. Vaste prijs, vaste deadline.",
+    "Auxilia bouwt AI-chatbots op je eigen data, apps op maat en automatisaties voor kmo's. Eén aanspreekpunt voor AI en IT. Vaste prijs, vaste deadline.",
   locale: 'nl_BE',
   lang: 'nl-BE',
   email: 'hallo@auxilia-ai.be',

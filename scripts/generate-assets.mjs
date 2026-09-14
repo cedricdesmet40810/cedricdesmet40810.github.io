@@ -11,6 +11,7 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import satori from 'satori';
+import { SITE } from '../src/config.js';
 import { Resvg } from '@resvg/resvg-js';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -20,181 +21,34 @@ mkdirSync(pub, { recursive: true });
 const font = (p) => readFileSync(resolve(root, 'node_modules', p));
 
 // satori leest ttf/otf/woff — geen woff2. Vandaar de statische varianten.
-const spectral = font('@fontsource/spectral/files/spectral-latin-500-normal.woff');
 const hanken = font('@fontsource/hanken-grotesk/files/hanken-grotesk-latin-400-normal.woff');
 const hankenBold = font(
   '@fontsource/hanken-grotesk/files/hanken-grotesk-latin-600-normal.woff'
 );
 
 // Merkkleuren, gelijk aan global.css
-const TEAL = '#0F5C5A';
+const TEAL = '#174C46';
 const CLAY = '#D2691E';
-const SAND = '#FAF7F2';
-
-/** Het losstaande teken, als losse elementen zodat satori het kan tekenen. */
-const mark = (size) => ({
-  type: 'div',
-  props: {
-    style: {
-      width: size,
-      height: size,
-      borderRadius: size * 0.28,
-      background: 'rgba(250,247,242,0.12)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      flexShrink: 0,
-    },
-    children: {
-      type: 'svg',
-      props: {
-        width: size * 0.66,
-        height: size * 0.66,
-        viewBox: '0 0 40 40',
-        children: [
-          {
-            type: 'path',
-            props: {
-              d: 'M8 21 L20 10 L32 21',
-              fill: 'none',
-              stroke: SAND,
-              strokeWidth: 4,
-              strokeLinecap: 'round',
-              strokeLinejoin: 'round',
-            },
-          },
-          {
-            type: 'path',
-            props: {
-              d: 'M8 32 L20 21 L32 32',
-              fill: 'none',
-              stroke: CLAY,
-              strokeWidth: 4,
-              strokeLinecap: 'round',
-              strokeLinejoin: 'round',
-            },
-          },
-        ],
-      },
-    },
-  },
-});
+const SAND = '#F5F7F6';
 
 /* ------------------------------------------------------------ og-image --- */
 
+const scene = `data:image/jpeg;base64,${readFileSync(resolve(pub, 'hero-thuiswerk.jpg')).toString('base64')}`;
+const text = (children, style) => ({ type: 'div', props: { children, style } });
 const ogTree = {
   type: 'div',
   props: {
-    style: {
-      width: 1200,
-      height: 630,
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-      background: TEAL,
-      padding: 72,
-      fontFamily: 'Hanken Grotesk',
-      position: 'relative',
-    },
+    style: { width: 1200, height: 630, display: 'flex', padding: 48, gap: 40, background: SAND, color: '#172F2B', fontFamily: 'Hanken Grotesk' },
     children: [
-      // Zacht licht rechtsboven, zodat het vlak niet dood aanvoelt.
-      {
-        type: 'div',
-        props: {
-          style: {
-            position: 'absolute',
-            top: -180,
-            right: -140,
-            width: 620,
-            height: 620,
-            borderRadius: 999,
-            background: 'rgba(62,132,130,0.34)',
-          },
-        },
-      },
-      {
-        type: 'div',
-        props: {
-          style: { display: 'flex', alignItems: 'center', gap: 20 },
-          children: [
-            mark(64),
-            {
-              type: 'div',
-              props: {
-                style: {
-                  fontFamily: 'Spectral',
-                  fontSize: 44,
-                  color: SAND,
-                  letterSpacing: '-0.022em',
-                },
-                children: 'Auxilia',
-              },
-            },
-          ],
-        },
-      },
-      {
-        type: 'div',
-        props: {
-          style: { display: 'flex', flexDirection: 'column' },
-          children: [
-            {
-              type: 'div',
-              props: {
-                style: {
-                  fontFamily: 'Spectral',
-                  fontSize: 74,
-                  lineHeight: 1.08,
-                  letterSpacing: '-0.022em',
-                  color: SAND,
-                  maxWidth: 940,
-                },
-                children: 'AI die jouw bedrijf van binnen kent',
-              },
-            },
-            {
-              type: 'div',
-              props: {
-                style: {
-                  marginTop: 26,
-                  fontSize: 30,
-                  lineHeight: 1.5,
-                  color: 'rgba(250,247,242,0.74)',
-                  maxWidth: 800,
-                },
-                children:
-                  'Chatbots op je eigen data, apps op maat en IT-beheer voor KMO’s.',
-              },
-            },
-          ],
-        },
-      },
-      {
-        type: 'div',
-        props: {
-          style: { display: 'flex', alignItems: 'center', gap: 18 },
-          children: [
-            {
-              type: 'div',
-              props: {
-                style: { width: 40, height: 4, borderRadius: 4, background: CLAY },
-              },
-            },
-            {
-              type: 'div',
-              props: {
-                style: {
-                  fontSize: 26,
-                  fontWeight: 600,
-                  color: 'rgba(250,247,242,0.86)',
-                  letterSpacing: '0.02em',
-                },
-                children: 'www.auxilia.be · Kempen, België',
-              },
-            },
-          ],
-        },
-      },
+      { type: 'div', props: { style: { width: 560, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '6px 0' }, children: [
+        text('Auxilia', { fontSize: 38, fontWeight: 600, letterSpacing: '-.05em' }),
+        { type: 'div', props: { style: { display: 'flex', flexDirection: 'column' }, children: [
+          text('AI die voor je KMO werkt', { fontSize: 78, lineHeight: 1, fontWeight: 600, letterSpacing: '-.055em', maxWidth: 530 }),
+          text('Chatbots op je eigen data, apps op maat en IT-beheer voor KMO’s.', { fontSize: 24, lineHeight: 1.45, marginTop: 26, color: '#50615D', maxWidth: 500 }),
+        ] } },
+        text(`${new URL(SITE.url).hostname} · Kempen, België`, { fontSize: 20, color: '#50615D' }),
+      ] } },
+      { type: 'img', props: { src: scene, width: 504, height: 534, style: { objectFit: 'cover', objectPosition: '44% 50%', borderRadius: '120px 20px 20px 20px' } } },
     ],
   },
 };
@@ -250,7 +104,6 @@ const iconTree = (size) => ({
 /* --------------------------------------------------------------- bouw --- */
 
 const fonts = [
-  { name: 'Spectral', data: spectral, weight: 500, style: 'normal' },
   { name: 'Hanken Grotesk', data: hanken, weight: 400, style: 'normal' },
   { name: 'Hanken Grotesk', data: hankenBold, weight: 600, style: 'normal' },
 ];

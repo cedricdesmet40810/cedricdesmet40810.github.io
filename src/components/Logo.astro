@@ -9,9 +9,9 @@
 const { variant = 'light', markOnly = false, size = 38 } = Astro.props;
 
 const dark = variant === 'dark';
-const tile = dark ? 'rgba(250,247,242,0.12)' : '#0F5C5A';
+const tile = dark ? 'rgba(250,247,242,0.12)' : '#174C46';
 const topChevron = dark ? '#FAF7F2' : '#FAF7F2';
-const wordmark = dark ? '#FAF7F2' : '#1C2422';
+const wordmark = dark ? '#FAF7F2' : '#172F2B';
 // Radius = 28% van de tegel.
 const radius = size * 0.28;
 ---
@@ -60,12 +60,12 @@ const radius = size * 0.28;
     border-radius: 28%;
   }
 
-  /* Het woordmerk staat altijd in Spectral. */
+  /* The wordmark shares the site’s clear, contemporary typography. */
   .logo__word {
     font-family: var(--font-display);
-    font-weight: 500;
-    font-size: 1.42rem;
-    letter-spacing: -0.022em;
+    font-weight: 650;
+    font-size: 1.9rem;
+    letter-spacing: -0.055em;
     line-height: 1;
   }
 </style>

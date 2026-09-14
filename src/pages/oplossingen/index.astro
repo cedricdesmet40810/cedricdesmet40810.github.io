@@ -1,11 +1,12 @@
 ---
+import SiteImage from '../../components/SiteImage.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import Icon from '../../components/Icon.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { SERVICES, SITE } from '../../config.js';
 
-const detail = {
+const detail: Record<string, string[]> = {
   'ai-chatbots': [
     'Antwoordt uit je eigen documenten, met bronvermelding',
     'Werkt in Teams, op je website of in je mailbox',
@@ -48,8 +49,8 @@ const itemList = {
 
 <BaseLayout
   title="Oplossingen"
-  metaTitle="AI- en IT-oplossingen voor KMO’s"
-  description="AI-chatbots op je eigen data, apps op maat, AI-integratie, kostenbesparing en IT-beheer. Alle oplossingen van Auxilia voor KMO’s op een rij."
+  metaTitle="AI- en IT-oplossingen voor kmo’s"
+  description="AI-chatbots op je eigen data, apps op maat, AI-integratie, kostenbesparing en IT-beheer. Alle oplossingen van Auxilia voor kmo’s op een rij."
   schema={[itemList]}
   breadcrumbs={[{ name: 'Oplossingen', href: '/oplossingen/' }]}
 >
@@ -88,7 +89,7 @@ const itemList = {
                 </a>
               </div>
 
-              <img
+              <SiteImage
                 class="hub-item__beeld"
                 src={s.beeld}
                 width="478"
@@ -134,23 +135,27 @@ const itemList = {
      dat hier stond is overbodig geworden. */
   @media (min-width: 860px) {
     .hub-item {
-      grid-template-columns: 1fr 300px;
+      grid-template-columns: 1fr 360px;
       gap: clamp(32px, 4vw, 56px);
       align-items: center;
     }
   }
 
   .hub-item__beeld {
+    max-height: 370px;
+    object-fit: contain;
+    background: #f5eee5;
+    padding: 20px;
     display: block;
     width: 100%;
-    max-width: 300px;
+    max-width: 360px;
     height: auto;
     margin-inline: auto;
     border-radius: var(--r);
   }
 
   .hub-item h2 {
-    font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
     margin-bottom: 12px;
   }
 

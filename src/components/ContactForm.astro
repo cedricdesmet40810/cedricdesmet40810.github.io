@@ -15,10 +15,10 @@ const endpoint = SITE.formEndpoint;
   class="form"
   id="contactformulier"
   method="post"
-  action={endpoint || undefined}
+  action={endpoint || `mailto:${SITE.email}`}
+  enctype={endpoint ? undefined : 'text/plain'}
   data-endpoint={endpoint}
   data-mailto={SITE.email}
-  novalidate
 >
   <div class="form__row">
     <label class="field">
@@ -26,12 +26,12 @@ const endpoint = SITE.formEndpoint;
       <input
         class="input"
         type="text"
-        name="naam"
+        name="naam" aria-describedby="error-naam"
         required
         autocomplete="name"
         placeholder="Jan Peeters"
       />
-      <span class="error" data-error-for="naam" hidden></span>
+      <span class="error" id="error-naam" data-error-for="naam" hidden></span>
     </label>
 
     <label class="field">
@@ -52,12 +52,12 @@ const endpoint = SITE.formEndpoint;
       <input
         class="input"
         type="email"
-        name="email"
+        name="email" aria-describedby="error-email"
         required
         autocomplete="email"
         placeholder="jan@bedrijf.be"
       />
-      <span class="error" data-error-for="email" hidden></span>
+      <span class="error" id="error-email" data-error-for="email" hidden></span>
     </label>
 
     <label class="field">
@@ -85,22 +85,22 @@ const endpoint = SITE.formEndpoint;
     <span>Waar loopt het vast? <span aria-hidden="true">*</span></span>
     <textarea
       class="textarea"
-      name="bericht"
+      name="bericht" aria-describedby="error-bericht"
       required
       minlength="10"
       placeholder="Beschrijf kort wat er vandaag te veel tijd kost. Hoe concreter, hoe beter we ons kunnen voorbereiden."
     ></textarea>
-    <span class="error" data-error-for="bericht" hidden></span>
+    <span class="error" id="error-bericht" data-error-for="bericht" hidden></span>
   </label>
 
   <label class="consent">
-    <input type="checkbox" name="akkoord" required />
+    <input type="checkbox" name="akkoord" aria-describedby="error-akkoord" required />
     <span>
       Ik ga ermee akkoord dat Auxilia mijn gegevens gebruikt om op deze vraag te
       antwoorden. Meer daarover in het <a href="/privacy/">privacybeleid</a>.
     </span>
   </label>
-  <span class="error" data-error-for="akkoord" hidden></span>
+  <span class="error" id="error-akkoord" data-error-for="akkoord" hidden></span>
 
   <!-- Spamval: mensen zien dit veld niet, bots vullen het in. -->
   <div class="honey" aria-hidden="true">
@@ -109,6 +109,9 @@ const endpoint = SITE.formEndpoint;
       <input type="text" name="website" tabindex="-1" autocomplete="off" />
     </label>
   </div>
+
+  {!endpoint && <p class="form__delivery">Dit formulier opent een e-mail met je vraag. Verstuur die in je mailprogramma, of mail rechtstreeks naar <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>}
+  <noscript><p>Je kunt je vraag ook rechtstreeks mailen naar <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p></noscript>
 
   <div class="form__foot">
     <button type="submit" class="btn btn--primary" data-submit>
@@ -194,6 +197,8 @@ const endpoint = SITE.formEndpoint;
     overflow: hidden;
   }
 
+  .form__delivery { margin-top: 22px; font-size: .9rem; color: var(--ink-soft); }
+
   .form__foot {
     display: flex;
     flex-wrap: wrap;
@@ -246,22 +251,23 @@ const endpoint = SITE.formEndpoint;
 <script>
   const form = document.getElementById('contactformulier');
   if (form instanceof HTMLFormElement) {
-    const status = form.querySelector('[data-status]');
+    form.noValidate = true;
+    const status = form.querySelector<HTMLElement>('[data-status]');
     const button = form.querySelector('[data-submit]');
     const label = form.querySelector('[data-submit-label]');
     const endpoint = form.dataset.endpoint;
     const mailto = form.dataset.mailto;
 
-    const berichten = {
+    const berichten: Record<string, string> = {
       naam: 'Vul je naam in, dan weten we wie we antwoorden.',
-      email: 'Vul een geldig e-mailadres in, anders raakt ons antwoord je niet.',
+      email: 'Vul een geldig e-mailadres in, anders bereikt ons antwoord je niet.',
       bericht: 'Schrijf kort waar het over gaat. Een zin of twee volstaat.',
       akkoord: 'We hebben je akkoord nodig om je bericht te mogen verwerken.',
     };
 
-    const toonFout = (naam, tekst) => {
+    const toonFout = (naam: string, tekst: string) => {
       const veld = form.elements.namedItem(naam);
-      const doel = form.querySelector(`[data-error-for="${naam}"]`);
+      const doel = form.querySelector<HTMLElement>(`[data-error-for="${naam}"]`);
       if (veld instanceof HTMLElement) veld.setAttribute('aria-invalid', 'true');
       if (doel) {
         doel.textContent = tekst;
@@ -270,7 +276,7 @@ const endpoint = SITE.formEndpoint;
     };
 
     const wisFouten = () => {
-      form.querySelectorAll('[data-error-for]').forEach((el) => {
+      form.querySelectorAll<HTMLElement>('[data-error-for]').forEach((el) => {
         el.hidden = true;
         el.textContent = '';
       });
@@ -279,7 +285,7 @@ const endpoint = SITE.formEndpoint;
       );
     };
 
-    const meldStatus = (tekst, tone) => {
+    const meldStatus = (tekst: string, tone: string) => {
       if (!status) return;
       status.textContent = tekst;
       status.dataset.tone = tone;
@@ -289,9 +295,9 @@ const endpoint = SITE.formEndpoint;
     const valideer = () => {
       wisFouten();
       const data = new FormData(form);
-      let eersteFout = null;
+      let eersteFout: string | null = null;
 
-      const check = (naam, geldig) => {
+      const check = (naam: string, geldig: boolean) => {
         if (!geldig) {
           toonFout(naam, berichten[naam]);
           eersteFout = eersteFout || naam;
@@ -313,6 +319,8 @@ const endpoint = SITE.formEndpoint;
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      if (button instanceof HTMLButtonElement && button.disabled) return;
+      if (status) status.hidden = true;
       const data = valideer();
       if (!data) return;
 
@@ -355,6 +363,7 @@ const endpoint = SITE.formEndpoint;
           method: 'POST',
           body: data,
           headers: { Accept: 'application/json' },
+          signal: AbortSignal.timeout(15000),
         });
         if (!res.ok) throw new Error(String(res.status));
 
@@ -380,7 +389,7 @@ const endpoint = SITE.formEndpoint;
       if (!(target instanceof HTMLElement) || !target.hasAttribute('aria-invalid')) return;
       target.removeAttribute('aria-invalid');
       const naam = target.getAttribute('name');
-      const doel = form.querySelector(`[data-error-for="${naam}"]`);
+      const doel = form.querySelector<HTMLElement>(`[data-error-for="${naam}"]`);
       if (doel) doel.hidden = true;
     });
   }

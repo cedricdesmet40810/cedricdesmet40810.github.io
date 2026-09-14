@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Icon from '../components/Icon.astro';
-import StepScene from '../components/StepScene.astro';
+import SiteImage from '../components/SiteImage.astro';
 import Faq from '../components/Faq.astro';
 import { SERVICES, SITE } from '../config.js';
 
@@ -52,7 +52,7 @@ const stappen = [
     scene: 'werkvloer',
     beeld: '/stap-werkvloer.jpg',
     t: 'We beginnen bij jou op de werkvloer',
-    d: 'We willen identificeren wat je bedrijf eigenlijk doet en wat de core business is. Welke tools je bedrijf gebruikt, en waar AI mogelijks een hulp kan zijn om je dagelijkse taken te versnellen.',
+    d: 'We willen identificeren wat je bedrijf eigenlijk doet en wat de corebusiness is. We bekijken welke tools je bedrijf gebruikt en waar AI mogelijk een hulp kan zijn om je dagelijkse taken te versnellen.',
   },
   {
     scene: 'systemen',
@@ -76,8 +76,9 @@ const stappen = [
 
 const producten = [
   {
-    vraag: 'Weet je dat er iets moet doen met AI, maar niet wat?',
+    vraag: 'Weet je dat je iets moet doen met AI, maar niet wat?',
     naam: 'Scan',
+    beeld: '/opl-kosten.jpg',
     d: 'We lichten je processen door. Je krijgt een rapport/plan met de kansen, de berekeningen en een volgorde van aanpak.',
     href: '/oplossingen/kostenbesparing/',
     label: 'Hoe de scan werkt',
@@ -85,6 +86,7 @@ const producten = [
   {
     vraag: 'Eén proces dat je wil aanpakken in je week?',
     naam: 'Bouw',
+    beeld: '/opl-apps.jpg',
     d: 'Een app op maat die AI gebruikt waar dat loont. Werkend opgeleverd op de afgesproken datum, voor het afgesproken bedrag.',
     href: '/oplossingen/apps-op-maat/',
     label: 'Bekijk wat we bouwen',
@@ -92,6 +94,7 @@ const producten = [
   {
     vraag: 'Nood aan een chatbot?',
     naam: 'Chat',
+    beeld: '/opl-chatbots.jpg',
     d: 'Een assistent die antwoordt uit je eigen documenten, met bronvermelding.',
     href: '/oplossingen/ai-chatbots/',
     label: 'Zo werkt de chatbot',
@@ -123,50 +126,40 @@ const waarom = [
   {
     icon: 'clock',
     t: 'Er wanneer jij ons nodig hebt',
-    d: 'Gemaakt voor kleine KMO’s: je belt ons rechtstreeks, niet een ticketsysteem. Wij komen langs wanneer het jou past, niet wanneer het ons uitkomt.',
+    d: 'Gemaakt voor kleine kmo’s: je belt ons rechtstreeks, niet een ticketsysteem. Wij komen langs wanneer het jou past, niet wanneer het ons uitkomt.',
   },
 ];
 
 ---
 
 <BaseLayout
-  title="Auxilia · AI en IT voor KMO’s in de Kempen"
+  title="Auxilia · AI en IT voor kmo’s in de Kempen"
   exactTitle={true}
-  description="AI-chatbots op je eigen data, apps op maat en automatisering voor KMO’s. Eén aanspreekpunt voor AI én IT. Vaste prijs, vaste deadline. Plan een kennismaking."
+  description="AI-chatbots op je eigen data, apps op maat en automatisering voor kmo’s. Eén aanspreekpunt voor AI én IT. Vaste prijs, vaste deadline. Plan een kennismaking."
   schema={[faqSchema, ...servicesSchema]}
 >
-  <!-- ====================================================== hero (teal) -->
-  <section class="hero band-teal">
+  <section class="hero">
     <div class="container hero__inner">
       <div class="hero__tekst">
-        <h1>AI die voor je KMO werkt</h1>
+        <p class="hero-badge">{SITE.tagline}</p>
+        <h1>AI die voor je kmo werkt</h1>
         <p class="hero__lead">
           Offertes opmaken, verslagen schrijven, mails sorteren, gegevens van
           het ene systeem naar het andere sturen. Wij bouwen AI en apps op
-          maat die dat voor jou overnemen, we gebruiken de software die je
+          maat die dat voor jou overnemen. We gebruiken de software die je
           vandaag al gebruikt, met je eigen team aan het stuur.
         </p>
         <div class="btn-row hero__actions">
-          <a href={SITE.bookingUrl || '/contact/'} class="btn btn--primary btn--xl">
-            Plan 30 minuten
-            <span class="arrow" aria-hidden="true">→</span>
-          </a>
+          <a href={SITE.bookingUrl || '/contact/'} class="btn btn--primary btn--xl">Plan 30 minuten <span class="arrow" aria-hidden="true">↗</span></a>
+          <a href="#werkwijze" class="hero__more">Hoe we werken <span aria-hidden="true">↓</span></a>
         </div>
       </div>
-
-      <img
-        class="hero__beeld"
-        src="/hero-thuiswerk.jpg"
-        width="1600"
-        height="893"
-        fetchpriority="high"
-        decoding="async"
-        alt="Illustratie: iemand ontspannen in een zetel bij het raam, terwijl documenten zichzelf opstapelen"
-      />
+      <div class="hero__visual">
+        <SiteImage class="hero__beeld" src="/hero-thuiswerk.jpg" width="1600" sizes="(max-width: 899px) 100vw, 47vw" fetchpriority="high" loading="eager" decoding="async" alt="Illustratie: iemand ontspannen in een zetel bij het raam, terwijl documenten zichzelf opstapelen" />
+        <div class="hero__caption"><span class="hero__caption-icon"><Icon name="check" size={19} /></span><span>Met je eigen team aan het stuur.</span><span class="hero__caption-mark" aria-hidden="true">↗</span></div>
+      </div>
     </div>
   </section>
-
-  <!-- ==================================================== integraties -->
   <section class="section--tight band-sand strip">
     <div class="container strip__row">
       <p class="strip__label">We integreren de software die jij al gebruikt</p>
@@ -225,639 +218,265 @@ const waarom = [
     </div>
   </section>
 
-  <!-- ========================================================== stappen -->
-  <section class="section band-sand" id="werkwijze">
-    <div class="container">
-      <div class="stappen__layout">
-        <aside class="stappen__zij reveal">
-          <div class="section-head">
-            <p class="eyebrow">Hoe we werken</p>
-            <h2 class="stappen__kop">Auxilia zorgt ervoor dat AI ten dienste staat van u.</h2>
-          </div>
-          <img
-            class="stappen__beeld"
-            src="/aan-de-slag.jpg"
-            width="522"
-            height="700"
-            loading="lazy"
-            decoding="async"
-            alt=""
-          />
-        </aside>
 
-        <ol class="bigsteps">
-          {
-            stappen.map((s) => (
-              <li class="bigstep reveal">
-                <div class="bigstep__visual" aria-hidden="true">
-                  {s.beeld ? (
-                    <img
-                      class="bigstep__beeld"
-                      src={s.beeld}
-                      width="418"
-                      height="560"
-                      loading="lazy"
-                      decoding="async"
-                      alt=""
-                    />
-                  ) : (
-                    <StepScene name={s.scene} />
-                  )}
-                </div>
-                <div class="bigstep__body">
-                  <h3>{s.t}</h3>
-                  <p>{s.d}</p>
-                </div>
-              </li>
-            ))
-          }
-        </ol>
+  <section class="section products-section">
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">Kies je vertrekpunt</p><h2>Drie van onze opties</h2></div>
+      <div class="products">
+        {producten.map(p => (
+          <article class="product">
+            <div class="product__top"><h3 class="product__naam">{p.naam}</h3><a class="product__symbol" href={p.href} aria-label={`${p.naam}: ${p.label}`}><span aria-hidden="true">↗</span></a></div>
+            <div class="product__visual"><SiteImage src={p.beeld} alt="" width="478" loading="lazy" sizes="(max-width: 700px) 100vw, 33vw" /></div>
+            <div class="product__body"><p class="product__vraag">{p.vraag}</p><p class="product__d">{p.d}</p><a href={p.href} class="link-arrow">{p.label}<span class="arrow" aria-hidden="true">↗</span></a></div>
+          </article>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- ==================================================== succesverhalen -->
-  <section class="section succesband">
+  <section class="section succesband band-teal">
     <div class="container">
-      <div class="section-head reveal">
-        <p class="eyebrow">Succesverhalen</p>
-        <h2>Waar hebben wij al geholpen?</h2>
-      </div>
-
-      <!-- Elk afgerond traject krijgt hier zo'n kaart. -->
-      <article class="card succes reveal">
+      <article class="succes">
         <div class="succes__body">
+          <div class="section-head"><p class="eyebrow">Succesverhalen</p><h2>Waar hebben wij al geholpen?</h2></div>
           <p class="succes__klant">To B-Seen · eventveiligheid</p>
-          <h3>Elk event een verslag zonder typen met behulp van AI</h3>
-          <p>
-            Foto’s en kernwoorden ter plaatse volstaan: AI schrijft het
-            verslag, in de stijl van de expert zelf.
-          </p>
-          <div class="succes__cijfers">
-            <div>
-              <strong>3 uur</strong>
-              <span>bespaard per rondgang</span>
-            </div>
-            <div>
-              <strong>1 werkdag</strong>
-              <span>per week terug gespendeerd aan klanten</span>
-            </div>
-          </div>
-          <a href="/ons-werk/" class="link-arrow">
-            Lees het hele verhaal
-            <span class="arrow" aria-hidden="true">→</span>
-          </a>
+          <h3>Voor elk event een verslag zonder typen met behulp van AI</h3>
+          <p>Foto’s en kernwoorden ter plaatse volstaan: AI schrijft het verslag, in de stijl van de expert zelf.</p>
+          <a href="/ons-werk/" class="btn btn--secondary">Lees het hele verhaal <span class="arrow" aria-hidden="true">↗</span></a>
         </div>
-        <img
-          class="succes__shot"
-          src="/tobseen-app.png"
-          width="1440"
-          height="1080"
-          loading="lazy"
-          decoding="async"
-          alt="De rapportage-app van To B-Seen op een telefoon: de observaties van een inspectieronde onder elkaar, met ernaast hoe AI een losse notitie uitschrijft tot een zin in het verslag."
-        />
+        <div class="succes__visual"><SiteImage class="succes__shot" src="/tobseen-app.png" width="1440" loading="lazy" decoding="async" alt="De rapportage-app van To B-Seen op een telefoon: de observaties van een inspectieronde onder elkaar, met ernaast hoe AI een losse notitie uitschrijft tot een zin in het verslag." /></div>
+        <div class="succes__cijfers">
+          <div><strong>3 uur</strong><span>bespaard per rondgang</span></div>
+          <div><strong>1 werkdag</strong><span>per week terug gespendeerd aan klanten</span></div>
+        </div>
       </article>
     </div>
   </section>
 
-  <!-- =========================================================== waarom -->
-  <section class="section band-paper">
-    <div class="container">
-      <div class="section-head section-head--center reveal">
-        <h2>Waarom voor Auxilia kiezen?</h2>
+  <section class="section process-section" id="werkwijze">
+    <div class="container stappen__layout">
+      <div class="stappen__zij">
+        <div class="section-head"><p class="eyebrow">Hoe we werken</p><h2 class="stappen__kop">Auxilia zorgt ervoor dat AI ten dienste staat van jou.</h2></div>
+        <div class="stappen__visual"><SiteImage class="stappen__beeld" src="/aan-de-slag.jpg" width="522" loading="lazy" decoding="async" alt="" sizes="(max-width: 899px) 50vw, 28vw" /></div>
       </div>
+      <ol class="bigsteps">
+        {stappen.map((s, i) => (
+          <li class="bigstep">
+            <span class="bigstep__number" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <div class="bigstep__body"><h3>{s.t}</h3><p>{s.d}</p></div>
+            <SiteImage class="bigstep__beeld" src={s.beeld} width="418" loading="lazy" decoding="async" alt="" sizes="130px" />
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
 
-      <div class="grid grid--3 reveal">
-        {
-          waarom.map((w) => (
-            <article class="card waarom">
-              <span class="waarom__icoon" aria-hidden="true">
-                <Icon name={w.icon} size={22} />
-              </span>
-              <h3 class="waarom__titel">{w.t}</h3>
-              <p>{w.d}</p>
-            </article>
-          ))
-        }
+  <section class="section why-section band-paper">
+    <div class="container why-layout">
+      <div class="section-head"><h2>Waarom voor Auxilia kiezen?</h2></div>
+      <div class="why-grid">
+        {waarom.map(w => (
+          <article class="waarom"><span class="waarom__icoon" aria-hidden="true"><Icon name={w.icon} size={24} /></span><h3>{w.t}</h3><p>{w.d}</p></article>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- ======================================================== producten -->
-  <section class="section band-paper">
-    <div class="container">
-      <div class="section-head section-head--center reveal">
-        <p class="eyebrow eyebrow--center">Kies je vertrekpunt</p>
-        <h2>Drie van onze opties</h2>
-      </div>
-
-      <div class="grid grid--3 reveal">
-        {
-          producten.map((p) => (
-            <article class="card product">
-              <p class="product__vraag">{p.vraag}</p>
-              <h3 class="product__naam">
-                <span class="product__mark" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" width="20" height="20">
-                    <path
-                      d="M5 14 L12 7.5 L19 14"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.4"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </span>
-                {p.naam}
-              </h3>
-              {p.prijs && <p class="product__prijs">{p.prijs}</p>}
-              <p class="product__d">{p.d}</p>
-              <a href={p.href} class="link-arrow">
-                {p.label}
-                <span class="arrow" aria-hidden="true">→</span>
-              </a>
-            </article>
-          ))
-        }
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ============================================================= faq -->
-  <section class="section band-sand" id="faq">
-    <div class="container">
-      <div class="section-head reveal">
+  <section class="section faq-section" id="faq">
+    <div class="container faq-layout">
+      <div class="section-head">
         <h2>Veelgestelde vragen</h2>
-        <p class="lead">
-          Staat je vraag er niet bij? De rest beantwoorden we jou bij een koffie.
-        </p>
-        <a href="/contact/" class="btn btn--primary faq__cta">
-          Maak een afspraak
-          <span class="arrow" aria-hidden="true">→</span>
-        </a>
+        <p class="lead">Staat je vraag er niet bij? De rest beantwoorden we voor jou bij een koffie.</p>
+        <a href="/contact/" class="link-arrow faq__cta">Maak een afspraak <span class="arrow" aria-hidden="true">↗</span></a>
       </div>
-      <div class="reveal">
-        <Faq items={faq} />
-      </div>
+      <Faq items={faq} />
     </div>
   </section>
 
-  <!-- ===================================================== slot (teal) -->
-  <section class="section band-teal slot">
+  <section class="slot-section">
     <div class="container">
-      <div class="slot__head reveal">
-        <h2 class="statement">Overtuigd? Plan een afspraak in.</h2>
-        <p class="lead">
-          Nog niet overtuigd? We hebben maar 30 minuten van je tijd nodig om
-          je te overtuigen. Dit neem je sowieso mee naar huis:
-        </p>
-      </div>
-
-      <div class="slot__grid reveal">
-        <ul class="checklist slot__list">
-          <li>
-            <Icon name="check" size={18} />
-            Een beeld van waar AI bij jullie het snelst rendeert
-          </li>
-          <li>
-            <Icon name="check" size={18} />
-            Wat je beter eerst zelf probeert, zonder ons
-          </li>
-          <li>
-            <Icon name="check" size={18} />
-            Of het de moeite is om verder te praten
-          </li>
-        </ul>
-
-        <div class="slot__cta">
-          <a href={SITE.bookingUrl || '/contact/'} class="btn btn--primary btn--xl">
-            Plan 30 minuten
-            <span class="arrow" aria-hidden="true">→</span>
-          </a>
+      <div class="slot band-teal">
+        <div class="slot__body">
+          <h2 class="statement">Overtuigd? Plan een afspraak in.</h2>
+          <p class="lead">Nog niet overtuigd? We hebben maar 30 minuten van je tijd nodig om je te overtuigen. Dit neem je sowieso mee naar huis:</p>
+          <ul class="checklist slot__list">
+            <li><Icon name="check" size={18} />Een beeld van waar AI bij jullie het snelst rendeert</li>
+            <li><Icon name="check" size={18} />Wat je beter eerst zelf probeert, zonder ons</li>
+            <li><Icon name="check" size={18} />Of het de moeite is om verder te praten</li>
+          </ul>
+          <a href={SITE.bookingUrl || '/contact/'} class="btn btn--primary btn--xl">Plan 30 minuten <span class="arrow" aria-hidden="true">↗</span></a>
         </div>
+        <SiteImage class="slot__mascot" src="/hero-contact-clean.png" alt="" width="1000" loading="lazy" sizes="(max-width: 700px) 70vw, 32vw" />
       </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  /* ------------------------------------------------------------- hero --- */
-
-  .hero {
-    position: relative;
-    overflow: hidden;
-    /* de donkere header loopt visueel door in het hero */
-    margin-top: -78px;
-    padding-top: calc(78px + clamp(3.5rem, 6vw, 6rem));
-    padding-bottom: clamp(3.5rem, 6vw, 6rem);
-    background: var(--teal);
+  .hero { padding: 48px 0 80px; background: var(--hero-sage); }
+  .hero__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .hero__tekst { padding: 12px 0 22px; }
+  .hero-badge { margin: 0 0 28px; }
+  .hero h1 { font-size: clamp(3.3rem, 6.5vw, 6rem); max-width: 10.5ch; line-height: 1.02; letter-spacing: -.055em; font-weight: 560; text-wrap: initial; }
+  .hero__lead { margin: 30px 0 0; max-width: 47ch; color: var(--ink-soft); font-size: clamp(1rem, 1.3vw, 1.13rem); line-height: 1.7; }
+  .hero__actions { margin-top: 32px; gap: 28px; }
+  .btn--xl { padding: 18px 27px; min-height: 58px; }
+  .hero__more { display: inline-flex; align-items: center; gap: 18px; font-size: .95rem; font-weight: 550; text-decoration: none; min-height: 44px; }
+  .hero__visual { position: relative; align-self: stretch; min-height: 590px; border-radius: 160px 24px 24px 24px; overflow: hidden; background: #e7d9c7; }
+  .hero__beeld { width: 100%; height: 100%; object-fit: cover; object-position: 44% 50%; position: absolute; inset: 0; }
+  .hero__caption { position: absolute; left: 24px; right: 24px; bottom: 24px; display: flex; align-items: center; gap: 12px; background: #fff; padding: 16px 20px; border-radius: 12px; color: var(--ink); font-size: .9rem; font-weight: 500; }
+  .hero__caption-icon { width: 34px; height: 34px; display: grid; place-items: center; flex: none; background: var(--brand-orange); border-radius: 50%; color: var(--orange-ink); }
+  .hero__caption-mark { margin-left: auto; font-size: 1.4rem; }
+  .strip { padding-block: 32px; border-block: 1px solid var(--line-soft); }
+  .strip__row { display: flex; align-items: center; gap: 48px; }
+  .strip__label { max-width: 22ch; margin: 0; flex: 0 0 220px; color: var(--ink-faint); font-size: .87rem; line-height: 1.5; }
+  .strip__list { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 28px; list-style: none; padding: 0; margin: 0; flex: 1; }
+  .strip__list li { display: flex; align-items: center; gap: 9px; color: var(--ink-soft); font-size: 1rem; font-weight: 550; white-space: nowrap; }
+  .strip__logo { width: 20px; height: 20px; flex: none; }
+  .products-section { background: var(--paper); }
+  .products { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 24px; }
+  .product { --product-surface: #f6ece6; display: flex; flex-direction: column; background: var(--product-surface); border-radius: 16px; overflow: hidden; border: 1px solid rgb(23 47 43 / 8%); }
+  .product:nth-child(2) { --product-surface: #efddcd; }
+  .product:nth-child(3) { --product-surface: #f0e0d2; }
+  .product__top { display: flex; align-items: center; justify-content: space-between; padding: 30px 28px 0; }
+  .product__naam { font-size: 2rem; font-weight: 570; letter-spacing: -.05em; }
+  .product__symbol { display: grid; place-items: center; flex: none; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--brand-orange); background: var(--brand-orange); color: var(--orange-ink); font-size: 1.3rem; text-decoration: none; transition: background .2s var(--ease), border-color .2s var(--ease); }
+  .product__symbol:hover { border-color: var(--brand-orange-hover); background: var(--brand-orange-hover); color: var(--orange-ink); }
+  .product__symbol:focus-visible { outline: 3px solid var(--teal); outline-offset: 4px; }
+  .product__visual { display: flex; align-items: center; justify-content: center; height: 280px; margin: 24px 28px 28px; }
+  .product__visual :global(img) { width: 100%; height: 100%; min-height: 0; object-fit: contain; mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent), linear-gradient(to bottom, transparent, #000 4%, #000 96%, transparent); mask-composite: intersect; }
+  .product__body { display: flex; flex-direction: column; flex: 1; padding: 0 28px 28px; }
+  .product__vraag { font-size: 1.2rem; font-weight: 570; letter-spacing: -.025em; line-height: 1.35; margin-bottom: 14px; }
+  .product__d { color: var(--ink-soft); font-size: .98rem; margin-bottom: 28px; flex: 1; }
+  .product .link-arrow { border-top: 1px solid var(--line-soft); padding-top: 20px; font-size: .91rem; }
+  .succesband { background: var(--teal-700); }
+  .succesband .section-head { margin-bottom: 36px; }
+  .succesband h2 { max-width: 18ch; }
+  .succes { display: grid; grid-template-columns: 1fr 1.12fr; align-items: start; gap: 44px 64px; }
+  .succes__klant { font-size: .85rem; color: #cfdbd2; margin-bottom: 20px; }
+  .succes h3 { font-size: clamp(1.55rem, 2.3vw, 2.1rem); max-width: 24ch; font-weight: 500; letter-spacing: -.035em; margin-bottom: 22px; }
+  .succes__body > p:not(.succes__klant) { color: #cadcd3; margin-bottom: 32px; }
+  .succes__visual { align-self: start; background: #fff; padding: 8px; border-radius: 16px; }
+  .succes__shot { width: 100%; height: auto; }
+  .succes__cijfers { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1.12fr; gap: 72px; padding-top: 42px; border-top: 1px solid #ffffff30; }
+  .succes__cijfers > div { display: flex; align-items: center; gap: 28px; }
+  .succes__cijfers strong { color: #efd7b9; font-size: clamp(2.7rem, 4.7vw, 4.25rem); font-weight: 500; letter-spacing: -.055em; line-height: 1; white-space: nowrap; }
+  .succes__cijfers span { max-width: 21ch; font-size: .92rem; color: #cadcd3; }
+  .stappen__layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 80px; align-items: start; }
+  .stappen__zij { position: sticky; top: 126px; }
+  .stappen__kop { font-size: clamp(2rem, 3.2vw, 2.85rem); max-width: 17ch; }
+  .stappen__visual { background: #f5eee4; border-radius: 18px 90px 18px 18px; overflow: hidden; width: 260px; }
+  .stappen__beeld { width: 100%; mix-blend-mode: multiply; }
+  .bigsteps { list-style: none; margin: 0; padding: 0; counter-reset: steps; }
+  .bigstep { display: grid; grid-template-columns: 28px 1fr 112px; gap: 20px; align-items: start; padding: 32px 0; border-top: 1px solid var(--line); }
+  .bigstep:last-child { border-bottom: 1px solid var(--line); }
+  .bigstep__number { color: var(--teal-300); font-size: .86rem; font-weight: 600; padding-top: 5px; }
+  .bigstep__body h3 { font-size: 1.35rem; line-height: 1.25; margin-bottom: 14px; }
+  .bigstep__body p { color: var(--ink-soft); font-size: .97rem; }
+  .bigstep__beeld { width: 112px; border-radius: 10px; }
+  .why-layout { display: grid; grid-template-columns: .6fr 1.4fr; gap: 100px; }
+  .why-layout h2 { max-width: 12ch; }
+  .why-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 44px 48px; }
+  .waarom__icoon { display: flex; align-items: center; margin-bottom: 18px; color: var(--teal); }
+  .waarom h3 { font-size: 1.2rem; margin-bottom: 12px; }
+  .waarom p { color: var(--ink-soft); font-size: .98rem; }
+  .waarom:last-child { grid-column: 1/-1; border-top: 1px solid var(--line); padding-top: 32px; }
+  .faq-layout { display: grid; grid-template-columns: .7fr 1.3fr; gap: 100px; align-items: start; }
+  .faq-layout .section-head { margin-bottom: 0; }
+  .faq-layout h2 { max-width: 12ch; }
+  .faq__cta { margin-top: 16px; border-bottom: 1px solid var(--teal); }
+  .slot-section { padding-bottom: 100px; }
+  .slot { display: grid; grid-template-columns: 1.2fr .8fr; gap: 24px; align-items: center; padding: 64px; border-radius: 28px; overflow: hidden; }
+  .slot .statement { font-size: clamp(2.2rem, 4.3vw, 3.85rem); max-width: 16ch; }
+  .slot .lead { margin: 24px 0; font-size: 1.05rem; }
+  .slot__list { margin-bottom: 32px; font-size: .95rem; }
+  .slot__mascot { width: 100%; max-height: 470px; object-fit: contain; }
+  @media (max-width: 1150px) {
+    .hero__inner { gap: 40px; }
+    .hero__visual { min-height: 560px; }
+    .strip__row { flex-direction: column; gap: 24px; align-items: stretch; }
+    .strip__label { flex: auto; max-width: none; text-align: center; }
+    .strip__list { justify-content: center; gap: 24px 36px; }
+    .stappen__layout { gap: 40px; }
+    .bigstep { grid-template-columns: 24px 1fr 88px; gap: 16px; }
+    .bigstep__beeld { width: 88px; }
+    .why-layout, .faq-layout { gap: 48px; }
+    .slot { padding: 44px; }
+    .succes, .succes__cijfers { column-gap: 40px; }
+    .succes__cijfers > div { flex-direction: column; align-items: flex-start; gap: 12px; }
   }
-
-  /* Zelfde bandhoogte als de hero op alle andere pagina's. */
-  @media (min-width: 900px) {
-    .hero {
-      display: flex;
-      align-items: center;
-      min-height: 730px;
-    }
-
-    .hero__inner {
-      width: 100%;
-    }
+  @media (max-width: 899px) {
+    .hero { padding-top: 32px; }
+    .hero__inner { grid-template-columns: 1fr; gap: 32px; }
+    .hero h1 { font-size: clamp(3.5rem, 9vw, 5.8rem); max-width: 12ch; }
+    .hero__lead { max-width: 58ch; }
+    .hero__visual { min-height: 460px; border-radius: 90px 20px 20px 20px; }
+    .hero__beeld { object-position: center 60%; }
+    .hero__caption { max-width: 380px; }
+    .products { gap: 16px; }
+    .product__top { padding: 22px 20px 0; }
+    .product__body { padding: 0 20px 24px; }
+    .product__visual { height: 220px; margin: 24px 20px; }
+    .product__naam { font-size: 1.65rem; }
+    .succes { grid-template-columns: 1fr; gap: 32px; }
+    .succes__cijfers { gap: 24px; }
+    .stappen__layout { grid-template-columns: 1fr; gap: 40px; }
+    .stappen__zij { position: static; display: grid; grid-template-columns: 1fr 180px; gap: 32px; align-items: center; }
+    .stappen__zij .section-head { margin-bottom: 0; }
+    .stappen__visual { width: 180px; }
+    .bigstep { grid-template-columns: 32px 1fr 112px; gap: 24px; }
+    .bigstep__beeld { width: 112px; }
+    .why-layout, .faq-layout { grid-template-columns: 1fr; gap: 40px; }
+    .why-layout .section-head { margin-bottom: 0; }
+    .why-layout h2, .faq-layout h2 { max-width: none; }
+    .slot { grid-template-columns: 1fr; }
+    .slot__mascot { display: none; }
   }
-
-  .hero__inner {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    gap: clamp(32px, 5vw, 64px);
-    align-items: center;
-    max-width: 1180px;
+  @media (max-width: 699px) {
+    .hero { padding: 28px 0 44px; }
+    .hero__tekst { padding-top: 8px; }
+    .hero-badge { margin-bottom: 24px; }
+    .hero h1 { font-size: clamp(3.45rem, 11vw, 4.7rem); max-width: 10.5ch; }
+    .hero__lead { margin-top: 24px; font-size: 1.03rem; }
+    .hero__actions { gap: 18px; margin-top: 26px; }
+    .hero__actions .btn { width: auto; }
+    .hero__more { font-size: .86rem; gap: 10px; }
+    .hero__visual { min-height: 360px; border-radius: 72px 16px 16px 16px; }
+    .hero__caption { left: 14px; right: 14px; bottom: 14px; padding: 12px; font-size: .78rem; gap: 9px; }
+    .hero__caption-icon { width: 28px; height: 28px; }
+    .strip { padding-block: 28px; }
+    .strip__list { gap: 18px 24px; }
+    .strip__list li { font-size: .86rem; }
+    .strip__logo { width: 18px; height: 18px; }
+    .products { grid-template-columns: 1fr; gap: 24px; }
+    .product__top { padding: 24px 26px 0; }
+    .product__naam { font-size: 2rem; }
+    .product__visual { height: 260px; margin: 24px 26px 28px; }
+    .product__body { padding: 0 26px 28px; }
+    .succes { grid-template-columns: 1fr; }
+    .succesband .section-head { margin-bottom: 30px; }
+    .succes h3 { font-size: 1.8rem; }
+    .succes__cijfers { grid-template-columns: 1fr 1fr; padding-top: 28px; gap: 20px; }
+    .succes__cijfers strong { font-size: clamp(2rem, 7vw, 2.8rem); }
+    .succes__cijfers span { font-size: .83rem; }
+    .stappen__zij { grid-template-columns: 1fr; }
+    .stappen__visual { display: none; }
+    .stappen__kop { max-width: 18ch; }
+    .bigstep { grid-template-columns: 24px 1fr; gap: 16px; padding-block: 28px; }
+    .bigstep__body h3 { font-size: 1.28rem; }
+    .bigstep__beeld { grid-column: 2; width: 96px; margin-top: 4px; }
+    .why-grid { grid-template-columns: 1fr; gap: 28px; }
+    .waarom { padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+    .waarom:last-child { border: 0; padding: 0; }
+    .slot-section { padding-bottom: 64px; }
+    .slot { padding: 34px 26px; border-radius: 20px; }
+    .slot .statement { font-size: 2.25rem; }
+    .slot .lead { font-size: 1rem; }
+    .slot .btn { width: 100%; }
   }
-
-  /* Tekst links, beeld rechts. Het beeld krijgt iets meer ruimte dan de
-     tekst, want de figuur zit midden in het kader. */
-  @media (min-width: 900px) {
-    .hero__inner {
-      grid-template-columns: 1fr 1.05fr;
-    }
-  }
-
-  .hero h1 {
-    font-size: clamp(2.6rem, 5.4vw, 4.4rem);
-    max-width: 14ch;
-  }
-
-  .hero__lead {
-    font-size: clamp(1.1rem, 1.5vw, 1.3rem);
-    line-height: 1.55;
-    color: rgba(250, 247, 242, 0.8);
-    max-width: 44ch;
-    margin: 24px 0 0;
-  }
-
-  .hero__actions {
-    margin-top: 36px;
-  }
-
-  .btn--xl {
-    padding: 18px 38px;
-    font-size: 1.08rem;
-  }
-
-  .hero__beeld {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: var(--r-lg);
-  }
-
-  /* ------------------------------------------------------------ strip --- */
-
-  .strip {
-    border-bottom: 1px solid var(--line-soft);
-    padding-block: 28px;
-  }
-
-  .strip__row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 14px 40px;
-  }
-
-  .strip__label {
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    margin: 0;
-    max-width: none;
-  }
-
-  .strip__list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px 32px;
-  }
-
-  .strip__list li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-family: var(--font-display);
-    font-size: 1.12rem;
-    color: var(--ink-soft);
-  }
-
-  .strip__logo {
-    width: 18px;
-    height: 18px;
-    flex: none;
-  }
-
-  /* Kop en beeld blijven links staan terwijl de stappen rechts passeren. */
-  .stappen__layout {
-    display: grid;
-    gap: clamp(28px, 4vw, 56px);
-  }
-
-  @media (min-width: 980px) {
-    .stappen__layout {
-      grid-template-columns: 0.82fr 1.18fr;
-      align-items: start;
-    }
-
-    .stappen__zij {
-      position: sticky;
-      /* onder de plakkende header, met wat lucht */
-      top: 108px;
-    }
-  }
-
-  .stappen__zij {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(20px, 3vw, 32px);
-  }
-
-  .stappen__zij .section-head { margin-bottom: 0; }
-
-  /* Een kolom die blijft staan mag niet hoger worden dan het scherm, anders
-     schuift de kop er bovenaan uit. Vandaar kleiner dan een gewone sectiekop —
-     en hij hoort de kaarten rechts ook niet te overstemmen. */
-  .stappen__kop {
-    font-size: clamp(1.6rem, 2.4vw, 2.1rem);
-  }
-
-  .stappen__beeld {
-    display: block;
-    width: 100%;
-    max-width: 250px;
-    height: auto;
-    border-radius: var(--r);
-  }
-
-  /* ---------------------------------------------------------- bigsteps --- */
-
-  .bigsteps {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 24px;
-  }
-
-  .bigstep {
-    display: grid;
-    gap: 22px;
-    background: var(--paper);
-    border: 1px solid var(--line-soft);
-    border-radius: var(--r-xl);
-    box-shadow: var(--shadow);
-    padding: clamp(26px, 3.2vw, 40px);
-  }
-
-  /* In een smallere kolom valt de strip-afwisseling weg: elke kaart krijgt
-     dezelfde opbouw, tegel links en tekst rechts. */
-  @media (min-width: 560px) {
-    .bigstep {
-      grid-template-columns: 158px 1fr;
-      align-items: center;
-      gap: clamp(24px, 3vw, 36px);
-    }
-  }
-
-  .bigstep__visual {
-    position: relative;
-    display: grid;
-    place-items: center;
-    aspect-ratio: 3 / 4;
-    max-width: 158px;
-    border-radius: 20px;
-    overflow: hidden;
-    background: linear-gradient(150deg, rgba(15, 92, 90, 0.1), rgba(15, 92, 90, 0.04));
-  }
-
-  .bigstep__beeld {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-  }
-
-  .bigstep__visual :global(svg) {
-    width: 100%;
-    height: 100%;
-    display: block;
-    padding: 14px;
-  }
-
-  .bigstep__body h3 {
-    font-size: clamp(1.5rem, 2.4vw, 2rem);
-    margin-bottom: 12px;
-  }
-
-  .bigstep__body p {
-    color: var(--ink-soft);
-    font-size: 1.05rem;
-    margin: 0;
-  }
-
-  /* --------------------------------------------------- succesverhalen --- */
-
-  /* De warme popband: klei-zacht, het verhaal voorop. */
-  .succesband {
-    background: var(--clay-soft);
-  }
-
-  .succes {
-    display: grid;
-    gap: clamp(28px, 4vw, 48px);
-    align-items: center;
-    padding: clamp(30px, 4vw, 52px);
-  }
-
-  @media (min-width: 880px) {
-    .succes {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  /* De mockup heeft zelf al een witte rand, dus geen kader eromheen. */
-  .succes__shot {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  .succes__klant {
-    font-size: 0.82rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--clay-700);
-    margin-bottom: 14px;
-  }
-
-  .succes h3 {
-    font-size: clamp(1.5rem, 2.4vw, 2rem);
-    margin-bottom: 12px;
-    max-width: 24ch;
-  }
-
-  .succes__body > p:not(.succes__klant) {
-    color: var(--ink-soft);
-    margin-bottom: 22px;
-    max-width: 52ch;
-  }
-
-  /* De cijfers als korte popjes: het resultaat in één oogopslag. */
-  .succes__cijfers {
-    display: flex;
-    flex-wrap: wrap;
-    gap: clamp(24px, 4vw, 44px);
-    margin-bottom: 26px;
-  }
-
-  .succes__cijfers strong {
-    display: block;
-    font-family: var(--font-display);
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    line-height: 1;
-    font-size: clamp(1.7rem, 2.8vw, 2.3rem);
-    color: var(--clay-700);
-  }
-
-  .succes__cijfers span {
-    display: block;
-    margin-top: 6px;
-    font-size: 0.92rem;
-    color: var(--ink-soft);
-  }
-
-  /* -------------------------------------------------------- producten --- */
-
-  .product {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .product__vraag {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--clay-700);
-    margin-bottom: 16px;
-  }
-
-  .product__naam {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: clamp(1.6rem, 2.4vw, 2rem);
-    margin-bottom: 12px;
-  }
-
-  .product__prijs {
-    font-size: 0.92rem;
-    font-weight: 600;
-    color: var(--teal);
-    margin-bottom: 14px;
-  }
-
-  .product__mark {
-    display: grid;
-    place-items: center;
-    width: 34px;
-    height: 34px;
-    border-radius: 10px;
-    background: var(--teal);
-    color: var(--sand);
-    flex: none;
-  }
-
-  .product__d {
-    flex: 1;
-    margin-bottom: 22px;
-  }
-
-  /* -------------------------------------------------------------- faq --- */
-
-  .faq__cta {
-    margin-top: 24px;
-  }
-
-  /* ----------------------------------------------------------- waarom --- */
-
-  .waarom {
-    text-align: center;
-  }
-
-  .waarom__icoon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 46px;
-    height: 46px;
-    margin-bottom: 18px;
-    border-radius: 50%;
-    background: var(--clay-soft);
-    color: var(--clay-700);
-  }
-
-  .waarom__titel {
-    font-size: 1.15rem;
-    margin-bottom: 10px;
-  }
-
-  /* ------------------------------------------------------------- slot --- */
-
-  .slot {
-    padding-block: clamp(4rem, 6vw, 6rem);
-  }
-
-  .slot__head {
-    text-align: center;
-    max-width: 720px;
-    margin-inline: auto;
-  }
-
-  .slot__head .statement {
-    font-size: clamp(1.9rem, 3.6vw, 2.9rem);
-    max-width: 20ch;
-    margin-inline: auto;
-  }
-
-  .slot__head .lead {
-    font-size: clamp(1.05rem, 1.4vw, 1.2rem);
-    margin: 22px auto 0;
-  }
-
-  .slot__grid {
-    display: grid;
-    gap: clamp(32px, 4vw, 48px);
-    align-items: center;
-    max-width: 900px;
-    margin: clamp(2.8rem, 4.5vw, 4rem) auto 0;
-  }
-
-  @media (min-width: 820px) {
-    .slot__grid {
-      grid-template-columns: 1.1fr 0.9fr;
-    }
-  }
-
-  .slot__cta {
-    display: grid;
-    gap: 12px;
+  @media (prefers-reduced-motion: no-preference) {
+    .hero__tekst { animation: hero-enter .6s both; }
+    .hero__visual { animation: hero-enter .8s .1s both; }
+    @keyframes hero-enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
   }
 </style>
-
