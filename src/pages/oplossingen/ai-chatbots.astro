@@ -6,7 +6,7 @@ import ChatDemo from '../../components/ChatDemo.astro';
 const faq = [
   {
     q: 'Verzint de chatbot antwoorden?',
-    a: 'Daar zit precies het verschil met een gewone chatbot. De onze zoekt eerst het juiste stuk in jouw documenten en antwoordt daaruit, met vermelding van het bestand. Vindt hij niets, dan zegt hij dat hij het niet weet in plaats van iets te verzinnen. Dat laatste is een instelling die wij bewust zo zetten.',
+    a: 'De chatbot zoekt in je documenten en vermeldt de bron bij zijn antwoord. We richten hem erop in om ontbrekende informatie te melden en testen dat met jullie vragen. Met de bronvermelding kun je het antwoord controleren; fouten blijven mogelijk.',
   },
   {
     q: 'Welke bestanden kan hij lezen?',
@@ -14,15 +14,15 @@ const faq = [
   },
   {
     q: 'Blijven onze documenten privé?',
-    a: 'Ja. Je bestanden komen in een afgeschermde omgeving die alleen voor jouw bedrijf werkt, en ze worden niet gebruikt om modellen te trainen. We leggen vooraf vast waar de data staat en wie erbij kan. Waar het kan, houden we de verwerking binnen Europa.',
+    a: 'We leggen per project vast waar je bestanden worden verwerkt, wie toegang heeft en welke afspraken gelden met de gekozen leveranciers, ook over eventueel gebruik voor modeltraining. We bespreken waar verwerking binnen Europa mogelijk is.',
   },
   {
     q: 'Kan niet iedereen dan alles zien?',
-    a: 'Nee, we koppelen de rechten aan je bestaande gebruikersgroepen. Wie geen toegang heeft tot de loonfiches, krijgt er ook via de assistent niets over te horen. Dat testen we samen voor we live gaan.',
+    a: 'We spreken af welke documenten voor welke gebruikers toegankelijk mogen zijn. Daarop richten we de toegangsrechten in, waar mogelijk gekoppeld aan je bestaande gebruikersgroepen. We testen die toegang samen voor we live gaan.',
   },
   {
     q: 'Wat als onze documenten verouderd zijn?',
-    a: 'Dan valt dat meteen op, en dat is vaak de eerste winst. De assistent wordt zo goed als de bronnen die je hem geeft. We helpen bij het opschonen en zetten daarna een vaste verversing in, zodat een nieuwe prijslijst automatisch meegaat.',
+    a: 'De antwoorden hangen af van de documenten die je beschikbaar maakt. Daarom bekijken we samen welke versies actueel zijn en spreken we af hoe wijzigingen worden bijgewerkt.',
   },
   {
     q: 'Kunnen klanten er ook mee chatten?',
@@ -60,15 +60,15 @@ const stappen = [
   },
   {
     t: 'We maken ze doorzoekbaar',
-    d: 'De documenten worden opgeknipt en geïndexeerd zodat de assistent gericht het juiste stuk terugvindt in plaats van te gokken op basis van algemene kennis.',
+    d: 'We maken de documenten doorzoekbaar, zodat de assistent relevante passages kan ophalen bij een vraag.',
   },
   {
     t: 'We testen met echte vragen',
-    d: 'Je team gooit er een week lang de vragen tegenaan die echt binnenkomen. Elk fout antwoord is een aanwijzing over welke bron ontbreekt of niet klopt.',
+    d: 'Je team test de assistent een week lang met vragen uit de praktijk. Bij fouten bekijken we zowel de gebruikte bron als de manier waarop het antwoord tot stand kwam.',
   },
   {
     t: 'Hij gaat live waar je werkt',
-    d: 'In Teams, op je website, in je mailbox of in een eigen scherm. Daarna houden we hem bij naarmate je documenten veranderen.',
+    d: 'In Teams, op je website, in je mailbox of in een eigen scherm. We spreken af hoe we de documenten en de assistent daarna bijwerken.',
   },
 ];
 ---
@@ -79,14 +79,14 @@ const stappen = [
   h1="Een AI-chatbot die antwoordt uit jouw documenten"
   metaTitle="AI-chatbot op je eigen data laten bouwen"
   description="Laat een AI-chatbot bouwen die antwoordt uit je eigen documenten, prijslijsten en procedures, met bronvermelding. Voor kmo’s in de Kempen en heel België."
-  lead="Een assistent die jouw prijslijst, handleidingen en voorwaarden kent en bij elk antwoord vermeldt uit welk document het komt. Een algemene chatbot kan dat niet, want die kent jouw bestanden niet."
+  lead="We koppelen de assistent aan jullie documenten en richten de toegang in voor je team. Zo sluit hij aan op de informatie en werkwijze van je bedrijf."
   beeld="/hero-chatbots.jpg"
   beeldAlt="Illustratie: iemand met chatvensters en documentmappen"
   highlights={[
-    'Antwoordt uit jouw bestanden in plaats van uit het internet',
-    'Toont bij elk antwoord de bron',
-    'Zegt het als hij iets niet weet',
-    'Respecteert de rechten die je al hebt ingesteld',
+    'Zoekt antwoorden in jouw documenten',
+    'Bronvermelding om antwoorden te controleren',
+    'Ingericht om ontbrekende informatie te melden',
+    'Toegangsrechten afgestemd op je team',
     'Draait in Teams, op je site of in je mailbox',
   ]}
   faq={faq}
@@ -96,20 +96,18 @@ const stappen = [
     <div class="container split">
       <div class="reveal">
         <p class="eyebrow">Het verschil</p>
-        <h2>Een gewone chatbot raadt. Deze zoekt het op.</h2>
+        <h2>Aangesloten op de informatie van je bedrijf</h2>
         <p>
-          Zet je een standaard AI-assistent op je website, dan antwoordt hij op
-          basis van wat hij ooit ergens gelezen heeft. Over jouw levertijden,
-          jouw garantie of jouw kortingen weet hij niets. Dus verzint hij iets
-          dat plausibel klinkt, en dat is precies het antwoord dat je niet wil
-          dat een klant krijgt.
+          Een algemene chatbot kan met bestanden werken, maar is daarmee nog niet
+          ingericht op jouw bedrijf. Welke documenten zijn actueel, wie mag welke
+          informatie zien en waar gebruikt je team de assistent? Die keuzes bepalen hoe
+          bruikbaar hij is.
         </p>
         <p>
-          Wij draaien het om. Bij elke vraag zoekt de assistent eerst in jouw
-          documenten naar het stuk dat erover gaat, en pas daarna formuleert hij
-          een antwoord uit wat hij daar vond. Staat het er niet in, dan zegt hij
-          dat. Saai, maar betrouwbaar, en dat is wat je nodig hebt als er een
-          prijs in staat.
+          Wij koppelen de assistent aan de gekozen bronnen en testen hem met vragen uit
+          jullie praktijk. Hij haalt relevante informatie op en vermeldt de bron bij zijn
+          antwoord. Zo kan je controleren waarop het antwoord is gebaseerd. Fouten blijven
+          mogelijk.
         </p>
       </div>
       <div class="reveal">
@@ -146,7 +144,7 @@ const stappen = [
     <div class="container">
       <div class="section-head reveal">
         <p class="eyebrow">Hoe we het bouwen</p>
-        <h2>Van een map vol documenten naar een assistent die klopt</h2>
+        <h2>Van een map vol documenten naar een assistent voor je team</h2>
       </div>
       <ol class="numbered reveal">
         {
@@ -178,9 +176,9 @@ const stappen = [
         <article class="card limit">
           <h3>Rommelige documenten</h3>
           <p>
-            Staan er drie versies van dezelfde prijslijst op je server, dan lost
-            de assistent dat niet op. Hij maakt het alleen zichtbaar. Opruimen
-            blijft mensenwerk. We helpen erbij, maar het kost tijd.
+            Staan er drie versies van dezelfde prijslijst op je server, dan weet de
+            assistent niet vanzelf welke de juiste is. Samen bepalen we welke versie
+            gebruikt moet worden en hoe je die actueel houdt.
           </p>
         </article>
         <article class="card limit">

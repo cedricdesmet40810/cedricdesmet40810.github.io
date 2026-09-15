@@ -115,7 +115,7 @@ const endpoint = SITE.formEndpoint;
 
   <div class="form__foot">
     <button type="submit" class="btn btn--primary" data-submit>
-      <span data-submit-label>Verstuur je vraag</span>
+      <span data-submit-label>{endpoint ? 'Verstuur je vraag' : 'Open je e-mail'}</span>
       <span class="arrow" aria-hidden="true">→</span>
     </button>
     <p class="form__note">
@@ -257,6 +257,8 @@ const endpoint = SITE.formEndpoint;
     const label = form.querySelector('[data-submit-label]');
     const endpoint = form.dataset.endpoint;
     const mailto = form.dataset.mailto;
+    const submitLabel = endpoint ? 'Verstuur je vraag' : 'Open je e-mail';
+    if (label) label.textContent = submitLabel;
 
     const berichten: Record<string, string> = {
       naam: 'Vul je naam in, dan weten we wie we antwoorden.',
@@ -379,7 +381,7 @@ const endpoint = SITE.formEndpoint;
         );
       } finally {
         if (button instanceof HTMLButtonElement) button.disabled = false;
-        if (label) label.textContent = 'Verstuur je vraag';
+        if (label) label.textContent = submitLabel;
       }
     });
 

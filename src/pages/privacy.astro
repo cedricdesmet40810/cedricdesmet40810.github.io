@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import { SITE } from '../config.js';
 
-const bijgewerkt = '5 augustus 2026';
+const bijgewerkt = '15 september 2026';
 ---
 
 <BaseLayout
@@ -32,7 +32,8 @@ const bijgewerkt = '5 augustus 2026';
 
         <h2>Welke gegevens houden we bij?</h2>
         <p>We verzamelen alleen wat we nodig hebben om je te kunnen antwoorden of ons werk te doen.</p>
-        <h3>Als je het contactformulier invult</h3>
+        <h3>Als je ons een bericht stuurt</h3>
+        {!SITE.formEndpoint && <p>Bij het huidige contactformulier ontvangen we je gegevens pas wanneer je de e-mail in je mailprogramma verstuurt.</p>}
         <ul>
           <li>je naam en, als je die invult, je bedrijfsnaam;</li>
           <li>je e-mailadres en eventueel je telefoonnummer;</li>
@@ -63,8 +64,7 @@ const bijgewerkt = '5 augustus 2026';
         <h2>Waarom mogen we dat?</h2>
         <ul>
           <li>
-            <strong>Je toestemming</strong>: voor berichten die je zelf via het
-            formulier verstuurt. Je kan die toestemming altijd intrekken.
+            <strong>Je toestemming</strong>: voor berichten die je zelf naar ons verstuurt. Je kan die toestemming altijd intrekken.
           </li>
           <li>
             <strong>Uitvoering van een overeenkomst</strong>: voor alles wat
@@ -114,8 +114,7 @@ const bijgewerkt = '5 augustus 2026';
         <p>
           Bouwen we voor jou een AI-oplossing, dan leggen we vóór de start
           schriftelijk vast welke gegevens gebruikt worden, waar ze bewaard
-          worden en wie er toegang toe heeft. Bedrijfsgegevens van klanten
-          worden niet gebruikt om modellen te trainen. In die projecten treden
+          worden en wie er toegang toe heeft. We leggen ook vast welke afspraken met de gebruikte dienstverleners gelden over het gebruik van die gegevens. In die projecten treden
           wij op als verwerker en blijf jij verwerkingsverantwoordelijke; dat
           leggen we vast in een verwerkersovereenkomst.
         </p>

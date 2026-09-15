@@ -77,7 +77,7 @@ export const SERVICES = [
     short: 'Kostenbesparing',
     nav: 'Kosten besparen',
     excerpt:
-      'We rekenen uit waar AI je geld en tijd oplevert, die je opnieuw kan besteden aan de verdere uitbouw van je bedrijf.',
+      'We brengen in kaart waar AI tijd kan vrijmaken en wat dat voor je bedrijf waard is.',
     icon: 'chart',
     beeld: '/opl-kosten.jpg',
   },

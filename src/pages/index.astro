@@ -9,7 +9,7 @@ import { SERVICES, SITE } from '../config.js';
 const faq = [
   {
     q: 'Wat kan zo’n AI nu concreet voor ons doen?',
-    a: 'Het meeste kantoorwerk is lezen en schrijven: offertes opmaken, mails sorteren en beantwoorden, verslagen schrijven, gegevens van het ene systeem naar het andere brengen, vragen beantwoorden uit je eigen documenten. Daar is AI sterk in. Beslissingen nemen, klanten bellen en producten afleveren blijven werk voor mensen.',
+    a: 'Veel kantoorwerk bestaat uit lezen en schrijven: offertes opmaken, mails sorteren en beantwoorden, verslagen schrijven, gegevens van het ene systeem naar het andere brengen, vragen beantwoorden uit je eigen documenten. Daar is AI sterk in. Beslissingen nemen, klanten bellen en producten afleveren blijven werk voor mensen.',
   },
   {
     q: 'Wat kost dat?',
@@ -52,7 +52,7 @@ const stappen = [
     scene: 'werkvloer',
     beeld: '/stap-werkvloer.jpg',
     t: 'We beginnen bij jou op de werkvloer',
-    d: 'We willen identificeren wat je bedrijf eigenlijk doet en wat de corebusiness is. We bekijken welke tools je bedrijf gebruikt en waar AI mogelijk een hulp kan zijn om je dagelijkse taken te versnellen.',
+    d: 'We bekijken hoe je bedrijf werkt, welke software je gebruikt en welke taken veel tijd vragen. Samen zoeken we waar AI kan helpen.',
   },
   {
     scene: 'systemen',
@@ -64,27 +64,27 @@ const stappen = [
     scene: 'team',
     beeld: '/stap-team.jpg',
     t: 'We geven het in handen van je team',
-    d: 'Wij overhandigen de skills en workflows aan jou en je team, en leren jou hoe je ze het beste gebruikt. We tonen waar het waarde heeft om een taak op een vast schema te laten lopen, en waar AI het repetitieve werk doet terwijl iemand van jullie telkens nakijkt.',
+    d: 'We leren je team met de nieuwe toepassingen werken en leggen de werkwijze uit. We tonen welke taken automatisch kunnen lopen en welke resultaten iemand moet nakijken.',
   },
   {
     scene: 'buurt',
     beeld: '/stap-opvolgen.jpg',
-    t: 'Wij volgen het proces op en helpen je verder bij onduidelijkheden',
+    t: 'We volgen op en helpen je verder',
     d: 'Bedrijven veranderen en tools ook. Wij houden het draaiend en bouwen uit wat werkt.',
   },
 ];
 
 const producten = [
   {
-    vraag: 'Weet je dat je iets moet doen met AI, maar niet wat?',
+    vraag: 'Benieuwd waar AI je bedrijf kan helpen?',
     naam: 'Scan',
     beeld: '/opl-kosten.jpg',
-    d: 'We lichten je processen door. Je krijgt een rapport/plan met de kansen, de berekeningen en een volgorde van aanpak.',
+    d: 'We lichten je processen door. Je krijgt een rapport met de kansen, de berekeningen en een voorstel voor de aanpak.',
     href: '/oplossingen/kostenbesparing/',
     label: 'Hoe de scan werkt',
   },
   {
-    vraag: 'Eén proces dat je wil aanpakken in je week?',
+    vraag: 'Een terugkerende taak die te veel tijd kost?',
     naam: 'Bouw',
     beeld: '/opl-apps.jpg',
     d: 'Een app op maat die AI gebruikt waar dat loont. Werkend opgeleverd op de afgesproken datum, voor het afgesproken bedrag.',
@@ -106,17 +106,17 @@ const waarom = [
   {
     icon: 'users',
     t: 'Eén aanspreekpunt',
-    d: 'AI én IT bij dezelfde mensen. Geen leveranciers die naar elkaar wijzen als er iets hapert.',
+    d: 'AI én IT bij dezelfde mensen. Wij kennen je systemen en stemmen de ondersteuning op elkaar af.',
   },
   {
     icon: 'euro',
     t: 'Vaste prijs, vaste deadline',
-    d: 'Je weet vooraf wat het kost en wanneer het klaar is. Geen uurtje-factuurtje achteraf.',
+    d: 'In je offerte op maat spreken we af wat we bouwen, wat het kost en wanneer we opleveren.',
   },
   {
     icon: 'plug',
     t: 'Op je eigen systemen',
-    d: 'Microsoft 365, Odoo, Billit, je eigen mappen. Je hoeft niets te vervangen of opnieuw te leren.',
+    d: 'We sluiten aan op de software die je al gebruikt, zoals Microsoft 365, Odoo of Billit. Je team leert hoe de nieuwe toepassingen daarin passen.',
   },
   {
     icon: 'check',
@@ -126,7 +126,7 @@ const waarom = [
   {
     icon: 'clock',
     t: 'Er wanneer jij ons nodig hebt',
-    d: 'Gemaakt voor kleine kmo’s: je belt ons rechtstreeks, niet een ticketsysteem. Wij komen langs wanneer het jou past, niet wanneer het ons uitkomt.',
+    d: 'Je bereikt ons rechtstreeks met je vragen. Als een bezoek nodig is, spreken we samen een moment af dat past.',
   },
 ];
 
@@ -252,7 +252,7 @@ const waarom = [
   <section class="section process-section" id="werkwijze">
     <div class="container stappen__layout">
       <div class="stappen__zij">
-        <div class="section-head"><p class="eyebrow">Hoe we werken</p><h2 class="stappen__kop">Auxilia zorgt ervoor dat AI ten dienste staat van jou.</h2></div>
+        <div class="section-head"><p class="eyebrow">Hoe we werken</p><h2 class="stappen__kop">Zo maken we AI bruikbaar in je bedrijf</h2></div>
         <div class="stappen__visual"><SiteImage class="stappen__beeld" src="/aan-de-slag.jpg" width="522" loading="lazy" decoding="async" alt="" sizes="(max-width: 899px) 50vw, 28vw" /></div>
       </div>
       <ol class="bigsteps">
@@ -282,7 +282,7 @@ const waarom = [
     <div class="container faq-layout">
       <div class="section-head">
         <h2>Veelgestelde vragen</h2>
-        <p class="lead">Staat je vraag er niet bij? De rest beantwoorden we voor jou bij een koffie.</p>
+        <p class="lead">Staat je vraag er niet bij? We bespreken je vraag graag tijdens een kennismaking.</p>
         <a href="/contact/" class="link-arrow faq__cta">Maak een afspraak <span class="arrow" aria-hidden="true">↗</span></a>
       </div>
       <Faq items={faq} />
@@ -293,12 +293,12 @@ const waarom = [
     <div class="container">
       <div class="slot band-teal">
         <div class="slot__body">
-          <h2 class="statement">Overtuigd? Plan een afspraak in.</h2>
-          <p class="lead">Nog niet overtuigd? We hebben maar 30 minuten van je tijd nodig om je te overtuigen. Dit neem je sowieso mee naar huis:</p>
+          <h2 class="statement">Bespreek je vraag in 30 minuten</h2>
+          <p class="lead">Vertel ons hoe je werkt en waar je tegenaan loopt. We bespreken waar AI mogelijk kan helpen en welke volgende stap zinvol is.</p>
           <ul class="checklist slot__list">
-            <li><Icon name="check" size={18} />Een beeld van waar AI bij jullie het snelst rendeert</li>
-            <li><Icon name="check" size={18} />Wat je beter eerst zelf probeert, zonder ons</li>
-            <li><Icon name="check" size={18} />Of het de moeite is om verder te praten</li>
+            <li><Icon name="check" size={18} />Een eerste beeld van waar AI kan helpen</li>
+            <li><Icon name="check" size={18} />Wat je al met je huidige software kan proberen</li>
+            <li><Icon name="check" size={18} />Een voorstel voor een volgende stap</li>
           </ul>
           <a href={SITE.bookingUrl || '/contact/'} class="btn btn--primary btn--xl">Plan 30 minuten <span class="arrow" aria-hidden="true">↗</span></a>
         </div>

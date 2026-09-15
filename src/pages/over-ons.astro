@@ -14,21 +14,21 @@ const team = [
     initialen: 'CD',
     naam: 'Cedric De Smet',
     rol: 'Bouw & implementatie',
-    d: 'Cedric bouwt wat afgesproken is, en dan nog iets extra zodat het ook over zes maanden nog werkt. Vraag hem hoe iets technisch in elkaar zit en hij legt het uit totdat jij het snapt, niet totdat híj denkt dat je het snapt.',
+    d: 'Cedric bouwt en implementeert de toepassingen. Hij bespreekt de technische keuzes met je en legt uit hoe de oplossing werkt.',
   },
   {
     initialen: 'KV',
     naam: 'Kevin Vaal',
     rol: 'Proces & opleiding',
-    d: 'Kevin stelt de vraag die niemand stelt: "Maar waarom doen jullie dit eigenlijk zo?" Niet om lastig te zijn, maar omdat het antwoord bijna altijd bepaalt wat er gebouwd moet worden. Hij gaat pas weg als je team het zonder hem kan.',
+    d: 'Kevin brengt je processen in kaart en bespreekt met je team wat er verandert. Hij begeleidt jullie bij het gebruik van de nieuwe toepassingen.',
   },
 ];
 
 const overtuigingen = [
   {
     n: '01',
-    titel: 'Groot bureau, kleine aandacht',
-    tekst: 'Hoe groter het bureau, hoe groter de afstand tussen jou en wie het werk doet. Wij blijven klein met opzet.',
+    titel: 'Rechtstreeks contact',
+    tekst: 'Wij blijven bewust klein. Je praat rechtstreeks met de mensen die je oplossing bouwen.',
   },
   {
     n: '02',
@@ -38,7 +38,7 @@ const overtuigingen = [
   {
     n: '03',
     titel: 'AI is geen toverspreuk',
-    tekst: 'We gebruiken het dagelijks, maar verkopen het niet als oplossing voor alles. Een goed proces heeft AI nodig als hulp, niet als alibi.',
+    tekst: 'We gebruiken AI waar het iets oplevert. Soms volstaat een betere instelling in bestaande software of een duidelijkere werkafspraak.',
   },
 ];
 ---
@@ -46,13 +46,13 @@ const overtuigingen = [
 <BaseLayout
   title="Over ons"
   metaTitle="Over Auxilia: AI en IT uit de Kempen"
-  description="Auxilia is een jong AI- en IT-bedrijf uit de Kempen: Cedric en Kevin, allebei geschoold in software, met To B-Seen als eerste bewijs dat het werkt."
+  description="Maak kennis met Cedric en Kevin van Auxilia. AI en IT voor kmo’s vanuit de Kempen, met rechtstreeks contact en begeleiding voor je team."
   breadcrumbs={[{ name: 'Over ons', href: '/over-ons/' }]}
 >
   <PageHero
     crumbs={[{ name: 'Over ons', href: '/over-ons/' }]}
     title="Wie er achter Auxilia zit"
-    lead="Cedric bouwt. Kevin vertaalt. Samen zijn we Auxilia, gestart in 2026, met één duidelijk idee over hoe IT voor kmo's anders kan."
+    lead="Cedric bouwt de toepassingen. Kevin brengt je processen in kaart en begeleidt je team. Samen zijn we Auxilia, gestart in 2026."
   />
 
   <!-- Naam origin -->
@@ -64,8 +64,8 @@ const overtuigingen = [
           <p class="intro-statement">Auxilia waren de hulptroepen die het Romeinse leger kwamen versterken. Ze namen het niet over: ze maakten het sterker.</p>
         </div>
         <div class="intro-tekst">
-          <p>Dat leek ons een juiste naam voor wat we doen: naast je team gaan staan, het saaie werk automatiseren en pas vertrekken als het zonder ons verder kan.</p>
-          <p>Geen externe dienstverlener die je afhankelijk houdt. Een partij die zichzelf overbodig maakt.</p>
+          <p>Die naam past bij onze aanpak: we ondersteunen je team, automatiseren terugkerend werk en leren jullie met de oplossing werken.</p>
+          <p>We zorgen dat je team zelfstandig met de oplossing kan werken. Voor onderhoud, vragen en verdere uitbouw blijven we bereikbaar.</p>
         </div>
       </div>
     </div>
@@ -75,10 +75,10 @@ const overtuigingen = [
   <section class="section band-paper">
     <div class="container split split--top">
       <div class="reveal">
-        <p class="eyebrow">Waarom dat geen nadeel is</p>
-        <h2>Jong bedrijf, en dat merk je aan de goede kant</h2>
+        <p class="eyebrow">Samenwerken met Auxilia</p>
+        <h2>Rechtstreeks contact met Cedric en Kevin</h2>
         <p>
-          Wie ons belt, krijgt geen accountmanager en geen junior die het dossier erbij neemt. Je krijgt de twee mensen die het ook echt bouwen, met de aandacht die een eerste generatie klanten nu eenmaal krijgt: veel.
+          Je bespreekt je vraag met de mensen die aan je oplossing werken. Cedric bouwt de toepassingen. Kevin brengt je processen in kaart en begeleidt je team bij het gebruik.
         </p>
       </div>
       <div class="reveal">
@@ -91,11 +91,11 @@ const overtuigingen = [
             </li>
             <li>
               <Icon name="check" size={18} />
-              Gebouwd met de huidige generatie AI-tools, niet met wat we toevallig in de kast hadden
+              AI-tools afgestemd op je processen en bestaande software
             </li>
             <li>
               <Icon name="check" size={18} />
-              Je nummer staat in onze telefoon, niet in een ticketsysteem
+              Persoonlijk contact met mensen die je bedrijf kennen
             </li>
           </ul>
         </div>
@@ -108,7 +108,7 @@ const overtuigingen = [
     <div class="container">
       <div class="section-head reveal">
         <p class="eyebrow">Wat wij geloven</p>
-        <h2>Drie dingen die de meeste IT-trajecten doen mislukken</h2>
+        <h2>Drie uitgangspunten voor onze samenwerking</h2>
       </div>
       <ol class="numbered reveal">
         {
@@ -130,8 +130,8 @@ const overtuigingen = [
   <section class="section band-paper">
     <div class="container">
       <div class="section-head reveal">
-        <p class="eyebrow">Wie je krijgt</p>
-        <h2>Er zit niemand tussen jou en wie het bouwt</h2>
+        <p class="eyebrow">Ons team</p>
+        <h2>De mensen achter je oplossing</h2>
         <p class="lead">
           Van het eerste gesprek tot lang na de oplevering praat je met dezelfde twee mensen.
         </p>
@@ -158,8 +158,8 @@ const overtuigingen = [
 
   <CtaBand
     eyebrow="Kennismaken"
-    title="Kom eens langs met je vraag"
-    text="Of wij komen naar jou, dat rijdt snel genoeg in de Kempen. Vertel wat je doet en waar het kraakt, dan zeggen we eerlijk wat wij zouden aanpakken."
+    title="Bespreek je vraag met ons"
+    text="Vertel hoe je werkt en waar je tegenaan loopt. We denken mee over een volgende stap, online of bij jou op kantoor."
     secondary={{ label: 'Bekijk de oplossingen', href: '/oplossingen/' }}
   />
 </BaseLayout>

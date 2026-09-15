@@ -62,7 +62,9 @@ if (process.argv.includes('--baseline')) {
 
   await test('Contact errors are linked to their fields', async () => {
     await page.goto(base + '/contact/');
-    await page.getByRole('button', { name: 'Verstuur je vraag' }).click();
+    const configuredEndpoint = await page.locator('#contactformulier').getAttribute('data-endpoint');
+    const expectedLabel = configuredEndpoint ? 'Verstuur je vraag' : 'Open je e-mail';
+    await page.getByRole('button', { name: expectedLabel, exact: true }).click();
     for (const name of ['naam', 'email', 'bericht', 'akkoord']) {
       const input = page.locator(`[name="${name}"]`);
       assert.equal(await input.getAttribute('aria-invalid'), 'true');
@@ -129,6 +131,7 @@ if (process.argv.includes('--baseline')) {
     await p.locator('[data-status][data-tone="fout"]').waitFor({ state: 'visible' });
     assert.equal(await p.locator('[name="naam"]').inputValue(), 'Website test');
     assert.equal(await p.locator('[data-submit]').isEnabled(), true);
+    assert.equal(await p.locator('[data-submit-label]').textContent(), 'Verstuur je vraag', 'Endpoint delivery must restore its send label after an error');
     status = 200;
     await p.getByRole('button', { name: 'Verstuur je vraag' }).click();
     await ready;
