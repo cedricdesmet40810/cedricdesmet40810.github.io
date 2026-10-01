@@ -23,6 +23,7 @@ Laat de preview draaien en voer in een tweede terminal uit:
 
 ```sh
 npm test
+npm run test:contact
 npm run test:a11y
 npm audit
 ```
@@ -48,11 +49,19 @@ Bedrijfsgegevens en integraties staan in `src/config.js`.
 | Instelling | Gedrag |
 | --- | --- |
 | `SITE.bookingUrl` | Met een URL gaan afspraakknoppen naar de kalender. Zonder URL gaan ze naar de contactpagina of het formulier. |
-| `SITE.formEndpoint` | Met een endpoint verstuurt het formulier een `POST` met `FormData` en verwacht het een succesvolle HTTP-status. Zonder endpoint wordt een e-mailconcept geopend dat de bezoeker zelf verzendt. |
+| `SITE.formEndpoint` | Verstuurt rechtstreeks naar Cedric via FormSubmit. Met JavaScript gebruikt het formulier het JSON/AJAX-endpoint en controleert het ook de bevestiging in het antwoord; zonder JavaScript gebruikt het de gewone formulieractie. Een ander endpoint ontvangt `FormData`. Zonder endpoint wordt een e-mailconcept geopend dat de bezoeker zelf verzendt. |
 | `SITE.url` | Bepaalt canonical-URL's, sitemap en social cards. |
 | `SITE.email`, `SITE.phone`, `SITE.vat` | Worden gedeeld door contactpagina, footer en gestructureerde gegevens. |
 
-Momenteel zijn de boekingslink en het formulierendpoint leeg. Het formulier vermeldt daarom duidelijk dat het een e-mail opent. Voor een rechtstreeks verzonden contactformulier moet een werkend endpoint worden ingevuld en end-to-end gecontroleerd. Het endpoint moet zelf invoer valideren, misbruik beperken en foutieve verzoeken met een niet-succesvolle status beantwoorden. Een kalender of maildienst wordt niet door deze statische site aangemaakt.
+Contactaanvragen worden via [FormSubmit](https://formsubmit.co/documentation) doorgestuurd naar `cedric@auxilia-ai.be`. Het e-mailadres van de bezoeker dient als antwoordadres. De onderwerpregel bevat het gekozen onderwerp. De boekingslink is nog leeg.
+
+Activeren vóór publicatie:
+
+1. Verstuur één herkenbaar testbericht via het formulier vanaf de bedoelde website-URL.
+2. Open de activatiemail van FormSubmit in `cedric@auxilia-ai.be` en bevestig het adres. Controleer ook de spammap.
+3. Verstuur daarna opnieuw een testbericht. Controleer ontvangst, alle ingevulde velden en het antwoordadres.
+
+Zonder die bevestiging is echte bezorging niet geverifieerd. `npm run test:contact` onderschept alle providerverzoeken; de test verstuurt geen echte e-mails. Er staat geen mailboxwachtwoord of geheime API-sleutel in de website. De spamval wordt ook zonder JavaScript naar FormSubmit verzonden; de standaard spambeveiliging van de gewone formulieractie blijft aan. Bij een fout blijven ingevulde gegevens staan zodat de bezoeker opnieuw kan proberen of rechtstreeks kan mailen.
 
 ## Beelden en stijl
 

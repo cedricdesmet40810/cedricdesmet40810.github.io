@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import { SITE } from '../config.js';
 
-const bijgewerkt = '15 september 2026';
+const bijgewerkt = '1 oktober 2026';
 ---
 
 <BaseLayout
@@ -34,6 +34,7 @@ const bijgewerkt = '15 september 2026';
         <p>We verzamelen alleen wat we nodig hebben om je te kunnen antwoorden of ons werk te doen.</p>
         <h3>Als je ons een bericht stuurt</h3>
         {!SITE.formEndpoint && <p>Bij het huidige contactformulier ontvangen we je gegevens pas wanneer je de e-mail in je mailprogramma verstuurt.</p>}
+        {SITE.formEndpoint.startsWith('https://formsubmit.co/') && <p>Wanneer je het contactformulier verstuurt, verwerkt FormSubmit de ingevulde gegevens om je bericht per e-mail bij Auxilia af te leveren. FormSubmit bewaart inzendingen volgens zijn documentatie gedurende 30 dagen. Meer informatie vind je in het <a href="https://formsubmit.co/privacy.pdf">privacybeleid van FormSubmit</a>.</p>}
         <ul>
           <li>je naam en, als je die invult, je bedrijfsnaam;</li>
           <li>je e-mailadres en eventueel je telefoonnummer;</li>

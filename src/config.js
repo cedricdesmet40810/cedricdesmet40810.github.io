@@ -27,9 +27,10 @@ export const SITE = {
   // Boekingslink (Cal.com, Calendly, Google Appointments ...).
   // Leeg laten = de knoppen sturen naar /contact/.
   bookingUrl: '',
-  // Endpoint voor het contactformulier (Formspree, Web3Forms, eigen API ...).
+  // Rechtstreeks naar Cedric via FormSubmit. Bevestig het adres één keer
+  // via de activatiemail voordat het formulier live wordt gebruikt.
   // Leeg laten = het formulier valt terug op een mailto-link.
-  formEndpoint: '',
+  formEndpoint: 'https://formsubmit.co/cedric@auxilia-ai.be',
 };
 
 export const NAV = [

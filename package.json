@@ -10,6 +10,7 @@
     "check": "astro check",
     "assets": "node scripts/generate-assets.mjs",
     "test": "node scripts/browser-check.mjs",
+    "test:contact": "node scripts/contact-check.mjs",
     "test:a11y": "node scripts/accessibility-check.mjs"
   },
   "dependencies": {

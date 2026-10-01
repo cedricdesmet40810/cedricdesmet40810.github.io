@@ -9,6 +9,7 @@ import Icon from './Icon.astro';
 import { SITE, SERVICES } from '../config.js';
 
 const endpoint = SITE.formEndpoint;
+const usesFormSubmit = endpoint.startsWith('https://formsubmit.co/');
 ---
 
 <form
@@ -20,6 +21,10 @@ const endpoint = SITE.formEndpoint;
   data-endpoint={endpoint}
   data-mailto={SITE.email}
 >
+  {usesFormSubmit && <>
+    <input type="hidden" name="_subject" value="Nieuwe aanvraag via de Auxilia-website" />
+    <input type="hidden" name="_template" value="table" />
+  </>}
   <div class="form__row">
     <label class="field">
       <span>Je naam <span aria-hidden="true">*</span></span>
@@ -106,7 +111,7 @@ const endpoint = SITE.formEndpoint;
   <div class="honey" aria-hidden="true">
     <label>
       Laat dit veld leeg
-      <input type="text" name="website" tabindex="-1" autocomplete="off" />
+      <input type="text" name={usesFormSubmit ? '_honey' : 'website'} tabindex="-1" autocomplete="off" />
     </label>
   </div>
 
@@ -256,6 +261,7 @@ const endpoint = SITE.formEndpoint;
     const button = form.querySelector('[data-submit]');
     const label = form.querySelector('[data-submit-label]');
     const endpoint = form.dataset.endpoint;
+    const usesFormSubmit = endpoint?.startsWith('https://formsubmit.co/');
     const mailto = form.dataset.mailto;
     const submitLabel = endpoint ? 'Verstuur je vraag' : 'Open je e-mail';
     if (label) label.textContent = submitLabel;
@@ -327,7 +333,7 @@ const endpoint = SITE.formEndpoint;
       if (!data) return;
 
       // Ingevulde spamval: doe alsof het gelukt is en verstuur niets.
-      if (String(data.get('website') || '').length > 0) {
+      if (String(data.get('_honey') || data.get('website') || '').length > 0) {
         form.reset();
         meldStatus('Bedankt, je bericht is verstuurd.', 'ok');
         return;
@@ -361,13 +367,30 @@ const endpoint = SITE.formEndpoint;
       if (label) label.textContent = 'Bezig met versturen…';
 
       try {
-        const res = await fetch(endpoint, {
+        // FormSubmit gebruikt een apart JSON-endpoint voor verzending op de pagina.
+        // De gewone action blijft bruikbaar zonder JavaScript, inclusief spamcontrole.
+        const deliveryEndpoint = usesFormSubmit
+          ? endpoint.replace('https://formsubmit.co/', 'https://formsubmit.co/ajax/')
+          : endpoint;
+        if (usesFormSubmit) {
+          data.set('_subject', `Aanvraag via de Auxilia-website: ${data.get('onderwerp') || 'algemeen'}`);
+        }
+        const res = await fetch(deliveryEndpoint, {
           method: 'POST',
-          body: data,
-          headers: { Accept: 'application/json' },
+          body: usesFormSubmit ? JSON.stringify(Object.fromEntries(data)) : data,
+          headers: usesFormSubmit
+            ? { Accept: 'application/json', 'Content-Type': 'application/json' }
+            : { Accept: 'application/json' },
           signal: AbortSignal.timeout(15000),
         });
         if (!res.ok) throw new Error(String(res.status));
+        if (usesFormSubmit) {
+          const result = await res.json();
+          // HTTP 200 kan ook een afwijzing of verzoek tot activering bevatten.
+          if ((result?.success !== true && result?.success !== 'true') || /activat/i.test(result?.message || '')) {
+            throw new Error('FormSubmit did not confirm delivery');
+          }
+        }
 
         form.reset();
         meldStatus(
